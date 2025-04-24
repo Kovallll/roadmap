@@ -1,12 +1,17 @@
-import nx from '@nx/eslint-plugin';
 import baseConfig from '../../eslint.config.mjs';
+
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import { fixupPluginRules } from '@eslint/compat';
 
 export default [
   ...baseConfig,
-  ...nx.configs['flat/react'],
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    // Override or add rules here
+    plugins: {
+      react: fixupPluginRules(react),
+      'react-hooks': fixupPluginRules(reactHooks),
+    },
     rules: {},
   },
 ];

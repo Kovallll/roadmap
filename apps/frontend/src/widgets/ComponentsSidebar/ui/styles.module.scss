@@ -1,0 +1,42 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  padding: 16px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.description {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.nodeItem {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: grab;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+
+  &.input {
+    border-left: 4px solid #6ede87;
+  }
+
+  &.default {
+    border-left: 4px solid #ff0072;
+  }
+
+  &.output {
+    border-left: 4px solid #6865a5;
+  }
+}
