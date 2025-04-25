@@ -43,9 +43,22 @@
   },
   "dependencies": {
     "@nestjs/cli": "^11.0.7",
-    "global": "^4.4.0"
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/passport": "^11.0.5",
+    "@prisma/client": "^6.6.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
+    "global": "^4.4.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "prisma": "^6.6.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/passport-local": "^1.0.38",
     "prisma": "^6.6.0"
   }
 }

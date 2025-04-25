@@ -73,7 +73,8 @@
         "serveTargetName": "serve",
         "previewTargetName": "preview",
         "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps"
+        "watchDepsTargetName": "watch-deps",
+        "dynamicImport": true
       }
     }
   ],

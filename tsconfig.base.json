@@ -16,6 +16,17 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
-  }
+    "customConditions": ["development"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@roadmap/*": ["libs/src/*"],
+      "@front/*": ["apps/frontend/src/*"],
+      "@back/*": ["apps/backend/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts"]
 }

@@ -6,37 +6,44 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CanvasService } from './canvas.service';
-import { CreateCanvaDto } from './dto/create-canvas.dto';
-import { UpdateCanvaDto } from './dto/update-canvas.dto';
+import { CreateCanvasDto } from './dto/create-canvas.dto';
+import { UpdateCanvasDto } from './dto/update-canvas.dto';
+import { JwtAuthGuard } from '@back/app/auth/jwt-auth.guard';
 
 @Controller('canvas')
 export class CanvasController {
   constructor(private readonly canvasService: CanvasService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createCanvaDto: CreateCanvaDto) {
-    return this.canvasService.create(createCanvaDto);
+  create(@Body() createCanvasDto: CreateCanvasDto) {
+    return this.canvasService.create(createCanvasDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.canvasService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.canvasService.findOne(+id);
+    return this.canvasService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCanvaDto: UpdateCanvaDto) {
-    return this.canvasService.update(+id, updateCanvaDto);
+  update(@Param('id') id: string, @Body() updateCanvasDto: UpdateCanvasDto) {
+    return this.canvasService.update(id, updateCanvasDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.canvasService.remove(+id);
+    return this.canvasService.remove(id);
   }
 }

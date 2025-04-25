@@ -2,11 +2,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 200px;
   height: 100%;
-  padding: 16px;
-  background-color: #f4f4f4;
-  border-right: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 50;
+  border-left: 1px solid #e5e7eb;
 }
 
 .description {

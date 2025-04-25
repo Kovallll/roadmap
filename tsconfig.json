@@ -10,13 +10,7 @@
       "path": "./apps/frontend"
     },
     {
-      "path": "./apps/backend-e2e"
-    },
-    {
       "path": "./apps/backend"
-    },
-    {
-      "path": "./shared"
     },
     {
       "path": "./libs"

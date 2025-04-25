@@ -1,26 +1,76 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCanvaDto } from './dto/create-canvas.dto';
-import { UpdateCanvaDto } from './dto/update-canvas.dto';
+import { PrismaService } from '../../prisma/prisma.service';
+import { CreateCanvasDto } from './dto/create-canvas.dto';
+import { UpdateCanvasDto } from './dto/update-canvas.dto';
+import { Canvas } from '@roadmap/canvas/types';
+import { Node, ReactFlowJsonObject, Edge } from '@xyflow/react';
 
 @Injectable()
 export class CanvasService {
-  create(createCanvaDto: CreateCanvaDto) {
-    return 'This action adds a new canva';
+  constructor(private prisma: PrismaService) {}
+
+  private mapToCanvas(prismaCanvas: any): Canvas {
+    return {
+      id: prismaCanvas.id,
+      userId: prismaCanvas.userId,
+      object: prismaCanvas.object as ReactFlowJsonObject<Node, Edge>,
+      createdAt: prismaCanvas.createdAt.toISOString(),
+      updatedAt: prismaCanvas.updatedAt.toISOString(),
+    };
   }
 
-  findAll() {
-    return `This action returns all canvas`;
+  async create(createCanvasDto: CreateCanvasDto): Promise<Canvas> {
+    const canvas = await this.prisma.canvas.create({
+      data: {
+        userId: createCanvasDto.userId,
+        object: JSON.parse(JSON.stringify(createCanvasDto.object)),
+      },
+    });
+
+    return this.mapToCanvas(canvas);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} canva`;
+  async findAll(): Promise<Canvas[]> {
+    const canvases = await this.prisma.canvas.findMany();
+
+    return canvases
+      .filter((canvas) => canvas.object !== null)
+      .map((canvas) => this.mapToCanvas(canvas));
   }
 
-  update(id: number, updateCanvaDto: UpdateCanvaDto) {
-    return `This action updates a #${id} canva`;
+  async findOne(id: string): Promise<Canvas | null> {
+    const canvas = await this.prisma.canvas.findUnique({ where: { id } });
+
+    if (!canvas || canvas.object === null) return null;
+
+    return this.mapToCanvas(canvas);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} canva`;
+  async update(id: string, updateCanvasDto: UpdateCanvasDto): Promise<Canvas> {
+    const cleanedDto = {
+      ...updateCanvasDto,
+      object: updateCanvasDto.object
+        ? JSON.parse(JSON.stringify(updateCanvasDto.object))
+        : undefined,
+    };
+
+    const data = Object.fromEntries(
+      Object.entries(cleanedDto).filter(([_, v]) => v !== undefined)
+    );
+
+    const canvas = await this.prisma.canvas.update({
+      where: { id },
+      data,
+    });
+
+    return this.mapToCanvas(canvas);
+  }
+
+  async remove(id: string): Promise<Canvas> {
+    const canvas = await this.prisma.canvas.delete({
+      where: { id },
+    });
+
+    return this.mapToCanvas(canvas);
   }
 }
