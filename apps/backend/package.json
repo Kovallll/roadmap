@@ -2,6 +2,11 @@
   "name": "@roadmap/backend",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test"
+  },
   "nx": {
     "targets": {
       "build": {

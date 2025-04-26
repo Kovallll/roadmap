@@ -1,24 +1,13 @@
 import { memo } from 'react';
 
-import { Handle, NodeProps, Position } from '@xyflow/react';
+import { BaseNode } from '@/shared/ui/BaseNode/BaseNode';
+import { NodeProps } from '@xyflow/react';
 
-const CustomNode = ({ isConnectable, ...props }: NodeProps) => {
+const CustomNode = (props: NodeProps) => {
   return (
-    <div {...props} draggable={false}>
-      <Handle
-        type="target"
-        position={Position.Top}
-        isConnectable={isConnectable}
-        className=""
-      />
+    <BaseNode nodeProps={props}>
       <div>CustomNode</div>
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="a"
-        isConnectable={isConnectable}
-      />
-    </div>
+    </BaseNode>
   );
 };
 

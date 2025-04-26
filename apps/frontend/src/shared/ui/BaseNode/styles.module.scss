@@ -1,0 +1,56 @@
+.baseNode {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+
+    .handle {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+.handle {
+  background: #4f46e5;
+  border: 2px solid white;
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s,
+    scale 0.3s;
+
+  &.top,
+  &.bottom {
+    width: 10px;
+    height: 12px;
+    border-radius: 50% / 40%;
+    left: 50%;
+  }
+
+  &.left,
+  &.right {
+    width: 12px;
+    height: 10px;
+    border-radius: 40% / 50%;
+    top: 50%;
+  }
+
+  &:hover {
+    background: #6366f1;
+    scale: 1.2;
+  }
+}
+
+.content {
+  pointer-events: none;
+}

@@ -1,11 +1,22 @@
-import { IsUUID, IsObject } from 'class-validator';
-import type { ReactFlowJsonObject } from '@xyflow/react';
-import { Node, Edge } from '@xyflow/react';
+import { IsUUID, IsObject, IsString, IsOptional } from 'class-validator';
+
+import type { CanvasData } from '@roadmap/canvas/types';
 
 export class CreateCanvasDto {
   @IsUUID()
+  id: string;
+
+  @IsUUID()
   userId: string;
 
+  @IsString()
+  title: string;
+
+  @IsString()
+  @IsOptional()
+  description?: string;
+
   @IsObject()
-  object: ReactFlowJsonObject<Node, Edge>;
+  @IsOptional()
+  data?: CanvasData;
 }

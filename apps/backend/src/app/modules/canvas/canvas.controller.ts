@@ -30,6 +30,12 @@ export class CanvasController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('user/:userId')
+  findByUserId(@Param('userId') userId: string) {
+    return this.canvasService.findByUserId(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.canvasService.findOne(id);
@@ -37,8 +43,8 @@ export class CanvasController {
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCanvasDto: UpdateCanvasDto) {
-    return this.canvasService.update(id, updateCanvasDto);
+  update(@Param('id') id: string, @Body() data: UpdateCanvasDto) {
+    return this.canvasService.update(id, data);
   }
 
   @UseGuards(JwtAuthGuard)

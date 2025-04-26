@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import styles from './app.module.scss';
 import { router } from './router/config';
@@ -7,6 +8,7 @@ import { router } from './router/config';
 import '@xyflow/react/dist/style.css';
 import { useAuthStore } from '@/features/auth/model/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactFlowProvider } from '@xyflow/react';
 
 const queryClient = new QueryClient();
 
@@ -24,11 +26,14 @@ export default function App() {
 
   return (
     <div className={styles.app}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </Suspense>
+      <ReactFlowProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <QueryClientProvider client={queryClient}>
+            <ToastContainer />
+            <RouterProvider router={router} />
+          </QueryClientProvider>
+        </Suspense>
+      </ReactFlowProvider>
     </div>
   );
 }

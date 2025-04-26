@@ -2,6 +2,8 @@ import { useTypeStore } from '../model/store';
 import { ComponentsSidebarProps } from '../model/types';
 import styles from './styles.module.scss';
 
+import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
+
 export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
   const setType = useTypeStore((state) => state.setType);
 
@@ -14,7 +16,11 @@ export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
   };
 
   return (
-    <aside className={styles.sidebar}>
+    <Sidebar
+      title="Добавление компонентов"
+      position="left"
+      className={styles.sidebar}
+    >
       <div className={styles.description}>
         You can drag these nodes to the pane on the right.
       </div>
@@ -30,6 +36,6 @@ export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
           </div>
         ))}
       </div>
-    </aside>
+    </Sidebar>
   );
 };

@@ -1,5 +1,8 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
+import { AuthProvider } from '../provider/AuthProvider';
+import { RoutePath } from './constants';
+
 import { useAuthStore } from '@/features/auth/model';
 
 export const ProtectedRoute = () => {
@@ -7,8 +10,12 @@ export const ProtectedRoute = () => {
   const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={RoutePath.LOGIN} state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <AuthProvider>
+      <Outlet />
+    </AuthProvider>
+  );
 };

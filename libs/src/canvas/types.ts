@@ -1,9 +1,18 @@
-import { ReactFlowJsonObject, Node, Edge } from '@xyflow/react';
+import { Node, Edge } from '@xyflow/react';
+
+export type CanvasData = {
+  nodes: Node[];
+  edges: Edge[];
+};
 
 export type Canvas = {
   id: string;
   userId: string;
-  object: ReactFlowJsonObject<Node, Edge>;
-  createdAt: string;
-  updatedAt: string;
+  title: string;
+  data: CanvasData | null;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
+
+export type CreateCanvasDto = Pick<Canvas, 'userId' | 'title' | 'description'>;

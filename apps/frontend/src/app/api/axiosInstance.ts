@@ -2,7 +2,7 @@ import { useAuthStore } from '@/features/auth/model/store';
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://localhost:5000/api/',
 });
 
 let isRefreshing = false;
@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post('/api/auth/refresh', {
+        const { data } = await axiosInstance.post('auth/refresh', {
           refresh_token: refreshToken,
         });
 

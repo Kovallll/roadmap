@@ -1,12 +1,13 @@
 import { store } from '../model/store';
 import styles from './styles.module.scss';
 
+import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
 import { useReactFlow } from '@xyflow/react';
 
 export const NodeSidebar = () => {
   const { selectedNode, setSelectedNode } = store();
   const { updateNode } = useReactFlow();
-  console.log(selectedNode, 'selectedNode');
+
   if (!selectedNode) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +17,12 @@ export const NodeSidebar = () => {
   };
 
   return (
-    <div className={styles.sidebar}>
-      <h2>Редактирование узла</h2>
-      <label>Название</label>
+    <Sidebar title="Редактирование узла" className={styles.sidebar}>
+      <label className={styles.label}>Название</label>
       <input
         value={(selectedNode.data?.label as string) || ''}
         onChange={handleChange}
       />
-    </div>
+    </Sidebar>
   );
 };

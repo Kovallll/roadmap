@@ -1,27 +1,29 @@
 import { lazy } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
+import { RoutePath } from './constants';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
 
 const LoginPage = lazy(() => import('@/pages/Login/ui/Login'));
 const RegisterPage = lazy(() => import('@/pages/Register/ui/RegisterPage'));
-const CanvasPage = lazy(() => import('@/pages/Canvas/ui/Canvas'));
+const MapPage = lazy(() => import('@/pages/Map/ui/MapPage'));
+const UserMapsPage = lazy(() => import('@/pages/Profile/ui/UserMapsPage'));
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Navigate to="/login" replace />,
+    path: RoutePath.ROOT,
+    element: <Navigate to={RoutePath.LOGIN} replace />,
   },
   {
     element: <PublicOnlyRoute />,
     children: [
       {
-        path: '/login',
+        path: RoutePath.LOGIN,
         element: <LoginPage />,
       },
       {
-        path: '/register',
+        path: RoutePath.REGISTER,
         element: <RegisterPage />,
       },
     ],
@@ -30,13 +32,17 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: '/canvas',
-        element: <CanvasPage />,
+        path: `${RoutePath.MAP}/:id`,
+        element: <MapPage />,
+      },
+      {
+        path: RoutePath.USER_MAPS,
+        element: <UserMapsPage />,
       },
     ],
   },
   {
-    path: '*',
+    path: RoutePath.NOT_FOUND,
     element: <div>404 Not Found</div>,
   },
 ]);

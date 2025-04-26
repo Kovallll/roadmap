@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
 
-import { ReactFlowProvider } from '@xyflow/react';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,8 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <ReactFlowProvider>
-      <App />
-    </ReactFlowProvider>
+    <App />
   </StrictMode>
 );
