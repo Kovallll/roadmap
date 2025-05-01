@@ -1,7 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 import {
   addEdge,
+  getConnectedEdges,
+  getIncomers,
+  getOutgoers,
   Node,
   OnConnect,
   useReactFlow,
@@ -20,6 +23,7 @@ export const useCanvasHandlers = (
   const {
     setEdges,
     getNodes,
+    getEdges,
     setNodes,
     addNodes,
     flowToScreenPosition,
@@ -34,6 +38,15 @@ export const useCanvasHandlers = (
     (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
       if (!type) return;
+
+      const sidebarEl = document.getElementById('sidebar');
+
+      const { clientX, clientY } = event;
+      const dropTarget = document.elementFromPoint(clientX, clientY);
+
+      if (sidebarEl && sidebarEl.contains(dropTarget)) {
+        return;
+      }
 
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -53,28 +66,46 @@ export const useCanvasHandlers = (
 
   const onConnect: OnConnect = useCallback(
     ({ source, target, sourceHandle, targetHandle }) => {
-      const nodes = getNodes();
-      console.log(sourceHandle, targetHandle, nodes, 'onConnect');
-      return setEdges((eds) =>
-        nodes
-          .filter((node) => node.id === source || node.selected)
-          .reduce(
-            (eds, node) =>
-              addEdge(
-                {
-                  source: node.id,
-                  target,
-                  sourceHandle: sourceHandle,
-                  targetHandle: targetHandle,
-                },
-                eds
-              ),
-            eds
-          )
+      setEdges((eds) =>
+        addEdge(
+          {
+            source,
+            target,
+            sourceHandle,
+            targetHandle,
+          },
+          eds
+        )
       );
     },
-    []
+    [setEdges]
   );
+
+  const onNodesDelete = useCallback((deleted: Node[]) => {
+    const nodes = getNodes();
+    const edges = getEdges();
+    setEdges(
+      deleted.reduce((acc, node) => {
+        const incomers = getIncomers(node, nodes, edges);
+        const outgoers = getOutgoers(node, nodes, edges);
+        const connectedEdges = getConnectedEdges([node], edges);
+
+        const remainingEdges = acc.filter(
+          (edge) => !connectedEdges.includes(edge)
+        );
+
+        const createdEdges = incomers.flatMap(({ id: source }) =>
+          outgoers.map(({ id: target }) => ({
+            id: `${source}->${target}`,
+            source,
+            target,
+          }))
+        );
+
+        return [...remainingEdges, ...createdEdges];
+      }, edges)
+    );
+  }, []);
 
   const { nodeLookup } = store.getState();
   const closestNodes = Array.from(nodeLookup.values());
@@ -158,5 +189,12 @@ export const useCanvasHandlers = (
     [getNodes, setEdges, handleChangeLines, closestNodes]
   );
 
-  return { onDrop, onDragOver, onConnect, onNodeDrag, onNodeDragStop };
+  return {
+    onDrop,
+    onDragOver,
+    onConnect,
+    onNodeDrag,
+    onNodeDragStop,
+    onNodesDelete,
+  };
 };

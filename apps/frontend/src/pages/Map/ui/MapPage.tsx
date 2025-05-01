@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 
 import { MapHeader } from './MapHeader';
 
@@ -14,10 +15,16 @@ const MapPage = () => {
   if (!data) return null;
 
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorText: '#ffffff',
+        },
+      }}
+    >
       <MapHeader canvas={data} />
       <Canvas canvas={data} />
-    </>
+    </ConfigProvider>
   );
 };
 

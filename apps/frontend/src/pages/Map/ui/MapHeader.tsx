@@ -1,4 +1,4 @@
-import { Layout, Space, Typography } from 'antd';
+import { Flex, Layout, Space, Typography } from 'antd';
 
 import { MapHeaderProps } from '../model';
 import styles from './MapHeader.module.scss';
@@ -13,18 +13,19 @@ export const MapHeader = ({ canvas }: MapHeaderProps) => {
   const saveCanvas = { ...canvas, data: canvasData };
   return (
     <Header className={styles.header}>
-      <Space
-        style={{
-          width: '100%',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
+      <Flex
+        justify="space-between"
+        align="center"
+        className={styles.content}
+        gap={24}
       >
         <Typography.Title level={3} style={{ margin: 0 }}>
-          Карта Разработки
+          {canvas.title}
         </Typography.Title>
-        <SaveButton canvas={saveCanvas} />
-      </Space>
+        <Space className={styles.button}>
+          <SaveButton canvas={saveCanvas} />
+        </Space>
+      </Flex>
     </Header>
   );
 };

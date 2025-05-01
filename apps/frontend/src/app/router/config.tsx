@@ -8,7 +8,7 @@ import { PublicOnlyRoute } from './PublicOnlyRoute';
 const LoginPage = lazy(() => import('@/pages/Login/ui/Login'));
 const RegisterPage = lazy(() => import('@/pages/Register/ui/RegisterPage'));
 const MapPage = lazy(() => import('@/pages/Map/ui/MapPage'));
-const UserMapsPage = lazy(() => import('@/pages/Profile/ui/UserMapsPage'));
+const ProfilePage = lazy(() => import('@/pages/Profile/ui/ProfilePage'));
 
 export const router = createBrowserRouter([
   {
@@ -36,8 +36,8 @@ export const router = createBrowserRouter([
         element: <MapPage />,
       },
       {
-        path: RoutePath.USER_MAPS,
-        element: <UserMapsPage />,
+        path: RoutePath.PROFILE,
+        element: <ProfilePage />,
       },
     ],
   },

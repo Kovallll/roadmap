@@ -4,28 +4,29 @@ import { jwtDecode } from 'jwt-decode';
 
 import { RoutePath } from '../router/constants';
 
-import { useAuthStore } from '@/features/auth/model';
 import { useUser } from '@/features/user/model/hooks/useUser';
 import { useUserStore } from '@/features/user/model/store';
+import { useAuthStore } from '@/shared/model/store/authStore';
+import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const setUser = useUserStore.use.setUser();
   const token = useAuthStore.use.accessToken();
 
-  let decodedToken: { username: string } | null = null;
+  let decodedToken: { id: string } | null = null;
   try {
     if (token) {
-      decodedToken = jwtDecode<{ username: string }>(token);
+      decodedToken = jwtDecode<{ id: string }>(token);
     }
   } catch (error) {
     console.error('Invalid token:', error);
     navigate(RoutePath.LOGIN);
   }
 
-  const userName = decodedToken?.username;
+  const userId = decodedToken?.id;
 
-  const { data, isSuccess } = useUser(userName ?? '');
+  const { data, isSuccess } = useUser(userId ?? '');
   if (!isSuccess) {
     navigate(RoutePath.LOGIN);
   }
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [token, data, setUser, navigate]);
 
   if (!token || !data) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return <>{children}</>;

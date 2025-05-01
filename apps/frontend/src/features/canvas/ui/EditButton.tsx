@@ -14,11 +14,7 @@ export const EditButton = ({ canvas }: EditButtonProps) => {
   };
 
   return (
-    <Button
-      type="primary"
-      style={{ marginTop: '10px' }}
-      onClick={handleEditCanvas}
-    >
+    <Button type="primary" onClick={handleEditCanvas}>
       Редактировать
     </Button>
   );

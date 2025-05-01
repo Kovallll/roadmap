@@ -1,11 +1,24 @@
-import { InternalNode, Node } from '@xyflow/react';
+import { InternalNode, Node, Edge } from '@xyflow/react';
 import { MIN_DISTANCE } from './constants';
 import { ClosestNodeResult } from './types';
+
+const getHandlesByDirection = (dx: number, dy: number) => {
+  const horizontal = Math.abs(dx) > Math.abs(dy);
+  if (horizontal) {
+    return dx > 0
+      ? { sourceHandle: 'right', targetHandle: 'left' }
+      : { sourceHandle: 'left', targetHandle: 'right' };
+  } else {
+    return dy > 0
+      ? { sourceHandle: 'bottom', targetHandle: 'top' }
+      : { sourceHandle: 'top', targetHandle: 'bottom' };
+  }
+};
 
 export const getClosestEdge = (
   internalNode: InternalNode<Node>,
   closestNodes: InternalNode<Node>[]
-) => {
+): Edge | null => {
   const closestNode = closestNodes.reduce<ClosestNodeResult>(
     (res, n) => {
       if (n.id !== internalNode.id) {
@@ -31,20 +44,26 @@ export const getClosestEdge = (
     }
   );
 
-  if (!closestNode.node) {
-    return null;
-  }
+  if (!closestNode.node) return null;
 
-  const closeNodeIsSource =
-    closestNode.node.internals.positionAbsolute.x <
-    internalNode.internals.positionAbsolute.x;
+  const sourceNode = internalNode;
+  const targetNode = closestNode.node;
+
+  const dx =
+    targetNode.internals.positionAbsolute.x -
+    sourceNode.internals.positionAbsolute.x;
+  const dy =
+    targetNode.internals.positionAbsolute.y -
+    sourceNode.internals.positionAbsolute.y;
+
+  const { sourceHandle, targetHandle } = getHandlesByDirection(dx, dy);
 
   return {
-    id: closeNodeIsSource
-      ? `${closestNode.node.id}-${internalNode.id}`
-      : `${internalNode.id}-${closestNode.node.id}`,
-    source: closeNodeIsSource ? closestNode.node.id : internalNode.id,
-    target: closeNodeIsSource ? internalNode.id : closestNode.node.id,
+    id: `${sourceNode.id}-${targetNode.id}`,
+    source: sourceNode.id,
+    target: targetNode.id,
+    sourceHandle,
+    targetHandle,
     className: '',
   };
 };

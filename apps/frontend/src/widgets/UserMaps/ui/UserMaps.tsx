@@ -1,69 +1,70 @@
 import { useState } from 'react';
-import { Button, Card, Flex, Input, Modal } from 'antd';
+import { Card, Flex, Input, Typography } from 'antd';
 
-import { UserMapsProps } from '../model';
+import styles from './styles.module.scss';
 
 import { useCanvases } from '@/features/canvas/model/hooks/useCanvases';
-import { useCreateCanvas } from '@/features/canvas/model/hooks/useCreateCanvas';
+import { CreateButton } from '@/features/canvas/ui/CreateButton';
 import { EditButton } from '@/features/canvas/ui/EditButton';
+import { SettingButton } from '@/features/canvas/ui/SettingButton';
+import { useUserStore } from '@/features/user/model';
+import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
+import { User } from '@roadmap/user/types';
 
-export const UserMaps = ({ user }: UserMapsProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+export const UserMaps = () => {
+  const user = useUserStore.use.user() as User;
+
+  const [search, setSearch] = useState('');
+
   const { data: canvases, isLoading, isError } = useCanvases(user?.id);
-  const { mutate, isPending } = useCreateCanvas();
 
-  const handleOkModal = () => {
-    if (!title.trim()) return;
-    mutate({ title, description, userId: user.id });
-    setIsModalOpen(false);
-    setTitle('');
-    setDescription('');
-  };
-
-  if (isLoading || !user) return <div>Загрузка...</div>;
+  if (isLoading || !user) return <Spinner />;
   if (isError) return <div>Ошибка при загрузке карт.</div>;
 
   const canvasList = Array.isArray(canvases) ? canvases : [];
 
+  const filteredCanvases = canvasList.filter((canvas) =>
+    canvas.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-      {canvasList.length > 0 ? (
-        canvasList.map((canvas) => (
-          <Card key={canvas.id} hoverable style={{ width: 240 }}>
-            <Card.Meta title={canvas.title} description={canvas.description} />
-            <EditButton canvas={canvas} />
-          </Card>
-        ))
-      ) : (
-        <>Нет карт</>
-      )}
-      <Button type="primary" onClick={() => setIsModalOpen(true)}>
-        Создать карту
-      </Button>
-      <Modal
-        title="Создание новой карты"
-        open={isModalOpen}
-        onOk={handleOkModal}
-        onCancel={() => setIsModalOpen(false)}
-        confirmLoading={isPending}
-        okText="Создать"
-        cancelText="Отмена"
-      >
-        <Flex vertical gap={16}>
-          <Input
-            placeholder="Введите название карты"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <Input
-            placeholder="Введите описание карты"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+    <Flex vertical gap={20} className={styles.container}>
+      <Flex justify="space-between" align="center" wrap="wrap">
+        <Input
+          placeholder="Поиск по названию"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ maxWidth: 300 }}
+        />
+        <Flex className={styles.crateButton}>
+          <CreateButton userId={user.id} />
         </Flex>
-      </Modal>
-    </div>
+      </Flex>
+
+      <Flex vertical className={styles.maps}>
+        {filteredCanvases.length > 0 ? (
+          filteredCanvases.map((canvas) => (
+            <Card key={canvas.id} hoverable className={styles.map}>
+              <Flex justify="space-between">
+                <Flex vertical>
+                  <Typography.Text className={styles.title}>
+                    {canvas.title}
+                  </Typography.Text>
+                  <Typography.Text className={styles.description}>
+                    {canvas.description}
+                  </Typography.Text>
+                </Flex>
+                <Flex align="center" gap={16}>
+                  <EditButton canvas={canvas} />
+                  <SettingButton canvas={canvas} />
+                </Flex>
+              </Flex>
+            </Card>
+          ))
+        ) : (
+          <Typography.Text>Нет существующих карт!</Typography.Text>
+        )}
+      </Flex>
+    </Flex>
   );
 };

@@ -1,35 +1,14 @@
 .sidebar {
   top: 64px;
-}
-
-.description {
-  margin-bottom: 12px;
-  font-size: 14px;
-  color: #666;
+  z-index: 100;
 }
 
 .nodeItem {
   padding: 10px;
   margin-bottom: 8px;
   border-radius: 8px;
-  background-color: white;
   border: 1px solid #ccc;
   cursor: grab;
   transition: all 0.2s;
-
-  &:hover {
-    background-color: #eaeaea;
-  }
-
-  &.input {
-    border-left: 4px solid #6ede87;
-  }
-
-  &.default {
-    border-left: 4px solid #ff0072;
-  }
-
-  &.output {
-    border-left: 4px solid #6865a5;
-  }
+  color: #fff;
 }

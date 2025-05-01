@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.id };
+    const payload = { id: user.id, username: user.username, sub: user.id };
 
     const accessToken = this.jwtService.sign(payload, {
       expiresIn: '1h',
@@ -56,13 +56,13 @@ export class AuthService {
       const decoded = this.jwtService.verify(refreshToken, {
         secret: this.configService.get<string>('JWT_SECRET'),
       });
-      const { username, sub } = decoded;
+      const { id, username, sub } = decoded;
 
-      const user = await this.users.getUser(username);
+      const user = await this.users.getUserById(id);
       if (!user) throw new Error('User not found');
 
       const newAccessToken = this.jwtService.sign(
-        { username, sub },
+        { id, username, sub },
         { expiresIn: '1h' }
       );
 

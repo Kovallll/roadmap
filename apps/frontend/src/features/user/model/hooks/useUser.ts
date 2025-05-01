@@ -2,9 +2,9 @@ import { getUser } from '../../api';
 
 import { useQuery } from '@tanstack/react-query';
 
-export const useUser = (userName: string) => {
+export const useUser = (id: string) => {
   return useQuery({
-    queryKey: ['getUser', userName],
-    queryFn: () => getUser(userName),
+    queryKey: ['getUser', id],
+    queryFn: () => getUser(id),
   });
 };

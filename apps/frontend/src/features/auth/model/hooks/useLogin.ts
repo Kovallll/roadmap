@@ -1,8 +1,9 @@
 import { axiosInstance } from '@/app/api/axiosInstance';
 import { useMutation } from '@tanstack/react-query';
 import { User } from '@roadmap/user/types';
-import { useAuthStore } from '../store';
+
 import { toast } from 'react-toastify';
+import { useAuthStore } from '@/shared/model/store/authStore';
 
 export const useLogin = () => {
   const setTokens = useAuthStore.use.setTokens();

@@ -3,10 +3,12 @@ import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import styles from './app.module.scss';
+import { AntdThemeProvider } from './provider/AntdThemeProvider';
 import { router } from './router/config';
 
 import '@xyflow/react/dist/style.css';
-import { useAuthStore } from '@/features/auth/model/store';
+import { useAuthStore } from '@/shared/model/store/authStore';
+import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactFlowProvider } from '@xyflow/react';
 
@@ -27,12 +29,14 @@ export default function App() {
   return (
     <div className={styles.app}>
       <ReactFlowProvider>
-        <Suspense fallback={<div>Loading...</div>}>
-          <QueryClientProvider client={queryClient}>
-            <ToastContainer />
-            <RouterProvider router={router} />
-          </QueryClientProvider>
-        </Suspense>
+        <AntdThemeProvider>
+          <Suspense fallback={<Spinner />}>
+            <QueryClientProvider client={queryClient}>
+              <ToastContainer />
+              <RouterProvider router={router} />
+            </QueryClientProvider>
+          </Suspense>
+        </AntdThemeProvider>
       </ReactFlowProvider>
     </div>
   );

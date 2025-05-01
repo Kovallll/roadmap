@@ -1,4 +1,4 @@
-import { Canvas, CanvasData, CreateCanvasDto } from '@roadmap/canvas/types';
+import { Canvas, CreateCanvasDto } from '@roadmap/canvas/types';
 
 import { API_URL } from './constants';
 import { axiosInstance } from '@/app/api/axiosInstance';
@@ -15,10 +15,11 @@ export const getUserCanvases = async (userId: string) => {
   return data;
 };
 
-export const saveCanvas = async (id: string, canvasData: CanvasData) => {
-  const { data } = await axiosInstance.patch<Canvas>(`${API_URL}/${id}`, {
-    data: canvasData,
-  });
+export const saveCanvas = async (canvas: Canvas) => {
+  const { data } = await axiosInstance.patch<Canvas>(
+    `${API_URL}/${canvas.id}`,
+    canvas
+  );
   return data;
 };
 

@@ -2,7 +2,7 @@ import { Button } from 'antd';
 
 import { SaveButtonProps, useSaveCanvas } from '../model';
 
-export const SaveButton = ({ canvas }: SaveButtonProps) => {
+export const SaveButton = ({ canvas, ...props }: SaveButtonProps) => {
   const { mutate } = useSaveCanvas(canvas.id);
 
   const handleSave = () => {
@@ -10,7 +10,7 @@ export const SaveButton = ({ canvas }: SaveButtonProps) => {
   };
 
   return (
-    <Button type="primary" onClick={handleSave}>
+    <Button onClick={handleSave} {...props}>
       Сохранить карту
     </Button>
   );

@@ -1,7 +1,7 @@
 export enum RoutePath {
   ROOT = '/',
   MAP = '/map',
-  USER_MAPS = '/profile/maps',
+  PROFILE = '/profile',
   LOGIN = '/login',
   REGISTER = '/register',
   NOT_FOUND = '*',

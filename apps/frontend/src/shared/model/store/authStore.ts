@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { AuthState } from './types';
+import { AuthState } from '../types';
 import { createSelectors } from '@/shared/model/store';
 
 export const store = create<AuthState>((set) => ({

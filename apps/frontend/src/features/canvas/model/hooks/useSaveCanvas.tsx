@@ -9,15 +9,13 @@ export const useSaveCanvas = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (canvas: Pick<Canvas, 'id' | 'data'>) => {
-      if (!canvas.data) {
-        throw new Error('Canvas data cannot be null or undefined');
-      }
-      return saveCanvas(canvas.id, canvas.data);
-    },
+    mutationFn: (canvas: Canvas) => saveCanvas(canvas),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['getCanvas', id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['getCanvases'],
       });
       toast.success('Карта успешно сохранена');
     },

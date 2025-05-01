@@ -1,4 +1,42 @@
+body {
+  box-sizing: border-box;
+}
+
 .temp .react-flow__edge-path {
   stroke: #bbb;
   stroke-dasharray: 5 5;
+}
+
+.react-flow__node {
+  color: #2c3144;
+  font-family: 'Inter', sans-serif;
+}
+
+.react-flow__handle {
+  background: #f17900;
+  width: 10px;
+  height: 10px;
+}
+
+.react-flow__edge-path {
+  stroke: #2c3144;
+}
+
+.react-flow__background {
+  background-color: #f8f9fb;
+}
+
+:root {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #2c3144;
+    border-radius: 4px;
+  }
 }

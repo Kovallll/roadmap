@@ -1,0 +1,26 @@
+.container {
+  height: 100%;
+}
+
+.title {
+  font-size: 20px;
+  color: $primary-color;
+}
+
+.description {
+  font-size: 14px;
+  color: $primary-color;
+}
+
+.crateButton {
+  margin-right: 24px;
+}
+
+.maps {
+  overflow-y: auto;
+}
+
+.map {
+  margin-bottom: 16px;
+  margin-right: 8px;
+}

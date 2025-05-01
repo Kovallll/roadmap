@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { nodeColor } from '../lib';
 import { CanvasProps, useCanvasHandlers } from '../model';
@@ -7,7 +7,7 @@ import { useAlignLinesStore } from '@/features/Align/model';
 import { AlignLines } from '@/features/Align/ui/AlignLines';
 import { useCanvasStore } from '@/features/canvas/model/store';
 import { useNodeClipboard } from '@/features/Copy/lib/hooks/useNodeClipboard';
-import { nodeLabels, nodeTypes } from '@/shared/lib';
+import { edgeTypes, nodeLabels, nodeTypes } from '@/shared/lib';
 import { ComponentsSidebar } from '@/widgets/ComponentsSidebar/ui/ComponentsSidebar';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model/store';
 import { EdgeSidebar } from '@/widgets/EdgeSidebar/ui/EdgeSidebar';
@@ -36,8 +36,14 @@ const Canvas = ({ canvas }: CanvasProps) => {
   const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
   const setLines = useAlignLinesStore.use.setLines();
 
-  const { onDrop, onDragOver, onConnect, onNodeDrag, onNodeDragStop } =
-    useCanvasHandlers(setLines);
+  const {
+    onDrop,
+    onDragOver,
+    onConnect,
+    onNodeDrag,
+    onNodeDragStop,
+    onNodesDelete,
+  } = useCanvasHandlers(setLines);
 
   useNodeClipboard();
 
@@ -79,9 +85,11 @@ const Canvas = ({ canvas }: CanvasProps) => {
         onNodeDrag={onNodeDrag}
         onNodeDragStop={onNodeDragStop}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onEdgeClick={handleSelectEdge}
         onNodeClick={handleSelectNode}
         onPaneClick={handleReset}
+        onNodesDelete={onNodesDelete}
         connectionMode={ConnectionMode.Loose}
         isValidConnection={() => {
           return true;

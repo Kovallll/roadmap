@@ -21,9 +21,6 @@ export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
       position="left"
       className={styles.sidebar}
     >
-      <div className={styles.description}>
-        You can drag these nodes to the pane on the right.
-      </div>
       <div>
         {nodeLabels.map((label) => (
           <div

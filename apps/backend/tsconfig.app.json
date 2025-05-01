@@ -7,7 +7,12 @@
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "es2021"
+    "target": "es2021",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/app/*"],
+      "@roadmap/*": ["../../libs/src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "../../libs/src/**/*.ts"],
   "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"]

@@ -8,7 +8,7 @@ import { Canvas } from '@prisma/client';
 export class CanvasService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createCanvasDto: CreateCanvasDto): Promise<Canvas> {
+  async create(createCanvasDto: Omit<CreateCanvasDto, 'id'>): Promise<Canvas> {
     const preparedData = createCanvasDto.data
       ? JSON.parse(JSON.stringify(createCanvasDto.data))
       : null;

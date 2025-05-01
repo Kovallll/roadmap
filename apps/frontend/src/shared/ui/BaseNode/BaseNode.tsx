@@ -1,3 +1,4 @@
+import { Flex } from 'antd';
 import cn from 'classnames';
 
 import { BaseNodeProps } from '../../model';
@@ -10,7 +11,14 @@ export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
   const { data } = nodeProps;
 
   return (
-    <div className={cn(styles.baseNode, className)}>
+    <Flex
+      className={cn(styles.baseNode, className)}
+      style={{
+        fontSize: Number(data?.fontSize),
+        backgroundColor: String(data?.backgroundColor),
+        color: String(data?.color),
+      }}
+    >
       {handles.map(({ position, id, className }) => (
         <Handle
           key={id}
@@ -27,6 +35,6 @@ export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
         <div className={styles.content}>{String(data?.label)}</div>
       )}
       {children}
-    </div>
+    </Flex>
   );
 };

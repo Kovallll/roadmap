@@ -9,6 +9,7 @@
   font-size: 14px;
   font-weight: 500;
   transition: box-shadow 0.2s;
+  color: $primary-color;
 
   &:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -20,7 +21,6 @@
   }
 }
 .handle {
-  background: #4f46e5;
   border: 2px solid white;
   cursor: pointer;
   position: absolute;
@@ -32,21 +32,18 @@
   &.top,
   &.bottom {
     width: 10px;
-    height: 12px;
-    border-radius: 50% / 40%;
+    height: 10px;
     left: 50%;
   }
 
   &.left,
   &.right {
-    width: 12px;
+    width: 10px;
     height: 10px;
-    border-radius: 40% / 50%;
     top: 50%;
   }
 
   &:hover {
-    background: #6366f1;
     scale: 1.2;
   }
 }

@@ -14,6 +14,13 @@ export default defineConfig(() => ({
     port: 4300,
     host: 'localhost',
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/shared/model/theme/index.scss";`,
+      },
+    },
+  },
   plugins: [react()],
   build: {
     outDir: './dist',

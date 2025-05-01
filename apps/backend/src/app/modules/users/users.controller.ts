@@ -6,37 +6,80 @@ import {
   Patch,
   Param,
   Delete,
+  UsePipes,
+  ValidationPipe,
+  UseFilters,
+  ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserNotFoundFilter } from '@/filters/UserNotFoundFilter';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
+  @UseGuards(JwtAuthGuard)
   @Post()
+  @ApiOperation({ summary: 'Создать пользователя' })
+  @ApiResponse({ status: 201, description: 'Пользователь успешно создан' })
+  @ApiResponse({ status: 400, description: 'Некорректные данные' })
+  @UsePipes(new ValidationPipe())
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
+  @ApiOperation({ summary: 'Получить всех пользователей' })
+  @ApiResponse({ status: 200, description: 'Возвращает список пользователей' })
   findAll() {
     return this.usersService.getAllUsers();
   }
 
-  @Get(':userName')
+  @Get('name/:userName')
+  @UseFilters(UserNotFoundFilter)
+  @ApiOperation({ summary: 'Получить пользователя по имени' })
+  @ApiResponse({ status: 200, description: 'Пользователь найден' })
+  @ApiResponse({ status: 404, description: 'Пользователь не найден' })
   findOne(@Param('userName') userName: string) {
     return this.usersService.getUser(userName);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  @ApiOperation({ summary: 'Получить пользователя по id' })
+  @ApiResponse({ status: 200, description: 'Пользователь найден' })
+  @ApiResponse({ status: 404, description: 'Пользователь не найден' })
+  @UseFilters(UserNotFoundFilter)
+  findOneById(@Param('id', ParseUUIDPipe) id: string) {
+    return this.usersService.getUserById(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @ApiOperation({ summary: 'Обновить информацию о пользователе' })
+  @ApiResponse({ status: 200, description: 'Пользователь успешно обновлён' })
+  @ApiResponse({ status: 404, description: 'Пользователь не найден' })
+  @UsePipes(new ValidationPipe())
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateUserDto: UpdateUserDto
+  ) {
     return this.usersService.updateUser(id, updateUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  @ApiOperation({ summary: 'Удалить пользователя' })
+  @ApiResponse({ status: 200, description: 'Пользователь успешно удалён' })
+  @ApiResponse({ status: 404, description: 'Пользователь не найден' })
+  @UseFilters(UserNotFoundFilter)
+  delete(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.deleteUser(id);
   }
 }
