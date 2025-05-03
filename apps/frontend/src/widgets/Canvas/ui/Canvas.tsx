@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 
 import { nodeColor } from '../lib';
 import { CanvasProps, useCanvasHandlers } from '../model';

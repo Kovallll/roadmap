@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'InterVariable';
+  src: url('@/shared/assets/fonts/Inter-VariableFont_opsz,wght.ttf')
+    format('ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'InterVariable';
+  src: url('@/shared/assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf')
+    format('ttf');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

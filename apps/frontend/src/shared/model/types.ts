@@ -12,3 +12,9 @@ export type AuthState = {
   setTokens: (access: string, refresh: string) => void;
   logout: () => void;
 };
+
+export type ListItem = { id: string; label: string };
+
+export type TextAreaProps = {
+  data?: Record<string, unknown>;
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;

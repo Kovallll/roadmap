@@ -1,6 +1,7 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
 import path from 'path';
 
 export default defineConfig(() => ({
@@ -17,11 +18,11 @@ export default defineConfig(() => ({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/shared/model/theme/index.scss";`,
+        additionalData: `@import "@/shared/styles/theme/index.scss";`,
       },
     },
   },
-  plugins: [react()],
+  plugins: [svgr(), react()],
   build: {
     outDir: './dist',
     emptyOutDir: true,

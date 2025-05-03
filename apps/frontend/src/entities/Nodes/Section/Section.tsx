@@ -1,0 +1,89 @@
+import { memo, useEffect, useRef } from 'react';
+
+import { NodeProps, NodeResizer, useReactFlow } from '@xyflow/react';
+
+export const SectionNode = memo(({ id, selected }: NodeProps) => {
+  const { getNode, getNodes, setNodes } = useReactFlow();
+  const prevPositionRef = useRef({ x: 0, y: 0 });
+  const nestedNodeIdsRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    const sectionNode = getNode(id);
+    if (!sectionNode) return;
+
+    const { x, y } = sectionNode.position;
+    const { width = 0, height = 0 } = sectionNode.measured || {};
+
+    const deltaX = x - prevPositionRef.current.x;
+    const deltaY = y - prevPositionRef.current.y;
+
+    prevPositionRef.current = { x, y };
+
+    if (nestedNodeIdsRef.current.size === 0) {
+      const sectionBounds = {
+        left: x,
+        right: x + width,
+        top: y,
+        bottom: y + height,
+      };
+
+      getNodes().forEach((node) => {
+        if (node.id === id) return;
+
+        const nodeX = node.position.x;
+        const nodeY = node.position.y;
+        const nodeWidth = node.measured?.width || 0;
+        const nodeHeight = node.measured?.height || 0;
+
+        const isInside =
+          nodeX >= sectionBounds.left &&
+          nodeX + nodeWidth <= sectionBounds.right &&
+          nodeY >= sectionBounds.top &&
+          nodeY + nodeHeight <= sectionBounds.bottom;
+
+        if (isInside) nestedNodeIdsRef.current.add(node.id);
+      });
+    }
+
+    if (!deltaX && !deltaY) return;
+    if (nestedNodeIdsRef.current.size === 0) return;
+
+    setNodes((nodes) =>
+      nodes.map((node) => {
+        if (nestedNodeIdsRef.current.has(node.id)) {
+          return {
+            ...node,
+            position: {
+              x: node.position.x + deltaX,
+              y: node.position.y + deltaY,
+            },
+          };
+        }
+        return node;
+      })
+    );
+  });
+
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        minHeight: 50,
+        minWidth: 100,
+        border: '2px dashed #888',
+        background: 'rgba(200, 200, 200, 0.1)',
+        position: 'relative',
+        borderRadius: 8,
+        zIndex: 0,
+        pointerEvents: 'none',
+      }}
+    >
+      {selected && (
+        <div style={{ position: 'absolute', zIndex: 1, pointerEvents: 'auto' }}>
+          <NodeResizer isVisible minWidth={150} minHeight={50} />
+        </div>
+      )}
+    </div>
+  );
+});

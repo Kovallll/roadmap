@@ -1,16 +1,18 @@
-import CustomNode from '@/entities/CustomNode/ui/CustomNode';
-import TextNode from '@/entities/TextNode/ui/TextNode';
+import TextNode from '@/entities/Nodes/Text/ui/TextNode';
 import { Position } from '@xyflow/react';
 import styles from '../ui/BaseNode/styles.module.scss';
 import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
+import Note from '@/entities/Nodes/Note/ui/Note';
+import { ListNode } from '@/entities/Nodes/List/ui/List';
 
 export const nodeTypes = {
-  customNode: CustomNode,
-  textNode: TextNode,
+  Text: TextNode,
+  Note: Note,
+  List: ListNode,
 };
 
 export const edgeTypes = {
-  baseEdge: BaseEdge,
+  custom: BaseEdge,
 };
 
 export const nodeLabels = Object.keys(nodeTypes);

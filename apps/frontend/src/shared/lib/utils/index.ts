@@ -10,9 +10,20 @@ export const useId = () => {
 export const createNode = (
   type: string,
   position: { x: number; y: number }
-): Node => ({
-  id: uuidv4(),
-  type,
-  data: { label: `${type} Node` },
-  position,
-});
+): Node => {
+  if (type === 'section') {
+    return {
+      id: uuidv4(),
+      type,
+      data: { label: `${type}` },
+      position,
+      connectable: false,
+    };
+  }
+  return {
+    id: uuidv4(),
+    type,
+    data: { label: `${type}` },
+    position,
+  };
+};

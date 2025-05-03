@@ -11,6 +11,7 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
           colorText: '#2c3144',
           colorLink: '#f17900',
           borderRadius: 8,
+          fontFamily: 'Inter, sans-serif',
         },
         components: {
           Layout: {
@@ -20,6 +21,9 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
           },
           Input: {
             colorText: '#2c3144',
+          },
+          Select: {
+            colorText: '#000',
           },
           InputNumber: {
             colorText: '#2c3144',

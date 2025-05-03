@@ -1,0 +1,53 @@
+.note {
+  background-color: #ffe0e0;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.4;
+    font-family: inherit;
+    outline: none;
+
+    &::placeholder {
+      color: #999;
+    }
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #2c3144;
+      border-radius: 2px;
+    }
+  }
+
+  .pinIcon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 4px;
+    right: 4px;
+    z-index: 100;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    font-size: 18px;
+    color: $primary-color;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

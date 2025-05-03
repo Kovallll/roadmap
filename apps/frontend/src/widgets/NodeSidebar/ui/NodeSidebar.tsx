@@ -1,10 +1,12 @@
-import { Input, InputNumber, Typography } from 'antd';
+import { InputNumber, Typography } from 'antd';
 import { ColorPicker } from 'antd';
 
 import { store } from '../model/store';
 import styles from './styles.module.scss';
 
+import { ListEditor } from '@/entities/Nodes/List/ui/ListEditor';
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
+import { colors } from '@/shared/styles/theme/theme';
 import { useReactFlow } from '@xyflow/react';
 
 export const NodeSidebar = () => {
@@ -13,28 +15,26 @@ export const NodeSidebar = () => {
 
   if (!selectedNode) return null;
 
-  const handleUpdate = (field: string, value: any) => {
-    const updated = {
-      ...selectedNode,
-      data: {
-        ...selectedNode.data,
+  const handleUpdate = (field: string, value: string | number | null) => {
+    updateNode(selectedNode.id, (prev) => {
+      const newData = {
+        ...prev.data,
         [field]: value,
-      },
-    };
-    setSelectedNode(updated);
-    updateNode(updated.id, updated);
+      };
+      setSelectedNode({ ...selectedNode, data: newData });
+      return {
+        data: newData,
+      };
+    });
   };
+
+  const additionalEditors = [{ type: 'List', editor: <ListEditor /> }];
 
   return (
     <Sidebar title="Редактирование узла" className={styles.sidebar}>
-      <div className={styles.field}>
-        <Typography.Text className={styles.label}>Название</Typography.Text>
-        <Input
-          value={(selectedNode.data?.label as string) || ''}
-          onChange={(e) => handleUpdate('label', e.target.value)}
-        />
-      </div>
-
+      {additionalEditors.map(
+        (item) => selectedNode.type === item.type && item.editor
+      )}
       <div className={styles.field}>
         <Typography.Text className={styles.label}>
           Размер шрифта
@@ -47,24 +47,20 @@ export const NodeSidebar = () => {
           style={{ width: '100%' }}
         />
       </div>
-
       <div className={styles.field}>
         <Typography.Text className={styles.label}>Цвет текста</Typography.Text>
         <ColorPicker
-          value={(selectedNode.data?.color as string) || '#000000'}
+          value={(selectedNode.data?.color as string) || colors.black}
           onChange={(color) => handleUpdate('color', color.toHexString())}
-          style={{ width: '100%' }}
         />
       </div>
-
       <div className={styles.field}>
         <Typography.Text className={styles.label}>Цвет фона</Typography.Text>
         <ColorPicker
-          value={(selectedNode.data?.backgroundColor as string) || '#ffffff'}
+          value={(selectedNode.data?.backgroundColor as string) || colors.white}
           onChange={(color) =>
             handleUpdate('backgroundColor', color.toHexString())
           }
-          style={{ width: '100%' }}
         />
       </div>
     </Sidebar>

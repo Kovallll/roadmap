@@ -1,4 +1,10 @@
-import { EdgeProps, getBezierPath } from '@xyflow/react';
+import { colors } from '@/shared/styles/theme/theme';
+import {
+  BaseEdge as FlowBaseEdge,
+  EdgeLabelRenderer,
+  EdgeProps,
+  getBezierPath,
+} from '@xyflow/react';
 
 export const BaseEdge = ({
   id,
@@ -8,9 +14,8 @@ export const BaseEdge = ({
   targetY,
   sourcePosition,
   targetPosition,
-  style = {},
-  markerEnd,
   data,
+  ...props
 }: EdgeProps) => {
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -21,54 +26,40 @@ export const BaseEdge = ({
     targetPosition,
   });
 
-  const strokeColor = data?.strokeColor || '#000';
-  const strokeWidth = data?.strokeWidth || 2;
+  const textColor = String(data?.color) || colors.black;
+  const strokeWidth = Number(data?.strokeWidth) || 2;
+  const strokeColor = String(data?.strokeColor) || colors.black;
   const label = data?.label || '';
-
-  const labelStyle = {
-    fontSize: data?.fontSize || 12,
-    fill: data?.fontColor || '#000',
-    background: data?.labelBackground || 'transparent',
-    padding: '2px 4px',
-    borderRadius: '4px',
-  };
 
   return (
     <>
-      <path
+      <FlowBaseEdge
         id={id}
-        style={{
-          stroke: strokeColor,
-          strokeWidth,
-          ...style,
-        }}
-        className="react-flow__edge-path"
-        d={edgePath}
-        markerEnd={markerEnd}
-        fill="none"
+        path={edgePath}
+        {...props}
+        style={{ strokeWidth, stroke: strokeColor }}
       />
       {label && (
-        <foreignObject
-          width={100}
-          height={40}
-          x={labelX - 50}
-          y={labelY - 20}
-          requiredExtensions="http://www.w3.org/1999/xhtml"
-        >
+        <EdgeLabelRenderer>
           <div
             style={{
-              ...labelStyle,
-              width: '100%',
-              height: '100%',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              position: 'absolute',
+              left: `${labelX}px`,
+              top: `${labelY}px`,
+              transform: 'translate(-50%, -50%)',
+              color: textColor,
+              whiteSpace: 'nowrap',
+              fontSize: 12,
+              background: 'white',
+              padding: '2px 4px',
+              borderRadius: 4,
+              pointerEvents: 'none',
             }}
+            className="edge-label-renderer__custom-edge nodrag nopan"
           >
-            {label}
+            {String(label)}
           </div>
-        </foreignObject>
+        </EdgeLabelRenderer>
       )}
     </>
   );

@@ -1,0 +1,14 @@
+.text {
+  color: $primary-color;
+}
+
+textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: inherit;
+  outline: none;
+}
