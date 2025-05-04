@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nx serve",
+    "start": "vite preview",
     "build": "yarn install && npx nx build",
     "test": "nx test"
   },

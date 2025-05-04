@@ -113,6 +113,6 @@
     "libs"
   ],
   "prisma": {
-    "schema": "apps/backend/prisma/schema.prisma"
+    "schema": "./prisma/schema.prisma"
   }
 }
