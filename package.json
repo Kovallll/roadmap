@@ -5,8 +5,8 @@
   "scripts": {
     "start:front": "nx serve frontend",
     "start:back": "nx serve backend",
-    "deploy:build:back": "yarn install && npx nx build backend",
-    "deploy:build:front": "yarn install && npx nx build frontend",
+    "deploy:build:back": "yarn install && npx nx build backend --verbose",
+    "deploy:build:front": "yarn install && npx nx build frontend --verbose",
     "deploy:start:back": "node apps/backend/dist/main.js",
     "deploy:start:front": "vite preview"
   },

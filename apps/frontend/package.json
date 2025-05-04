@@ -4,10 +4,25 @@
   "private": true,
   "scripts": {
     "start": "vite preview",
-    "build": "yarn install && npx nx build",
-    "test": "nx test"
+    "build": "nx build frontend",
+    "test": "nx test frontend"
   },
   "nx": {
-    "name": "frontend"
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "options": {
+          "outputPath": "dist/apps/frontend",
+          "configFile": "apps/frontend/vite.config.ts"
+        }
+      },
+      "serve": {
+        "executor": "@nx/vite:dev-server",
+        "options": {
+          "buildTarget": "frontend:build",
+          "configFile": "apps/frontend/vite.config.ts"
+        }
+      }
+    }
   }
 }

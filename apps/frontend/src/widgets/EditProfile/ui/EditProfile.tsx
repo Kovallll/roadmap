@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { Button, Form, Input, Typography } from 'antd';
 
 import { useUpdateUser } from '../modal';
