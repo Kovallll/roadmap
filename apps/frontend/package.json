@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "vite preview",
-    "build": "nx build frontend",
-    "test": "nx test frontend"
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test"
   },
   "nx": {
+    "name": "frontend",
     "targets": {
       "build": {
         "executor": "@nx/vite:build",
