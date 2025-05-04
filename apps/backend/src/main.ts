@@ -12,7 +12,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: '*',
   });
 
   const config = new DocumentBuilder()
