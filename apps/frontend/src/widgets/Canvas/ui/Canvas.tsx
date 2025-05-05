@@ -2,9 +2,10 @@ import { memo, useCallback, useEffect } from 'react';
 
 import { nodeColor } from '../lib';
 import { CanvasProps, useCanvasHandlers } from '../model';
+import styles from './styles.module.scss';
 
-import { useAlignLinesStore } from '@/features/Align/model';
-import { AlignLines } from '@/features/Align/ui/AlignLines';
+import { useAlignLinesStore } from '@/features/align/model';
+import { AlignLines } from '@/features/align/ui/AlignLines';
 import { useCanvasStore } from '@/features/canvas/model/store';
 import { useNodeClipboard } from '@/features/Copy/lib/hooks/useNodeClipboard';
 import { edgeTypes, nodeLabels, nodeTypes } from '@/shared/lib';
@@ -73,7 +74,7 @@ const Canvas = ({ canvas }: CanvasProps) => {
   }, [setSelectedEdge, setSelectedNode]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div className={styles.container}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

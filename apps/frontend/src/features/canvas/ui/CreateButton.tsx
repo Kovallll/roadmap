@@ -3,6 +3,7 @@ import { Button, Flex, Input, Modal } from 'antd';
 
 import { CreateButtonProps } from '../model';
 import { useCreateCanvas } from '../model/hooks/useCreateCanvas';
+import styles from './styles.module.scss';
 
 export const CreateButton = ({ userId }: CreateButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +25,7 @@ export const CreateButton = ({ userId }: CreateButtonProps) => {
       <Button
         type="primary"
         onClick={() => setIsModalOpen(true)}
-        style={{ alignSelf: 'flex-start' }}
+        className={styles.createButton}
       >
         Создать карту
       </Button>

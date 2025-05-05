@@ -1,8 +1,8 @@
 .note {
   background-color: #ffe0e0;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: $gap-sm;
+  border-radius: $radius-sm;
+  box-shadow: 0 $gap-xxxs $gap-xs rgba(0, 0, 0, 0.1);
   position: relative;
 
   textarea {
@@ -10,8 +10,8 @@
     background: transparent;
     border: none;
     resize: none;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: $font-xs;
+    line-height: $lineHeight-xxxs;
     font-family: inherit;
     outline: none;
 
@@ -29,7 +29,7 @@
 
     &::-webkit-scrollbar-thumb {
       background-color: #2c3144;
-      border-radius: 2px;
+      border-radius: $radius-xxxs;
     }
   }
 
@@ -37,13 +37,13 @@
     position: absolute;
     height: 20px;
     width: 20px;
-    top: 4px;
-    right: 4px;
+    top: $gap-xxs;
+    right: $gap-xxs;
     z-index: 100;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
-    font-size: 18px;
+    font-size: $font-md;
     color: $primary-color;
 
     &:hover {

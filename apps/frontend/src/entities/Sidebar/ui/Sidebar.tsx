@@ -12,13 +12,15 @@ export const Sidebar = ({
   children,
   ...props
 }: SidebarProps) => {
+  const sidebarStyles = {
+    [position]: 0,
+  };
+
   return (
     <Sider
       className={cn(styles.sidebar, className)}
       id="sidebar"
-      style={{
-        [position]: 0,
-      }}
+      style={sidebarStyles}
       {...props}
     >
       {title && <Typography.Title level={4}>{title}</Typography.Title>}

@@ -1,20 +1,20 @@
 .baseNode {
   background: #fff;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: $radius-sm;
+  padding: $gap-md;
   z-index: 2;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 $gap-xxs $gap-xs rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 14px;
+  font-size: $font-xs;
   font-weight: 500;
   transition: box-shadow 0.2s;
   color: $primary-color;
   height: -webkit-fill-available;
 
   &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 $gap-xs $gap-sm rgba(0, 0, 0, 0.15);
 
     .handle {
       opacity: 1;
@@ -30,7 +30,7 @@
 }
 
 .handle {
-  border: 2px solid white;
+  border: $gap-xxxs solid white;
   cursor: pointer;
   position: absolute;
   opacity: 0;

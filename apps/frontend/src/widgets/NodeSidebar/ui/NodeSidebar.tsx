@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 import { ListEditor } from '@/entities/Nodes/List/ui/ListEditor';
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
-import { colors } from '@/shared/styles/theme/theme';
+import { colors } from '@/shared/styles/theme';
 import { useReactFlow } from '@xyflow/react';
 
 export const NodeSidebar = () => {
@@ -44,7 +44,7 @@ export const NodeSidebar = () => {
           max={72}
           value={(selectedNode.data?.fontSize as number) || 14}
           onChange={(value) => handleUpdate('fontSize', value)}
-          style={{ width: '100%' }}
+          className={styles.numberInput}
         />
       </div>
       <div className={styles.field}>

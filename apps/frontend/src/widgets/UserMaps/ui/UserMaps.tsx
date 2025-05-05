@@ -34,7 +34,7 @@ export const UserMaps = () => {
           placeholder="Поиск по названию"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ maxWidth: 300 }}
+          className={styles.search}
         />
         <Flex className={styles.crateButton}>
           <CreateButton userId={user.id} />

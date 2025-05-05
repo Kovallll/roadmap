@@ -5,7 +5,7 @@ import { store } from '../model/store';
 import styles from './styles.module.scss';
 
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
-import { colors } from '@/shared/styles/theme/theme';
+import { colors } from '@/shared/styles/theme';
 import { useReactFlow } from '@xyflow/react';
 
 const { Option } = Select;

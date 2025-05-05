@@ -3,17 +3,17 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: $font-lg;
   color: $primary-color;
 }
 
 .description {
-  font-size: 14px;
+  font-size: $font-xs;
   color: $primary-color;
 }
 
 .crateButton {
-  margin-right: 24px;
+  margin-right: $gap-lg;
 }
 
 .maps {
@@ -21,6 +21,10 @@
 }
 
 .map {
-  margin-bottom: 16px;
-  margin-right: 8px;
+  margin-bottom: $gap-md;
+  margin-right: $gap-xs;
+}
+
+.search {
+  max-width: 300px;
 }

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, Typography } from 'antd';
 
 import { useLogin } from '../model/hooks/useLogin';
+import styles from './styles.module.scss';
 
 import { User } from '@roadmap/user/types';
 
@@ -24,7 +25,7 @@ export const LoginForm = () => {
       name="login"
       layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 400, margin: 'auto', marginTop: '5rem' }}
+      className={styles.form}
     >
       <Typography.Title level={3}>Вход</Typography.Title>
 

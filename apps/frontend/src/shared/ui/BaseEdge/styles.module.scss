@@ -1,0 +1,10 @@
+.label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: $font-xxs;
+  background: white;
+  padding: $gap-xxxs $gap-xxs;
+  border-radius: $radius-xxs;
+  pointer-events: none;
+}

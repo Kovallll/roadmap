@@ -13,8 +13,8 @@ import {
 
 import { useTypeStore } from '@/widgets/ComponentsSidebar/model/store';
 import { createNode } from '@/shared/lib/utils';
-import { AlignmentLine } from '@/features/Align/model';
-import { checkAlignment, getAlignPosition } from '@/features/Align/lib';
+import { AlignmentLine } from '@/features/align/model';
+import { checkAlignment, getAlignPosition } from '@/features/align/lib';
 import { getClosestEdge } from '@/features/proximityConnect/lib';
 
 export const useCanvasHandlers = (

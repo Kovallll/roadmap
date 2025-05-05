@@ -1,12 +1,12 @@
 .sidebar {
-  top: 64px;
+  top: $gap-xxxl;
   z-index: 100;
 }
 
 .nodeItem {
   padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 8px;
+  margin-bottom: $gap-xs;
+  border-radius: $radius-sm;
   border: 1px solid #ccc;
   cursor: grab;
   transition: all 0.2s;

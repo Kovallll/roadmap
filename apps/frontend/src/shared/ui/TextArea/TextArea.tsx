@@ -14,17 +14,23 @@ export const TextArea = ({
   className,
   data,
 }: TextAreaProps) => {
+  const fontSize = Number(data?.fontSize);
+  const backgroundColor = String(data?.backgroundColor);
+  const color = String(data?.color);
+
+  const textAreaStyles = {
+    fontSize,
+    backgroundColor,
+    color,
+  };
+
   return (
     <AntdTextArea
       value={value}
       onChange={onChange}
       className={cn(styles.textarea, 'nodrag', 'nowheel', className)}
       placeholder={placeholder}
-      style={{
-        fontSize: Number(data?.fontSize),
-        backgroundColor: String(data?.backgroundColor),
-        color: String(data?.color),
-      }}
+      style={textAreaStyles}
     />
   );
 };

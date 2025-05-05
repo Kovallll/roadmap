@@ -1,5 +1,6 @@
-import { useAlignLinesStore } from '../model';
 import styles from './styles.module.scss';
+
+import { useAlignLinesStore } from '@/features/align/model';
 
 export const AlignLines = () => {
   const lines = useAlignLinesStore.use.lines();

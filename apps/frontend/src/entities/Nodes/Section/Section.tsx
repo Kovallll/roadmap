@@ -1,5 +1,7 @@
 import { memo, useEffect, useRef } from 'react';
 
+import styles from './styles.module.scss';
+
 import { NodeProps, NodeResizer, useReactFlow } from '@xyflow/react';
 
 export const SectionNode = memo(({ id, selected }: NodeProps) => {
@@ -65,22 +67,9 @@ export const SectionNode = memo(({ id, selected }: NodeProps) => {
   });
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        minHeight: 50,
-        minWidth: 100,
-        border: '2px dashed #888',
-        background: 'rgba(200, 200, 200, 0.1)',
-        position: 'relative',
-        borderRadius: 8,
-        zIndex: 0,
-        pointerEvents: 'none',
-      }}
-    >
+    <div className={styles.section}>
       {selected && (
-        <div style={{ position: 'absolute', zIndex: 1, pointerEvents: 'auto' }}>
+        <div className={styles.resizer}>
           <NodeResizer isVisible minWidth={150} minHeight={50} />
         </div>
       )}

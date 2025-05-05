@@ -19,7 +19,7 @@ export const MapHeader = ({ canvas }: MapHeaderProps) => {
         className={styles.content}
         gap={24}
       >
-        <Typography.Title level={3} style={{ margin: 0 }}>
+        <Typography.Title level={3} className={styles.title}>
           {canvas.title}
         </Typography.Title>
         <Space className={styles.button}>

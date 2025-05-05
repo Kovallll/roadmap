@@ -6,7 +6,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: $gap-xs;
 }
 
 .listItem {
@@ -20,8 +20,8 @@
   border: none;
   width: 10px !important;
   height: 10px;
-  padding: 12px !important;
-  margin-left: 4px;
+  padding: $gap-sm !important;
+  margin-left: $gap-xxs;
   background: transparent;
 }
 

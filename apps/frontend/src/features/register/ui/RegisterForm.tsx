@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, Typography } from 'antd';
 
 import { useRegister } from '../model';
+import styles from './styles.module.scss';
 
 import { User } from '@roadmap/user/types';
 
@@ -24,7 +25,7 @@ export const RegisterForm = () => {
       name="register"
       layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 400, margin: 'auto', marginTop: '5rem' }}
+      className={styles.form}
     >
       <Typography.Title level={3}>Регистрация</Typography.Title>
 

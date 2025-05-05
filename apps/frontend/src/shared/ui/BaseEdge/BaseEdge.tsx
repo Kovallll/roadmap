@@ -1,4 +1,8 @@
-import { colors } from '@/shared/styles/theme/theme';
+import cn from 'classnames';
+
+import styles from './styles.module.scss';
+
+import { colors } from '@/shared/styles/theme';
 import {
   BaseEdge as FlowBaseEdge,
   EdgeLabelRenderer,
@@ -29,35 +33,32 @@ export const BaseEdge = ({
   const textColor = String(data?.color) || colors.black;
   const strokeWidth = Number(data?.strokeWidth) || 2;
   const strokeColor = String(data?.strokeColor) || colors.black;
-  const label = data?.label || '';
+  const label = String(data?.label) || '';
+
+  const edgeStyles = {
+    strokeWidth,
+    stroke: strokeColor,
+  };
+
+  const labelStyles = {
+    left: `${labelX}px`,
+    top: `${labelY}px`,
+    color: textColor,
+  };
 
   return (
     <>
-      <FlowBaseEdge
-        id={id}
-        path={edgePath}
-        {...props}
-        style={{ strokeWidth, stroke: strokeColor }}
-      />
+      <FlowBaseEdge id={id} path={edgePath} {...props} style={edgeStyles} />
       {label && (
         <EdgeLabelRenderer>
           <div
-            style={{
-              position: 'absolute',
-              left: `${labelX}px`,
-              top: `${labelY}px`,
-              transform: 'translate(-50%, -50%)',
-              color: textColor,
-              whiteSpace: 'nowrap',
-              fontSize: 12,
-              background: 'white',
-              padding: '2px 4px',
-              borderRadius: 4,
-              pointerEvents: 'none',
-            }}
-            className="edge-label-renderer__custom-edge nodrag nopan"
+            style={labelStyles}
+            className={cn(
+              styles.label,
+              'edge-label-renderer__custom-edge nodrag nopan'
+            )}
           >
-            {String(label)}
+            {label}
           </div>
         </EdgeLabelRenderer>
       )}
