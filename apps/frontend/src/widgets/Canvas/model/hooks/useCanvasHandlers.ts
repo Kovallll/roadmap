@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-
 import {
   addEdge,
   getConnectedEdges,
@@ -11,15 +10,13 @@ import {
   useStoreApi,
 } from '@xyflow/react';
 
-import { useTypeStore } from '@/widgets/ComponentsSidebar/model/store';
-import { createNode } from '@/shared/lib/utils';
-import { AlignmentLine } from '@/features/align/model';
+import { useTypeStore } from '@/widgets/ComponentsSidebar/model';
+import { createNode } from '@/shared/lib';
+import { useAlignLinesStore } from '@/features/align/model';
 import { checkAlignment, getAlignPosition } from '@/features/align/lib';
 import { getClosestEdge } from '@/features/proximityConnect/lib';
 
-export const useCanvasHandlers = (
-  handleChangeLines: (lines: AlignmentLine[]) => void
-) => {
+export const useCanvasHandlers = () => {
   const {
     setEdges,
     getNodes,
@@ -30,9 +27,14 @@ export const useCanvasHandlers = (
     screenToFlowPosition,
     getInternalNode,
   } = useReactFlow();
-  const store = useStoreApi();
 
+  const setLines = useAlignLinesStore.use.setLines();
+
+  const store = useStoreApi();
   const type = useTypeStore.use.type();
+
+  const getClosestNodes = () =>
+    Array.from(store.getState().nodeLookup.values());
 
   const onDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
@@ -40,23 +42,21 @@ export const useCanvasHandlers = (
       if (!type) return;
 
       const sidebarEl = document.getElementById('sidebar');
-
-      const { clientX, clientY } = event;
-      const dropTarget = document.elementFromPoint(clientX, clientY);
-
-      if (sidebarEl && sidebarEl.contains(dropTarget)) {
+      if (
+        sidebarEl?.contains(
+          document.elementFromPoint(event.clientX, event.clientY)
+        )
+      )
         return;
-      }
 
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
       const newNode = createNode(type, position);
-
       addNodes(newNode);
     },
-    [screenToFlowPosition, type, addNodes]
+    [type, screenToFlowPosition, addNodes]
   );
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -67,34 +67,24 @@ export const useCanvasHandlers = (
   const onConnect: OnConnect = useCallback(
     ({ source, target, sourceHandle, targetHandle }) => {
       setEdges((eds) =>
-        addEdge(
-          {
-            source,
-            target,
-            sourceHandle,
-            targetHandle,
-          },
-          eds
-        )
+        addEdge({ source, target, sourceHandle, targetHandle }, eds)
       );
     },
     [setEdges]
   );
 
-  const onNodesDelete = useCallback((deleted: Node[]) => {
-    const nodes = getNodes();
-    const edges = getEdges();
-    setEdges(
-      deleted.reduce((acc, node) => {
+  const onNodesDelete = useCallback(
+    (deleted: Node[]) => {
+      const nodes = getNodes();
+      const edges = getEdges();
+
+      const updatedEdges = deleted.reduce((acc, node) => {
         const incomers = getIncomers(node, nodes, edges);
         const outgoers = getOutgoers(node, nodes, edges);
-        const connectedEdges = getConnectedEdges([node], edges);
+        const connected = getConnectedEdges([node], edges);
 
-        const remainingEdges = acc.filter(
-          (edge) => !connectedEdges.includes(edge)
-        );
-
-        const createdEdges = incomers.flatMap(({ id: source }) =>
+        const remaining = acc.filter((e) => !connected.includes(e));
+        const newEdges = incomers.flatMap(({ id: source }) =>
           outgoers.map(({ id: target }) => ({
             id: `${source}->${target}`,
             source,
@@ -102,24 +92,20 @@ export const useCanvasHandlers = (
           }))
         );
 
-        return [...remainingEdges, ...createdEdges];
-      }, edges)
-    );
-  }, []);
+        return [...remaining, ...newEdges];
+      }, edges);
 
-  const { nodeLookup } = store.getState();
-  const closestNodes = Array.from(nodeLookup.values());
+      setEdges(updatedEdges);
+    },
+    [getNodes, getEdges, setEdges]
+  );
 
   const onNodeDrag = useCallback(
     (_: React.MouseEvent, node: Node) => {
       const nodes = getNodes();
-      const otherNodes = nodes.filter((n) => n.id !== node.id);
+      const others = nodes.filter((n) => n.id !== node.id);
 
-      const { isPositionChanged, newPosition } = getAlignPosition(
-        node,
-        otherNodes
-      );
-
+      const { isPositionChanged, newPosition } = getAlignPosition(node, others);
       if (isPositionChanged) {
         setNodes((nds) =>
           nds.map((n) =>
@@ -128,11 +114,10 @@ export const useCanvasHandlers = (
         );
       }
 
-      checkAlignment(node, nodes, handleChangeLines, flowToScreenPosition);
-
+      checkAlignment(node, nodes, setLines, flowToScreenPosition);
       const internalNode = getInternalNode(node.id);
       const closeEdge = internalNode
-        ? getClosestEdge(internalNode, closestNodes)
+        ? getClosestEdge(internalNode, getClosestNodes())
         : null;
 
       setEdges((es) => {
@@ -157,17 +142,17 @@ export const useCanvasHandlers = (
       setNodes,
       setEdges,
       flowToScreenPosition,
-      handleChangeLines,
-      closestNodes,
+      setLines,
+      getClosestNodes,
     ]
   );
 
   const onNodeDragStop = useCallback(
     (_: React.MouseEvent, node: Node) => {
-      handleChangeLines([]);
+      setLines([]);
       const internalNode = getInternalNode(node.id);
       const closeEdge = internalNode
-        ? getClosestEdge(internalNode, closestNodes)
+        ? getClosestEdge(internalNode, getClosestNodes())
         : null;
 
       setEdges((es) => {
@@ -186,7 +171,7 @@ export const useCanvasHandlers = (
         return nextEdges;
       });
     },
-    [getNodes, setEdges, handleChangeLines, closestNodes]
+    [getNodes, setEdges, setLines, getClosestNodes]
   );
 
   return {

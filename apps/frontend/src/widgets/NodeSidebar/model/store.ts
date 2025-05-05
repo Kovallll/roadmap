@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { SelectedNodeState } from './types';
-import { createSelectors } from '@/shared/model/store';
+import { createSelectors } from '@/shared/model';
 
 export const store = create<SelectedNodeState>((set) => ({
   selectedNode: null,

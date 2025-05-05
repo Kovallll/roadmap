@@ -3,7 +3,7 @@
 }
 
 .sider {
-  color: #fff;
+  color: $white;
 }
 
 .logo {
@@ -15,11 +15,11 @@
 }
 
 .header {
-  background: #fff;
   padding: 0 $gap-lg;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: $white;
 }
 
 .profileInfo {
@@ -30,7 +30,6 @@
 
 .username {
   font-weight: bold;
-  color: $primary-color;
 }
 
 .content {

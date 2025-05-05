@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { CanvasState } from './types';
-import { createSelectors } from '@/shared/model/store';
+import { createSelectors } from '@/shared/model';
 import { CanvasData } from '@roadmap/canvas/types';
 
 export const store = create<CanvasState>((set) => ({

@@ -4,6 +4,7 @@ import { ConfigProvider } from 'antd';
 import { MapHeader } from './MapHeader';
 
 import { useCanvas } from '@/features/canvas/model';
+import { colors } from '@/shared/styles/theme';
 import Canvas from '@/widgets/Canvas/ui/Canvas';
 
 const MapPage = () => {
@@ -18,7 +19,7 @@ const MapPage = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorText: '#ffffff',
+          colorText: colors.white,
         },
       }}
     >

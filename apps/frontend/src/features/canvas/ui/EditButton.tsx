@@ -3,7 +3,7 @@ import { Button } from 'antd';
 
 import { EditButtonProps } from '../model';
 
-import { RoutePath } from '@/app/router/constants';
+import { RoutePath } from '@/shared/model';
 
 export const EditButton = ({ canvas }: EditButtonProps) => {
   const { id } = canvas;

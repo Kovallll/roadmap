@@ -4,6 +4,7 @@ import { Flex, Spin } from 'antd';
 import styles from './styles.module.scss';
 
 import { LoadingOutlined } from '@ant-design/icons';
+
 export const Spinner: React.FC = () => (
   <Flex
     align="center"

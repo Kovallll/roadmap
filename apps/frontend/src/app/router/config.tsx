@@ -1,9 +1,10 @@
 import { lazy } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { RoutePath } from './constants';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
+
+import { RoutePath } from '@/shared/model';
 
 const LoginPage = lazy(() => import('@/pages/Login/ui/Login'));
 const RegisterPage = lazy(() => import('@/pages/Register/ui/RegisterPage'));

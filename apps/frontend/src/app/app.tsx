@@ -7,7 +7,8 @@ import { AntdThemeProvider } from './provider/AntdThemeProvider';
 import { router } from './router/config';
 
 import '@xyflow/react/dist/style.css';
-import { useAuthStore } from '@/shared/model/store/authStore';
+import { LOCAL_STORAGE } from '@/shared/model';
+import { useAuthStore } from '@/shared/model';
 import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactFlowProvider } from '@xyflow/react';
@@ -18,8 +19,8 @@ export default function App() {
   const logout = useAuthStore.use.logout();
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    const refresh = localStorage.getItem('refresh_token');
+    const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
+    const refresh = localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN);
 
     if (!token || !refresh) {
       logout();

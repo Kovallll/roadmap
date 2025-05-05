@@ -1,5 +1,5 @@
-import { useTypeStore } from '../model/store';
-import { ComponentsSidebarProps } from '../model/types';
+import { useTypeStore } from '../model';
+import { ComponentsSidebarProps } from '../model';
 import styles from './styles.module.scss';
 
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
@@ -7,13 +7,11 @@ import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
 export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
   const setType = useTypeStore((state) => state.setType);
 
-  const onDragStart = (
-    event: React.DragEvent<HTMLDivElement>,
-    nodeType: string
-  ) => {
-    setType(nodeType);
-    event.dataTransfer.effectAllowed = 'move';
-  };
+  const onDragStart =
+    (nodeType: string) => (event: React.DragEvent<HTMLDivElement>) => {
+      setType(nodeType);
+      event.dataTransfer.effectAllowed = 'move';
+    };
 
   return (
     <Sidebar
@@ -27,7 +25,7 @@ export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
             key={label}
             className={styles.nodeItem}
             draggable
-            onDragStart={(event) => onDragStart(event, label)}
+            onDragStart={onDragStart(label)}
           >
             <div className={styles.nodePreview}>{label}</div>
           </div>

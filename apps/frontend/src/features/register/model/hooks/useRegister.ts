@@ -2,6 +2,8 @@ import { axiosInstance } from '@/app/api/axiosInstance';
 import { useMutation } from '@tanstack/react-query';
 import { User } from '@roadmap/user/types';
 import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import { ApiResponseError } from '@/shared/model';
 
 export const useRegister = () => {
   return useMutation({
@@ -9,9 +11,9 @@ export const useRegister = () => {
     onSuccess: () => {
       toast.success('Регистрация прошла успешно');
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<ApiResponseError>) => {
       toast.error(
-        error?.response?.data?.message || 'Произошла неизвестная ошибка'
+        error.response?.data?.message || 'Произошла неизвестная ошибка'
       );
     },
   });

@@ -29,9 +29,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'uploads'));
   const port = process.env.PORT || 5000;
   await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-  );
+  Logger.log(`🚀 Application is running on: ${process.env.VITE_BACK_HOST}`);
 }
 
 bootstrap();

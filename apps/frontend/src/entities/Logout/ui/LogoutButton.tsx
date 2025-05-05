@@ -4,7 +4,8 @@ import { Button, Modal } from 'antd';
 import styles from './styles.module.scss';
 
 import { useUserStore } from '@/features/user/model';
-import { useAuthStore } from '@/shared/model/store/authStore';
+import { useAuthStore } from '@/shared/model';
+import { colors } from '@/shared/styles/theme';
 import { QueryClient } from '@tanstack/react-query';
 
 export const LogoutButton = () => {
@@ -28,6 +29,8 @@ export const LogoutButton = () => {
     setIsLogoutModalOpen(false);
   };
 
+  const cancelButtonStyles = { style: { color: colors.black } };
+
   return (
     <>
       <Modal
@@ -38,7 +41,7 @@ export const LogoutButton = () => {
         onCancel={cancelLogout}
         okText="Выйти"
         cancelText="Отмена"
-        cancelButtonProps={{ style: { color: 'black' } }}
+        cancelButtonProps={cancelButtonStyles}
       >
         <p>Вы действительно хотите выйти из системы?</p>
       </Modal>

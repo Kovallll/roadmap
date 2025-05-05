@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Button, Flex, Input, Modal } from 'antd';
 
 import { CreateButtonProps } from '../model';
-import { useCreateCanvas } from '../model/hooks/useCreateCanvas';
+import { useCreateCanvas } from '../model';
 import styles from './styles.module.scss';
+
+import { gaps } from '@/shared/styles/theme';
 
 export const CreateButton = ({ userId }: CreateButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,11 +22,25 @@ export const CreateButton = ({ userId }: CreateButtonProps) => {
     setDescription('');
   };
 
+  const handleCreate = () => {
+    setIsModalOpen(true);
+  };
+
+  const onCancel = () => setIsModalOpen(false);
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <>
       <Button
         type="primary"
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleCreate}
         className={styles.createButton}
       >
         Создать карту
@@ -33,21 +49,21 @@ export const CreateButton = ({ userId }: CreateButtonProps) => {
         title="Создание новой карты"
         open={isModalOpen}
         onOk={handleOkModal}
-        onCancel={() => setIsModalOpen(false)}
+        onCancel={onCancel}
         confirmLoading={isPending}
         okText="Создать"
         cancelText="Отмена"
       >
-        <Flex vertical gap={16}>
+        <Flex vertical gap={gaps.md}>
           <Input
             placeholder="Введите название карты"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={handleChangeTitle}
           />
           <Input
             placeholder="Введите описание карты"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleChangeDescription}
           />
         </Flex>
       </Modal>

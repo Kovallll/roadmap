@@ -1,13 +1,13 @@
-import TextNode from '@/entities/Nodes/Text/ui/TextNode';
+import { TextNode } from '@/entities/Nodes/Text/ui/TextNode';
 import { Position } from '@xyflow/react';
 import styles from '../ui/BaseNode/styles.module.scss';
 import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
-import Note from '@/entities/Nodes/Note/ui/Note';
+import { NoteNode } from '@/entities/Nodes/Note/ui/Note';
 import { ListNode } from '@/entities/Nodes/List/ui/List';
 
 export const nodeTypes = {
   Text: TextNode,
-  Note: Note,
+  Note: NoteNode,
   List: ListNode,
 };
 

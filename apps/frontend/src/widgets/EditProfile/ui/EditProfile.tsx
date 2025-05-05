@@ -10,8 +10,14 @@ const { Title } = Typography;
 
 export const EditProfile = () => {
   const user = useUserStore.use.user();
+
   const [form] = Form.useForm();
+  const initialValues = {
+    username: user?.username,
+  };
+
   const { mutate } = useUpdateUser(user?.id ?? '');
+
   const handleSave = async () => {
     const values = await form.validateFields();
     mutate(values);
@@ -24,13 +30,7 @@ export const EditProfile = () => {
       <Title level={2} className={styles.pageTitle}>
         Редактирование профиля
       </Title>
-      <Form
-        form={form}
-        initialValues={{
-          username: user.username,
-        }}
-        layout="vertical"
-      >
+      <Form form={form} initialValues={initialValues} layout="vertical">
         <Form.Item
           label="Имя пользователя"
           name="username"
@@ -38,7 +38,6 @@ export const EditProfile = () => {
         >
           <Input />
         </Form.Item>
-
         <Button type="primary" onClick={handleSave}>
           Сохранить
         </Button>

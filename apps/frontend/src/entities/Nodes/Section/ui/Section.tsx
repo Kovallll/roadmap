@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef } from 'react';
 
+import { areNodePropsEqual } from '../../lib';
 import styles from './styles.module.scss';
 
 import { NodeProps, NodeResizer, useReactFlow } from '@xyflow/react';
@@ -75,4 +76,4 @@ export const SectionNode = memo(({ id, selected }: NodeProps) => {
       )}
     </div>
   );
-});
+}, areNodePropsEqual);

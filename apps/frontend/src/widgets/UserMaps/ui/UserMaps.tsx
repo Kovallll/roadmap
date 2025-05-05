@@ -1,39 +1,36 @@
-import { useState } from 'react';
 import { Card, Flex, Input, Typography } from 'antd';
 
+import { useSearch } from '../model';
 import styles from './styles.module.scss';
 
-import { useCanvases } from '@/features/canvas/model/hooks/useCanvases';
+import { useCanvases } from '@/features/canvas/model';
 import { CreateButton } from '@/features/canvas/ui/CreateButton';
 import { EditButton } from '@/features/canvas/ui/EditButton';
 import { SettingButton } from '@/features/canvas/ui/SettingButton';
 import { useUserStore } from '@/features/user/model';
+import { gaps } from '@/shared/styles/theme';
 import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
 import { User } from '@roadmap/user/types';
 
 export const UserMaps = () => {
   const user = useUserStore.use.user() as User;
 
-  const [search, setSearch] = useState('');
-
   const { data: canvases, isLoading, isError } = useCanvases(user?.id);
+
+  const canvasList = Array.isArray(canvases) ? canvases : [];
+
+  const { handleSearch, search, searchedCanvases } = useSearch(canvasList);
 
   if (isLoading || !user) return <Spinner />;
   if (isError) return <div>Ошибка при загрузке карт.</div>;
 
-  const canvasList = Array.isArray(canvases) ? canvases : [];
-
-  const filteredCanvases = canvasList.filter((canvas) =>
-    canvas.title.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
-    <Flex vertical gap={20} className={styles.container}>
+    <Flex vertical gap={gaps.lg} className={styles.container}>
       <Flex justify="space-between" align="center" wrap="wrap">
         <Input
           placeholder="Поиск по названию"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearch}
           className={styles.search}
         />
         <Flex className={styles.crateButton}>
@@ -42,8 +39,8 @@ export const UserMaps = () => {
       </Flex>
 
       <Flex vertical className={styles.maps}>
-        {filteredCanvases.length > 0 ? (
-          filteredCanvases.map((canvas) => (
+        {searchedCanvases.length ? (
+          searchedCanvases.map((canvas) => (
             <Card key={canvas.id} hoverable className={styles.map}>
               <Flex justify="space-between">
                 <Flex vertical>
@@ -54,7 +51,7 @@ export const UserMaps = () => {
                     {canvas.description}
                   </Typography.Text>
                 </Flex>
-                <Flex align="center" gap={16}>
+                <Flex align="center" gap={gaps.md}>
                   <EditButton canvas={canvas} />
                   <SettingButton canvas={canvas} />
                 </Flex>

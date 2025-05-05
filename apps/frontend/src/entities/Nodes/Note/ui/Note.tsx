@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 
-import { areNodePropsEqual } from '../../libs';
+import { areNodePropsEqual } from '../../lib';
 import styles from './styles.module.scss';
 
 import { BaseNode } from '@/shared/ui/BaseNode/BaseNode';
@@ -8,7 +8,7 @@ import { TextArea } from '@/shared/ui/TextArea/TextArea';
 import { useReactFlow } from '@xyflow/react';
 import { NodeProps } from '@xyflow/react';
 
-const NoteNode = (props: NodeProps) => {
+export const NoteNode = memo((props: NodeProps) => {
   const { data, id } = props;
   const { updateNodeData } = useReactFlow();
 
@@ -19,17 +19,13 @@ const NoteNode = (props: NodeProps) => {
     [id, data, updateNodeData]
   );
 
+  const label = String(data.label);
+
   return (
     <>
       <BaseNode nodeProps={props} className={styles.note}>
-        <TextArea
-          value={String(data.label)}
-          onChange={handleChange}
-          data={data}
-        />
+        <TextArea value={label} onChange={handleChange} data={data} />
       </BaseNode>
     </>
   );
-};
-
-export default memo(NoteNode, areNodePropsEqual);
+}, areNodePropsEqual);

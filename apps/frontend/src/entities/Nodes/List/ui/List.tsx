@@ -1,6 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import { Button, Flex, List } from 'antd';
 
+import { areNodePropsEqual } from '../../lib';
 import styles from './styles.module.scss';
 
 import { ListItem } from '@/shared/model';
@@ -54,21 +55,19 @@ export const ListNode = memo((props: NodeProps) => {
   const toggleCollapse = () => setCollapsed((prev) => !prev);
 
   const items = (data.items ?? []) as ListItem[];
+  const label = String(data.label);
+  const toggleIcon = collapsed ? <RightOutlined /> : <DownOutlined />;
 
   return (
     <BaseNode nodeProps={props} className={styles.listNode}>
       <Flex vertical className={styles.container}>
         <Flex justify="space-between" align="center">
-          <TextArea
-            value={String(data.label)}
-            onChange={handleTitleChange}
-            data={data}
-          />
+          <TextArea value={label} onChange={handleTitleChange} data={data} />
           <Button
             onClick={toggleCollapse}
             size="small"
             className={styles.button}
-            icon={collapsed ? <RightOutlined /> : <DownOutlined />}
+            icon={toggleIcon}
           />
         </Flex>
 
@@ -76,10 +75,7 @@ export const ListNode = memo((props: NodeProps) => {
           <List className={styles.content}>
             {items.map((item) => (
               <List.Item key={item.id} className={styles.listItem}>
-                <TextArea
-                  value={String(item.label)}
-                  onChange={handleItemChange(item.id)}
-                />
+                <TextArea value={label} onChange={handleItemChange(item.id)} />
                 <Button
                   onClick={handleItemDelete(item.id)}
                   className={styles.button}
@@ -93,4 +89,4 @@ export const ListNode = memo((props: NodeProps) => {
       </Flex>
     </BaseNode>
   );
-});
+}, areNodePropsEqual);

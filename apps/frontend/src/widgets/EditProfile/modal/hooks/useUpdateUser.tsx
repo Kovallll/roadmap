@@ -1,6 +1,8 @@
 import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 import { axiosInstance } from '@/app/api/axiosInstance';
+import { ApiResponseError } from '@/shared/model';
 import { User } from '@roadmap/user/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -16,9 +18,9 @@ export const useUpdateUser = (id: string) => {
       });
       toast.success('Профиль обновлен успешно!');
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<ApiResponseError>) => {
       toast.error(
-        error?.response?.data?.message || 'Произошла неизвестная ошибка'
+        error.response?.data?.message || 'Произошла неизвестная ошибка'
       );
     },
   });

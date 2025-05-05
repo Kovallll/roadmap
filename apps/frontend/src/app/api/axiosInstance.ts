@@ -1,4 +1,5 @@
-import { useAuthStore } from '@/shared/model/store/authStore';
+import { LOCAL_STORAGE } from '@/shared/model';
+import { useAuthStore } from '@/shared/model';
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
@@ -17,7 +18,7 @@ const processQueue = (error: unknown, token: string | null = null) => {
 };
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -30,7 +31,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = err.config;
 
     const status = err?.response?.status;
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN);
 
     if (status === 401 && refreshToken && !originalRequest._retry) {
       if (isRefreshing) {
@@ -53,7 +54,7 @@ axiosInstance.interceptors.response.use(
           }
         );
 
-        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem(LOCAL_STORAGE.ACCESS_TOKEN, data.access_token);
         useAuthStore.getState().setTokens(data.access_token, refreshToken);
 
         axiosInstance.defaults.headers.common[
@@ -64,8 +65,8 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        localStorage.removeItem(LOCAL_STORAGE.ACCESS_TOKEN);
+        localStorage.removeItem(LOCAL_STORAGE.REFRESH_TOKEN);
         useAuthStore.getState().logout();
         processQueue(refreshError, null);
         return Promise.reject(refreshError);
@@ -75,8 +76,8 @@ axiosInstance.interceptors.response.use(
     }
 
     if (status === 401) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      localStorage.removeItem(LOCAL_STORAGE.ACCESS_TOKEN);
+      localStorage.removeItem(LOCAL_STORAGE.REFRESH_TOKEN);
       useAuthStore.getState().logout();
     }
 

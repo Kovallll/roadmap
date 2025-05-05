@@ -2,11 +2,10 @@ import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-import { RoutePath } from '../router/constants';
-
-import { useUser } from '@/features/user/model/hooks/useUser';
-import { useUserStore } from '@/features/user/model/store';
-import { useAuthStore } from '@/shared/model/store/authStore';
+import { useUser } from '@/features/user/model';
+import { useUserStore } from '@/features/user/model';
+import { RoutePath } from '@/shared/model';
+import { useAuthStore } from '@/shared/model';
 import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

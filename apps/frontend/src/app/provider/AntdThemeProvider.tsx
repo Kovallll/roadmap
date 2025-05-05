@@ -1,35 +1,37 @@
 import { ReactNode } from 'react';
 import { ConfigProvider, theme as antdTheme } from 'antd';
 
+import { colors } from '@/shared/styles/theme';
+
 export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ConfigProvider
       theme={{
         algorithm: antdTheme.defaultAlgorithm,
         token: {
-          colorPrimary: '#2c3144',
-          colorText: '#2c3144',
-          colorLink: '#f17900',
+          colorPrimary: colors.primary,
+          colorText: colors.primary,
+          colorLink: colors.secondary,
           borderRadius: 8,
           fontFamily: 'Inter, sans-serif',
         },
         components: {
           Layout: {
-            siderBg: '#2c3144',
-            headerBg: '#2c3144',
+            siderBg: colors.primary,
+            headerBg: colors.primary,
             algorithm: true,
           },
           Input: {
-            colorText: '#2c3144',
+            colorText: colors.primary,
           },
           Select: {
-            colorText: '#000',
+            colorText: colors.black,
           },
           InputNumber: {
-            colorText: '#2c3144',
+            colorText: colors.primary,
           },
           Button: {
-            colorText: '#000',
+            colorText: colors.black,
           },
         },
       }}

@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, Typography } from 'antd';
 
-import { useLogin } from '../model/hooks/useLogin';
+import { useLogin } from '../model';
 import styles from './styles.module.scss';
 
+import { RoutePath } from '@/shared/model';
 import { User } from '@roadmap/user/types';
 
 export const LoginForm = () => {
@@ -17,6 +18,10 @@ export const LoginForm = () => {
         navigate('/canvas');
       },
     });
+  };
+
+  const handleClickRegisterButton = () => {
+    navigate(RoutePath.REGISTER);
   };
 
   return (
@@ -57,7 +62,7 @@ export const LoginForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="link" block onClick={() => navigate('/register')}>
+        <Button type="link" block onClick={handleClickRegisterButton}>
           Нет аккаунта? Зарегистрироваться
         </Button>
       </Form.Item>

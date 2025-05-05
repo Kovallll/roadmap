@@ -2,6 +2,8 @@ import { EditProfile } from '@/widgets/EditProfile/ui/EditProfile';
 import { UserMaps } from '@/widgets/UserMaps/ui/UserMaps';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
+export const siderWidth = 240;
+
 export const tabs = [
   {
     key: 'maps',

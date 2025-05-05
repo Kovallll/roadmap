@@ -1,9 +1,9 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { AuthProvider } from '../provider/AuthProvider';
-import { RoutePath } from './constants';
 
-import { useAuthStore } from '@/shared/model/store/authStore';
+import { RoutePath } from '@/shared/model';
+import { useAuthStore } from '@/shared/model';
 
 export const ProtectedRoute = () => {
   const token = useAuthStore.use.accessToken();

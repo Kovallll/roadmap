@@ -2,11 +2,12 @@ import { Flex } from 'antd';
 import cn from 'classnames';
 
 import { BaseNodeProps } from '../../model';
+import { minResizerHeight, minResizerWidth } from './constants';
 import styles from './styles.module.scss';
 
 import { handles } from '@/shared/lib';
 import { colors } from '@/shared/styles/theme';
-import { useSelectedNodeStore } from '@/widgets/NodeSidebar/model/store';
+import { useSelectedNodeStore } from '@/widgets/NodeSidebar/model';
 import { Handle, NodeResizer } from '@xyflow/react';
 
 export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
@@ -23,20 +24,21 @@ export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
     color,
   };
 
+  const isResizerVisible = selectedNode?.id === id;
+
+  const nodeClassName = cn(styles.baseNode, {
+    [styles[className ?? '']]: !!className,
+  });
+
   return (
     <>
       <NodeResizer
         color={colors.secondary}
-        isVisible={selectedNode?.id === id}
-        minWidth={150}
-        minHeight={50}
+        isVisible={isResizerVisible}
+        minWidth={minResizerWidth}
+        minHeight={minResizerHeight}
       />
-      <Flex
-        className={cn(styles.baseNode, {
-          [styles[className ?? '']]: !!className,
-        })}
-        style={nodeStyles}
-      >
+      <Flex className={nodeClassName} style={nodeStyles}>
         {handles.map(({ position, id, className }) => (
           <Handle
             key={id}

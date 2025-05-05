@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Avatar, Flex, Layout, Menu, Typography } from 'antd';
 
-import { tabs } from '../libs';
+import { siderWidth, tabs } from '../lib';
+import { MenuTab } from '../model';
 import styles from './styles.module.scss';
 
 import { LogoutButton } from '@/entities/Logout/ui/LogoutButton';
 import { useUserStore } from '@/features/user/model';
+import { gaps } from '@/shared/styles/theme';
 import { UserOutlined } from '@ant-design/icons';
 
 const { Content, Sider, Header } = Layout;
@@ -19,17 +21,21 @@ const ProfilePage = () => {
   const user = useUserStore.use.user();
   if (!user) return null;
 
+  const handleClickMenu = (tab: MenuTab) => {
+    setSelectedMenu(tab.key);
+  };
+
   return (
     <Layout className={styles.profileLayout}>
-      <Sider width={240} className={styles.sider}>
+      <Sider width={siderWidth} className={styles.sider}>
         <Flex vertical>
           <div className={styles.logo}>Roadmap</div>
-          <Flex vertical gap={16}>
+          <Flex vertical gap={gaps.md}>
             <Menu
               theme="dark"
               mode="inline"
               selectedKeys={[selectedMenu]}
-              onClick={({ key }) => setSelectedMenu(key)}
+              onClick={handleClickMenu}
               items={tabs}
             />
             <LogoutButton />
