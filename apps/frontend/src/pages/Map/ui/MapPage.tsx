@@ -21,7 +21,7 @@ const MapPage = () => {
   const token = searchParams.get('token');
 
   if (token && token !== accessToken) {
-    navigate(`${RoutePath.MAP}/:id`);
+    navigate(`${RoutePath.MAP}/${id}`);
     setIsEdit(false);
   }
 
