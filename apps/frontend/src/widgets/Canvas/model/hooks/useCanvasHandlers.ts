@@ -15,18 +15,21 @@ import { createNode } from '@/shared/lib';
 import { useAlignLinesStore } from '@/features/align/model';
 import { checkAlignment, getAlignPosition } from '@/features/align/lib';
 import { getClosestEdge } from '@/features/proximityConnect/lib';
+import { useFlowStore } from '@/features/hotkeys/model';
+
+let isUndo = true;
 
 export const useCanvasHandlers = () => {
   const {
-    setEdges,
     getNodes,
     getEdges,
-    setNodes,
-    addNodes,
     flowToScreenPosition,
     screenToFlowPosition,
     getInternalNode,
   } = useReactFlow();
+
+  const setNodes = useFlowStore.use.setNodes();
+  const setEdges = useFlowStore.use.setEdges();
 
   const setLines = useAlignLinesStore.use.setLines();
 
@@ -54,9 +57,9 @@ export const useCanvasHandlers = () => {
         y: event.clientY,
       });
       const newNode = createNode(type, position);
-      addNodes(newNode);
+      setNodes((nds) => [...nds, newNode]);
     },
-    [type, screenToFlowPosition, addNodes]
+    [type, screenToFlowPosition, setNodes]
   );
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -66,8 +69,9 @@ export const useCanvasHandlers = () => {
 
   const onConnect: OnConnect = useCallback(
     ({ source, target, sourceHandle, targetHandle }) => {
-      setEdges((eds) =>
-        addEdge({ source, target, sourceHandle, targetHandle }, eds)
+      setEdges(
+        (eds) => addEdge({ source, target, sourceHandle, targetHandle }, eds),
+        { undo: true }
       );
     },
     [setEdges]
@@ -102,6 +106,12 @@ export const useCanvasHandlers = () => {
 
   const onNodeDrag = useCallback(
     (_: React.MouseEvent, node: Node) => {
+      if (isUndo) {
+        setNodes((nds) => nds.map((n) => (n.id === node.id ? node : n)), {
+          undo: isUndo,
+        });
+        isUndo = false;
+      }
       const nodes = getNodes();
       const others = nodes.filter((n) => n.id !== node.id);
 
@@ -137,24 +147,19 @@ export const useCanvasHandlers = () => {
         return nextEdges;
       });
     },
-    [
-      getNodes,
-      setNodes,
-      setEdges,
-      flowToScreenPosition,
-      setLines,
-      getClosestNodes,
-    ]
+    [getNodes, flowToScreenPosition, setLines, setNodes, getClosestNodes]
   );
 
   const onNodeDragStop = useCallback(
     (_: React.MouseEvent, node: Node) => {
       setLines([]);
+
       const internalNode = getInternalNode(node.id);
       const closeEdge = internalNode
         ? getClosestEdge(internalNode, getClosestNodes())
         : null;
 
+      isUndo = true;
       setEdges((es) => {
         const nextEdges = es.filter((e) => e.className !== 'temp');
 

@@ -1,7 +1,6 @@
 import { NodeProps } from '@xyflow/react';
 
 export const areNodePropsEqual = (prev: NodeProps, next: NodeProps) => {
-  console.log(prev, next);
   return (
     prev.id === next.id &&
     prev.data.label === next.data.label &&

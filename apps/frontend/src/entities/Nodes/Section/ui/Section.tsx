@@ -1,79 +1,80 @@
-import { memo, useEffect, useRef } from 'react';
+// import { memo, useEffect, useRef } from 'react';
 
-import { areNodePropsEqual } from '../../lib';
-import styles from './styles.module.scss';
+// import { areNodePropsEqual } from '../../lib';
+// import styles from './styles.module.scss';
 
-import { NodeProps, NodeResizer, useReactFlow } from '@xyflow/react';
+// import { NodeProps, NodeResizer, useReactFlow } from '@xyflow/react';
 
-export const SectionNode = memo(({ id, selected }: NodeProps) => {
-  const { getNode, getNodes, setNodes } = useReactFlow();
-  const prevPositionRef = useRef({ x: 0, y: 0 });
-  const nestedNodeIdsRef = useRef<Set<string>>(new Set());
+// export const SectionNode = memo(({ id, selected }: NodeProps) => {
+//   const { getNode, getNodes } = useReactFlow();
 
-  useEffect(() => {
-    const sectionNode = getNode(id);
-    if (!sectionNode) return;
+//   const prevPositionRef = useRef({ x: 0, y: 0 });
+//   const nestedNodeIdsRef = useRef<Set<string>>(new Set());
 
-    const { x, y } = sectionNode.position;
-    const { width = 0, height = 0 } = sectionNode.measured || {};
+//   useEffect(() => {
+//     const sectionNode = getNode(id);
+//     if (!sectionNode) return;
 
-    const deltaX = x - prevPositionRef.current.x;
-    const deltaY = y - prevPositionRef.current.y;
+//     const { x, y } = sectionNode.position;
+//     const { width = 0, height = 0 } = sectionNode.measured || {};
 
-    prevPositionRef.current = { x, y };
+//     const deltaX = x - prevPositionRef.current.x;
+//     const deltaY = y - prevPositionRef.current.y;
 
-    if (nestedNodeIdsRef.current.size === 0) {
-      const sectionBounds = {
-        left: x,
-        right: x + width,
-        top: y,
-        bottom: y + height,
-      };
+//     prevPositionRef.current = { x, y };
 
-      getNodes().forEach((node) => {
-        if (node.id === id) return;
+//     if (nestedNodeIdsRef.current.size === 0) {
+//       const sectionBounds = {
+//         left: x,
+//         right: x + width,
+//         top: y,
+//         bottom: y + height,
+//       };
 
-        const nodeX = node.position.x;
-        const nodeY = node.position.y;
-        const nodeWidth = node.measured?.width || 0;
-        const nodeHeight = node.measured?.height || 0;
+//       getNodes().forEach((node) => {
+//         if (node.id === id) return;
 
-        const isInside =
-          nodeX >= sectionBounds.left &&
-          nodeX + nodeWidth <= sectionBounds.right &&
-          nodeY >= sectionBounds.top &&
-          nodeY + nodeHeight <= sectionBounds.bottom;
+//         const nodeX = node.position.x;
+//         const nodeY = node.position.y;
+//         const nodeWidth = node.measured?.width || 0;
+//         const nodeHeight = node.measured?.height || 0;
 
-        if (isInside) nestedNodeIdsRef.current.add(node.id);
-      });
-    }
+//         const isInside =
+//           nodeX >= sectionBounds.left &&
+//           nodeX + nodeWidth <= sectionBounds.right &&
+//           nodeY >= sectionBounds.top &&
+//           nodeY + nodeHeight <= sectionBounds.bottom;
 
-    if (!deltaX && !deltaY) return;
-    if (nestedNodeIdsRef.current.size === 0) return;
+//         if (isInside) nestedNodeIdsRef.current.add(node.id);
+//       });
+//     }
 
-    setNodes((nodes) =>
-      nodes.map((node) => {
-        if (nestedNodeIdsRef.current.has(node.id)) {
-          return {
-            ...node,
-            position: {
-              x: node.position.x + deltaX,
-              y: node.position.y + deltaY,
-            },
-          };
-        }
-        return node;
-      })
-    );
-  });
+//     if (!deltaX && !deltaY) return;
+//     if (nestedNodeIdsRef.current.size === 0) return;
 
-  return (
-    <div className={styles.section}>
-      {selected && (
-        <div className={styles.resizer}>
-          <NodeResizer isVisible minWidth={150} minHeight={50} />
-        </div>
-      )}
-    </div>
-  );
-}, areNodePropsEqual);
+//     setNodes((nodes) =>
+//       nodes.map((node) => {
+//         if (nestedNodeIdsRef.current.has(node.id)) {
+//           return {
+//             ...node,
+//             position: {
+//               x: node.position.x + deltaX,
+//               y: node.position.y + deltaY,
+//             },
+//           };
+//         }
+//         return node;
+//       })
+//     );
+//   });
+
+//   return (
+//     <div className={styles.section}>
+//       {selected && (
+//         <div className={styles.resizer}>
+//           <NodeResizer isVisible minWidth={150} minHeight={50} />
+//         </div>
+//       )}
+//     </div>
+//   );
+// }, areNodePropsEqual);

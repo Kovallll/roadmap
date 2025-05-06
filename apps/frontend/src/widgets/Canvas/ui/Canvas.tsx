@@ -1,11 +1,14 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { nodeColor } from '../lib';
 import { CanvasProps, useCanvasHandlers, useNodeEdgeHandles } from '../model';
 import styles from './styles.module.scss';
 
 import { AlignLines } from '@/features/align/ui/AlignLines';
-import { useNodeClipboard } from '@/features/copy/lib';
+import { useNodeClipboard } from '@/features/hotkeys/lib';
+import { useSaveWithShortcut } from '@/features/hotkeys/lib/hooks/useSaveWithShortcut';
+import { useUndoRedo } from '@/features/hotkeys/lib/hooks/useUndoRedo';
+import { useFlowStore } from '@/features/hotkeys/model';
 import { edgeTypes, nodeLabels, nodeTypes } from '@/shared/lib';
 import { useCanvasStore } from '@/shared/model';
 import { ComponentsSidebar } from '@/widgets/ComponentsSidebar/ui/ComponentsSidebar';
@@ -42,6 +45,16 @@ const Canvas = ({ canvas }: CanvasProps) => {
   } = useNodeEdgeHandles(canvas);
 
   useNodeClipboard();
+  useUndoRedo();
+  useSaveWithShortcut();
+
+  const resetUndoRedo = useFlowStore.use.reset();
+
+  useEffect(() => {
+    return () => {
+      resetUndoRedo();
+    };
+  }, [resetUndoRedo]);
 
   const isEdit = useCanvasStore.use.isEdit();
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Flex, Select, Typography } from 'antd';
 
 import styles from './styles.module.scss';
@@ -14,7 +14,7 @@ import { useReactFlow } from '@xyflow/react';
 
 const { Text } = Typography;
 
-export const StatusSelect = () => {
+export const StatusSelect = memo(() => {
   const selectedNode = useSelectedNodeStore.use.selectedNode();
   const canvas = useCanvasStore.use.canvas();
 
@@ -23,7 +23,12 @@ export const StatusSelect = () => {
 
   const nodeStatus =
     (selectedNode?.data?.status as string) || NodeStatus.PENDING;
+
   const [status, setStatus] = useState(nodeStatus);
+
+  useEffect(() => {
+    setStatus(nodeStatus);
+  }, [nodeStatus, status]);
 
   if (!selectedNode || !canvas) return null;
 
@@ -87,4 +92,4 @@ export const StatusSelect = () => {
       )}
     />
   );
-};
+});

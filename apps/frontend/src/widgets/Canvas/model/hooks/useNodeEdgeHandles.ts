@@ -1,15 +1,44 @@
+import { useFlowStore } from '@/features/hotkeys/model';
 import { useCanvasStore, useSelectedNodeStore } from '@/shared/model/store';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 
 import { Canvas } from '@roadmap/canvas/types';
-import { Edge, Node, useEdgesState, useNodesState } from '@xyflow/react';
+import {
+  applyEdgeChanges,
+  applyNodeChanges,
+  Edge,
+  Node,
+  OnEdgesChange,
+  OnNodesChange,
+} from '@xyflow/react';
 import { useCallback, useEffect } from 'react';
 
 export const useNodeEdgeHandles = (canvas: Canvas) => {
-  const [nodes, _, onNodesChange] = useNodesState(canvas.data?.nodes || []);
-  const [edges, __, onEdgesChange] = useEdgesState(canvas.data?.edges || []);
+  const nodes = useFlowStore.use.nodes();
+  const edges = useFlowStore.use.edges();
+  const setNodes = useFlowStore.use.setNodes();
+  const setEdges = useFlowStore.use.setEdges();
 
+  useEffect(() => {
+    setNodes(canvas.data?.nodes || []);
+    setEdges(canvas.data?.edges || []);
+  }, []);
+
+  const onNodesChange: OnNodesChange = useCallback(
+    (changes) => {
+      setNodes((nds) => applyNodeChanges(changes, nds));
+    },
+    [setNodes]
+  );
+
+  const onEdgesChange: OnEdgesChange = useCallback(
+    (changes) => {
+      setEdges((eds) => applyEdgeChanges(changes, eds));
+    },
+    [setEdges]
+  );
   const setCanvasData = useCanvasStore.use.setCanvasData();
+  const setCanvas = useCanvasStore.use.setCanvas();
 
   const setSelectedNode = useSelectedNodeStore.use.setSelectedNode();
   const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
@@ -41,6 +70,7 @@ export const useNodeEdgeHandles = (canvas: Canvas) => {
 
   useEffect(() => {
     setCanvasData({ nodes, edges });
+    setCanvas({ ...canvas, data: { ...canvas.data, nodes, edges } });
   }, [nodes, edges, setCanvasData]);
 
   return {
