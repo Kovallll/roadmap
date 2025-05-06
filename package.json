@@ -8,7 +8,7 @@
     "deploy:build:back": "yarn install && npx nx build backend --verbose",
     "deploy:build:front": "yarn install && npx nx build frontend --verbose",
     "deploy:start:back": "node apps/backend/dist/main.js",
-    "deploy:start:front": "serve dist/apps/frontend"
+    "deploy:start:front": "serve dist/apps/frontend --single"
   },
   "private": true,
   "dependencies": {
