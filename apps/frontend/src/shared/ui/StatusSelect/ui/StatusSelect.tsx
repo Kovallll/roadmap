@@ -5,7 +5,11 @@ import styles from './styles.module.scss';
 
 import { useSaveCanvas } from '@/features/canvas/model';
 import { nodeStatuses } from '@/shared/lib';
-import { useCanvasStore, useSelectedNodeStore } from '@/shared/model';
+import {
+  NodeStatus,
+  useCanvasStore,
+  useSelectedNodeStore,
+} from '@/shared/model';
 import { useReactFlow } from '@xyflow/react';
 
 const { Text } = Typography;
@@ -17,7 +21,8 @@ export const StatusSelect = () => {
   const { updateNode } = useReactFlow();
   const { mutate } = useSaveCanvas(canvas?.id ?? '', false);
 
-  const nodeStatus = (selectedNode?.data?.status as string) || '';
+  const nodeStatus =
+    (selectedNode?.data?.status as string) || NodeStatus.PENDING;
   const [status, setStatus] = useState(nodeStatus);
 
   if (!selectedNode || !canvas) return null;
@@ -64,6 +69,7 @@ export const StatusSelect = () => {
       {value}
     </Text>
   );
+
   return (
     <Select
       className={styles.select}
