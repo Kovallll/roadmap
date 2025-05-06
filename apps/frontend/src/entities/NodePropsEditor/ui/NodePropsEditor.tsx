@@ -5,6 +5,7 @@ import { additionalEditors, NodePropsEditorProps } from '../model';
 import styles from './styles.module.scss';
 
 import { colors, fontSizes } from '@/shared/styles/theme';
+import { StatusSelect } from '@/shared/ui/StatusSelect/ui/StatusSelect';
 
 export const NodePropsEditor = ({
   selectedNode,
@@ -51,6 +52,10 @@ export const NodePropsEditor = ({
       <div className={styles.field}>
         <Typography.Text className={styles.label}>Цвет фона</Typography.Text>
         <ColorPicker value={bgColor} onChange={handleChangeBgColor} />
+      </div>
+      <div className={styles.field}>
+        <Typography.Text className={styles.label}>Статус</Typography.Text>
+        <StatusSelect />
       </div>
     </>
   );
