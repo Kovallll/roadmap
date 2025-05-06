@@ -1,25 +1,22 @@
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 
-import { saveCanvas } from '../../api';
+import { deleteCanvas } from '../../api';
 
 import { ApiResponseError } from '@/shared/model';
 import { Canvas } from '@roadmap/canvas/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useSaveCanvas = (id: string, notify = true) => {
+export const useDeleteCanvas = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (canvas: Canvas) => saveCanvas(canvas),
+    mutationFn: (canvasId: Canvas['id']) => deleteCanvas(canvasId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['getCanvas', id],
-      });
       queryClient.invalidateQueries({
         queryKey: ['getCanvases'],
       });
-      if (notify) toast.success('Карта успешно сохранена');
+      toast.success('Карта успешно удалена');
     },
     onError: (error: AxiosError<ApiResponseError>) => {
       toast.error(

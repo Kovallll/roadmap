@@ -1,8 +1,10 @@
 .sidebar {
   position: fixed;
-  width: 200px;
+  width: var(--width) !important;
   height: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: $gap-md;
   z-index: 10;
+  min-width: 0 !important;
+  max-width: var(--width) !important;
 }

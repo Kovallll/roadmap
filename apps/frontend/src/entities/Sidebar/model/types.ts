@@ -6,4 +6,5 @@ export type SidebarProps = {
   title?: string;
   position?: 'left' | 'right';
   className?: string;
+  width?: number;
 } & SiderProps;

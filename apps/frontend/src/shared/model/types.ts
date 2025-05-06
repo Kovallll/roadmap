@@ -1,4 +1,5 @@
-import { NodeProps } from '@xyflow/react';
+import { Canvas, CanvasData } from '@roadmap/canvas/types';
+import { NodeProps, Node } from '@xyflow/react';
 
 export type BaseNodeProps = {
   nodeProps: NodeProps;
@@ -27,3 +28,21 @@ export type ApiResponseError = {
   statusCode: number;
   message: string;
 };
+
+export interface SelectedNodeState {
+  selectedNode: Node | null;
+  setSelectedNode: (node: Node | null) => void;
+}
+
+export type CanvasState = {
+  canvas: Canvas | null;
+  setCanvas: (canvas: Canvas) => void;
+  canvasData: CanvasData | null;
+  setCanvasData: (canvasData: CanvasData) => void;
+  isEdit: boolean;
+  setIsEdit: (isEdit: boolean) => void;
+};
+
+export type Styles = { [x: string]: string | number };
+
+export type NodeStatusType = { color: string; value: string };

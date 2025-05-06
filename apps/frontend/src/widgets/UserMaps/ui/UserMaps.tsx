@@ -5,8 +5,10 @@ import styles from './styles.module.scss';
 
 import { useCanvases } from '@/features/canvas/model';
 import { CreateButton } from '@/features/canvas/ui/CreateButton';
+import { DeleteButton } from '@/features/canvas/ui/DeleteButton';
 import { EditButton } from '@/features/canvas/ui/EditButton';
 import { SettingButton } from '@/features/canvas/ui/SettingButton';
+import { ViewButton } from '@/features/canvas/ui/ViewButton';
 import { useUserStore } from '@/features/user/model';
 import { gaps } from '@/shared/styles/theme';
 import { Spinner } from '@/shared/ui/Spinner/ui/Spinner';
@@ -52,8 +54,10 @@ export const UserMaps = () => {
                   </Typography.Text>
                 </Flex>
                 <Flex align="center" gap={gaps.md}>
-                  <EditButton canvas={canvas} />
+                  <EditButton canvasId={canvas.id} />
+                  <ViewButton canvasId={canvas.id} />
                   <SettingButton canvas={canvas} />
+                  <DeleteButton canvasId={canvas.id} />
                 </Flex>
               </Flex>
             </Card>

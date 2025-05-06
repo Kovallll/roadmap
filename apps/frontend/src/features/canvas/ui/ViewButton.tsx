@@ -1,24 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
-import { EditButtonProps } from '../model';
+import { ViewButtonProps } from '../model';
 
-import { RoutePath, useAuthStore } from '@/shared/model';
+import { RoutePath } from '@/shared/model';
 import { useCanvasStore } from '@/shared/model/store/canvasStore';
 
-export const EditButton = ({ canvasId }: EditButtonProps) => {
+export const ViewButton = ({ canvasId }: ViewButtonProps) => {
   const setIsEdit = useCanvasStore.use.setIsEdit();
-  const token = useAuthStore.use.accessToken();
+
   const navigate = useNavigate();
 
   const handleEditCanvas = () => {
-    navigate(`${RoutePath.MAP}/${canvasId}?token=${token}`);
-    setIsEdit(true);
+    navigate(`${RoutePath.MAP}/${canvasId}`);
+    setIsEdit(false);
   };
 
   return (
     <Button type="primary" onClick={handleEditCanvas}>
-      Редактировать
+      Просмотреть
     </Button>
   );
 };

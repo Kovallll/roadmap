@@ -11,3 +11,10 @@ export enum RoutePath {
   REGISTER = '/register',
   NOT_FOUND = '*',
 }
+
+export enum NodeStatus {
+  DONE = 'Done',
+  IN_PROGRESS = 'In Progress',
+  PENDING = 'Pending',
+  CLOSE = 'Close',
+}

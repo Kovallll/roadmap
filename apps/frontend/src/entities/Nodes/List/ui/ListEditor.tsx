@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.scss';
 
 import { ListItem } from '@/shared/model';
-import { useSelectedNodeStore } from '@/widgets/NodeSidebar/model';
+import { useSelectedNodeStore } from '@/shared/model/store';
 import { useReactFlow } from '@xyflow/react';
 
 export const ListEditor = () => {

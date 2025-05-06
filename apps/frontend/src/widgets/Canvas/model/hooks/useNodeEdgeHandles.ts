@@ -1,6 +1,6 @@
-import { useCanvasStore } from '@/features/canvas/model';
+import { useCanvasStore, useSelectedNodeStore } from '@/shared/model/store';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
-import { useSelectedNodeStore } from '@/widgets/NodeSidebar/model';
+
 import { Canvas } from '@roadmap/canvas/types';
 import { Edge, Node, useEdgesState, useNodesState } from '@xyflow/react';
 import { useCallback, useEffect } from 'react';

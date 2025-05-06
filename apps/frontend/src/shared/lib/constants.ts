@@ -4,12 +4,21 @@ import styles from '../ui/BaseNode/styles.module.scss';
 import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
 import { NoteNode } from '@/entities/Nodes/Note/ui/Note';
 import { ListNode } from '@/entities/Nodes/List/ui/List';
+import { NodeStatus } from '../model';
+import { colors } from '../styles/theme';
 
 export const nodeTypes = {
   Text: TextNode,
   Note: NoteNode,
   List: ListNode,
 };
+
+export const nodeStatuses = [
+  { color: colors.success, value: NodeStatus.DONE },
+  { color: colors.secondary, value: NodeStatus.IN_PROGRESS },
+  { color: colors.disabled, value: NodeStatus.PENDING },
+  { color: colors.black, value: NodeStatus.CLOSE },
+];
 
 export const edgeTypes = {
   custom: BaseEdge,

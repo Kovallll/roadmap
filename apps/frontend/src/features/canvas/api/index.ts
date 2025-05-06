@@ -30,3 +30,10 @@ export const createCanvas = async (canvas: CreateCanvasDto) => {
   );
   return data;
 };
+
+export const deleteCanvas = async (canvasId: Canvas['id']) => {
+  const { data } = await axiosInstance.delete<CreateCanvasDto>(
+    `${API_URL}/${canvasId}`
+  );
+  return data;
+};

@@ -24,14 +24,21 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
           Input: {
             colorText: colors.primary,
           },
-          Select: {
-            colorText: colors.black,
-          },
+
           InputNumber: {
             colorText: colors.primary,
           },
           Button: {
             colorText: colors.black,
+          },
+          Tabs: {
+            itemActiveColor: colors.secondary,
+            itemSelectedColor: colors.secondary,
+            inkBarColor: colors.secondary,
+            itemHoverColor: colors.secondary,
+          },
+          Divider: {
+            colorSplit: colors.secondary,
           },
         },
       }}

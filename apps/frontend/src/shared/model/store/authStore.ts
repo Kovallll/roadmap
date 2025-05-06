@@ -3,7 +3,7 @@ import { AuthState } from '../types';
 import { createSelectors } from './createSelectors';
 import { LOCAL_STORAGE } from '../enums';
 
-export const store = create<AuthState>((set) => ({
+export const authStore = create<AuthState>((set) => ({
   accessToken: localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN),
   refreshToken: localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN),
   setTokens: (access, refresh) => {
@@ -18,4 +18,4 @@ export const store = create<AuthState>((set) => ({
   },
 }));
 
-export const useAuthStore = createSelectors(store);
+export const useAuthStore = createSelectors(authStore);

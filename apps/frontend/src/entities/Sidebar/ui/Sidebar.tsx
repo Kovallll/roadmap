@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import { SidebarProps } from '../model';
 import styles from './styles.module.scss';
+
+import { Styles } from '@/shared/model';
 const { Sider } = Layout;
 
 export const Sidebar = ({
@@ -10,10 +12,12 @@ export const Sidebar = ({
   position = 'right',
   className,
   children,
+  width,
   ...props
 }: SidebarProps) => {
-  const sidebarStyles = {
+  const sidebarStyles: Styles = {
     [position]: 0,
+    '--width': `${width ?? 200}px`,
   };
 
   return (

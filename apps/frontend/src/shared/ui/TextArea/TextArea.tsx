@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Input } from 'antd';
 import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
-import { TextAreaProps } from '@/shared/model';
+import { getStatusColor } from '@/shared/lib';
+import { NodeStatus, TextAreaProps, useCanvasStore } from '@/shared/model';
 
 const { TextArea: AntdTextArea } = Input;
 
@@ -14,21 +16,46 @@ export const TextArea = ({
   className,
   data,
 }: TextAreaProps) => {
+  const [isHover, setIsHover] = useState(false);
+
+  const isEdit = useCanvasStore.use.isEdit();
+
   const fontSize = Number(data?.fontSize);
   const backgroundColor = String(data?.backgroundColor);
-  const color = String(data?.color);
+  const status = String(data?.status);
 
-  const textAreaStyles = {
+  const customColor = String(data?.color ?? 'inherit');
+  const color =
+    status === NodeStatus.PENDING || status === NodeStatus.CLOSE
+      ? customColor
+      : getStatusColor(status);
+
+  const handleMouseOver = () => {
+    setIsHover(isEdit ? true : false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
+
+  const textAreaStyles: React.CSSProperties = {
     fontSize,
     backgroundColor,
     color,
+    pointerEvents: isEdit ? 'all' : 'none',
   };
 
   return (
     <AntdTextArea
       value={value}
       onChange={onChange}
-      className={cn(styles.textarea, 'nodrag', 'nowheel', className)}
+      className={cn(styles.textarea, 'nodrag', 'nowheel', className, {
+        [styles.hover]: isHover,
+        [styles.crossed]:
+          status === NodeStatus.CLOSE || status === NodeStatus.DONE,
+      })}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
       placeholder={placeholder}
       style={textAreaStyles}
     />

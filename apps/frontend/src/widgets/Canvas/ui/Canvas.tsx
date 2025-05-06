@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 import { AlignLines } from '@/features/align/ui/AlignLines';
 import { useNodeClipboard } from '@/features/copy/lib';
 import { edgeTypes, nodeLabels, nodeTypes } from '@/shared/lib';
+import { useCanvasStore } from '@/shared/model';
 import { ComponentsSidebar } from '@/widgets/ComponentsSidebar/ui/ComponentsSidebar';
 import { EdgeSidebar } from '@/widgets/EdgeSidebar/ui/EdgeSidebar';
 import { NodeSidebar } from '@/widgets/NodeSidebar/ui/NodeSidebar';
@@ -42,6 +43,8 @@ const Canvas = ({ canvas }: CanvasProps) => {
 
   useNodeClipboard();
 
+  const isEdit = useCanvasStore.use.isEdit();
+
   return (
     <div className={styles.container}>
       <ReactFlow
@@ -62,6 +65,8 @@ const Canvas = ({ canvas }: CanvasProps) => {
         onNodesDelete={onNodesDelete}
         connectionMode={ConnectionMode.Loose}
         isValidConnection={handleIsValidConnection}
+        nodesDraggable={isEdit}
+        nodesConnectable={isEdit}
         fitView
       >
         <Background variant={BackgroundVariant.Lines} />

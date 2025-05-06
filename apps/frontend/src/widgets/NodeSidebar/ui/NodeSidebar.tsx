@@ -1,21 +1,26 @@
-import { InputNumber, Typography } from 'antd';
-import { ColorPicker } from 'antd';
-import { AggregationColor } from 'antd/es/color-picker/color';
+import { Tabs } from 'antd';
 
-import { additionalEditors, store } from '../model';
 import styles from './styles.module.scss';
 
+import { NodeContentEditor } from '@/entities/NodeContentEditor/ui/NodeContentEditor';
+import { NodeContentViewer } from '@/entities/NodeContentViewer/ui/NodeContentViewer';
+import { NodePropsEditor } from '@/entities/NodePropsEditor/ui/NodePropsEditor';
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
-import { colors, fontSizes } from '@/shared/styles/theme';
+import { selectedNodeStore, useCanvasStore } from '@/shared/model/store';
 import { useReactFlow } from '@xyflow/react';
 
 export const NodeSidebar = () => {
-  const { selectedNode, setSelectedNode } = store();
+  const { selectedNode, setSelectedNode } = selectedNodeStore();
   const { updateNode } = useReactFlow();
+
+  const isEdit = useCanvasStore.use.isEdit();
 
   if (!selectedNode) return null;
 
-  const handleUpdate = (field: string, value: string | number | null) => {
+  const handleUpdate = (
+    field: string,
+    value: string | number | null | object
+  ) => {
     updateNode(selectedNode.id, (prev) => {
       const newData = {
         ...prev.data,
@@ -28,46 +33,39 @@ export const NodeSidebar = () => {
     });
   };
 
-  const handleChangeFontSize = (value: number | null) => {
-    handleUpdate('fontSize', value);
-  };
+  const tabs = [
+    {
+      key: 'props',
+      label: 'Свойства',
+      children: (
+        <NodePropsEditor
+          selectedNode={selectedNode}
+          handleUpdate={handleUpdate}
+        />
+      ),
+    },
+    {
+      key: 'content',
+      label: 'Контент',
+      children: (
+        <NodeContentEditor
+          selectedNode={selectedNode}
+          handleUpdate={handleUpdate}
+        />
+      ),
+    },
+  ];
 
-  const handleChangeTextColor = (color: AggregationColor) => {
-    handleUpdate('color', color.toHexString());
-  };
-
-  const handleChangeBgColor = (color: AggregationColor) => {
-    handleUpdate('backgroundColor', color.toHexString());
-  };
-
-  const fontSize = (selectedNode.data?.fontSize as number) || fontSizes.xs;
-  const textColor = (selectedNode.data?.color as string) || colors.black;
-  const bgColor =
-    (selectedNode.data?.backgroundColor as string) || colors.white;
+  const width = isEdit ? 200 : 500;
+  const title = isEdit ? 'Редактирование узла' : '';
 
   return (
-    <Sidebar title="Редактирование узла" className={styles.sidebar}>
-      {additionalEditors.map(
-        (item) => selectedNode.type === item.type && item.editor
+    <Sidebar title={title} className={styles.sidebar} width={width}>
+      {isEdit ? (
+        <Tabs defaultActiveKey="code" items={tabs} />
+      ) : (
+        <NodeContentViewer selectedNode={selectedNode} />
       )}
-      <div className={styles.field}>
-        <Typography.Text className={styles.label}>
-          Размер шрифта
-        </Typography.Text>
-        <InputNumber
-          value={fontSize}
-          onChange={handleChangeFontSize}
-          className={styles.numberInput}
-        />
-      </div>
-      <div className={styles.field}>
-        <Typography.Text className={styles.label}>Цвет текста</Typography.Text>
-        <ColorPicker value={textColor} onChange={handleChangeTextColor} />
-      </div>
-      <div className={styles.field}>
-        <Typography.Text className={styles.label}>Цвет фона</Typography.Text>
-        <ColorPicker value={bgColor} onChange={handleChangeBgColor} />
-      </div>
     </Sidebar>
   );
 };
