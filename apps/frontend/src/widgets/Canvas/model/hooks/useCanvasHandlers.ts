@@ -58,7 +58,7 @@ export const useCanvasHandlers = () => {
         y: event.clientY,
       });
       const newNode = createNode(type, position);
-      setNodes((nds) => [...nds, newNode]);
+      setNodes((nds) => [...nds, newNode], { undo: true });
     },
     [type, screenToFlowPosition, setNodes]
   );
