@@ -14,7 +14,6 @@ import { useTypeStore } from '@/widgets/ComponentsSidebar/model';
 import { createNode } from '@/shared/lib';
 import { useAlignLinesStore } from '@/features/align/model';
 import { checkAlignment, getAlignPosition } from '@/features/align/lib';
-import { getClosestEdge } from '@/features/proximityConnect/lib';
 import { useFlowStore } from '@/features/hotkeys/model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -130,56 +129,14 @@ export const useCanvasHandlers = () => {
       }
 
       checkAlignment(node, nodes, setLines, flowToScreenPosition);
-      const internalNode = getInternalNode(node.id);
-      const closeEdge = internalNode
-        ? getClosestEdge(internalNode, getClosestNodes())
-        : null;
-
-      setEdges((es) => {
-        const nextEdges = es.filter((e) => e.className !== 'temp');
-
-        if (
-          closeEdge &&
-          !nextEdges.find(
-            (ne) =>
-              ne.source === closeEdge.source && ne.target === closeEdge.target
-          )
-        ) {
-          closeEdge.className = 'temp';
-          nextEdges.push(closeEdge);
-        }
-
-        return nextEdges;
-      });
     },
     [getNodes, flowToScreenPosition, setLines, setNodes, getClosestNodes]
   );
 
   const onNodeDragStop = useCallback(
-    (_: React.MouseEvent, node: Node) => {
+    (_: React.MouseEvent) => {
       setLines([]);
-
-      const internalNode = getInternalNode(node.id);
-      const closeEdge = internalNode
-        ? getClosestEdge(internalNode, getClosestNodes())
-        : null;
-
       isUndo = true;
-      setEdges((es) => {
-        const nextEdges = es.filter((e) => e.className !== 'temp');
-
-        if (
-          closeEdge &&
-          !nextEdges.find(
-            (ne) =>
-              ne.source === closeEdge.source && ne.target === closeEdge.target
-          )
-        ) {
-          nextEdges.push(closeEdge);
-        }
-
-        return nextEdges;
-      });
     },
     [getNodes, setEdges, setLines, getClosestNodes]
   );
