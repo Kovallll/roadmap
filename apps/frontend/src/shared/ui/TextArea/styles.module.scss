@@ -2,14 +2,16 @@
   width: 100%;
   resize: none !important;
   border: none;
+  box-shadow: none !important;
   background: transparent;
   font-family: inherit;
 }
 
 .hover {
   outline: none;
-  background-color: #e6f0ff;
+  background-color: $white;
   resize: both !important;
+  box-shadow: 0 0 0 1px $gray !important;
 }
 
 .crossed {

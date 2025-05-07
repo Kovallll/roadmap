@@ -1,6 +1,5 @@
 import { memo, useCallback } from 'react';
 
-import { areNodePropsEqual } from '../../lib';
 import styles from './styles.module.scss';
 
 import { BaseNode } from '@/shared/ui/BaseNode/BaseNode';
@@ -28,4 +27,4 @@ export const NoteNode = memo((props: NodeProps) => {
       </BaseNode>
     </>
   );
-}, areNodePropsEqual);
+});

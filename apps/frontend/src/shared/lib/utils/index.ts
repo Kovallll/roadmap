@@ -1,6 +1,7 @@
 import { Node } from '@xyflow/react';
 import { v4 as uuidv4 } from 'uuid';
 import { nodeStatuses } from '../constants';
+import { colors } from '@/shared/styles/theme';
 
 export const createNode = (
   type: string,
@@ -24,5 +25,7 @@ export const createNode = (
 };
 
 export const getStatusColor = (status: string) => {
-  return nodeStatuses.find((node) => status === node.value)?.color;
+  return (
+    nodeStatuses.find((node) => status === node.value)?.color ?? colors.black
+  );
 };

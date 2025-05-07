@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { Button, Typography } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,7 +8,7 @@ import { ListItem } from '@/shared/model';
 import { useSelectedNodeStore } from '@/shared/model/store';
 import { useReactFlow } from '@xyflow/react';
 
-export const ListEditor = () => {
+export const ListEditor = memo(() => {
   const { updateNodeData } = useReactFlow();
   const selectedNode = useSelectedNodeStore.use.selectedNode();
 
@@ -38,4 +38,4 @@ export const ListEditor = () => {
       </Button>
     </>
   );
-};
+});

@@ -1,7 +1,5 @@
 import { memo, useCallback } from 'react';
 
-import { areNodePropsEqual } from '../../lib';
-
 import { BaseNode } from '@/shared/ui/BaseNode/BaseNode';
 import { TextArea } from '@/shared/ui/TextArea/TextArea';
 import { NodeProps, useReactFlow } from '@xyflow/react';
@@ -24,4 +22,4 @@ export const TextNode = memo((props: NodeProps) => {
       <TextArea value={label} onChange={handleChange} data={data} />
     </BaseNode>
   );
-}, areNodePropsEqual);
+});

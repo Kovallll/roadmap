@@ -1,4 +1,5 @@
-import { Flex, Layout, Space, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Button, Flex, Layout, Space, Typography } from 'antd';
 
 import { MapHeaderProps } from '../model';
 import styles from './MapHeader.module.scss';
@@ -11,6 +12,11 @@ const { Header } = Layout;
 
 export const MapHeader = ({ canvas }: MapHeaderProps) => {
   const canvasData = useCanvasStore.use.canvasData();
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const isEdit = useCanvasStore.use.isEdit();
 
@@ -27,11 +33,11 @@ export const MapHeader = ({ canvas }: MapHeaderProps) => {
         <Typography.Title level={3} className={styles.title}>
           {canvas.title}
         </Typography.Title>
-        {isEdit && (
-          <Space className={styles.button}>
-            <SaveButton canvas={saveCanvas} />
-          </Space>
-        )}
+
+        <Space className={styles.button}>
+          <Button onClick={handleGoBack}>Назад</Button>
+          {isEdit && <SaveButton canvas={saveCanvas} />}
+        </Space>
       </Flex>
     </Header>
   );

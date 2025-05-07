@@ -5,7 +5,12 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 import { getStatusColor } from '@/shared/lib';
-import { NodeStatus, TextAreaProps, useCanvasStore } from '@/shared/model';
+import {
+  NodeStatus,
+  Styles,
+  TextAreaProps,
+  useCanvasStore,
+} from '@/shared/model';
 
 const { TextArea: AntdTextArea } = Input;
 
@@ -23,7 +28,8 @@ export const TextArea = ({
   const fontSize = Number(data?.fontSize);
   const backgroundColor = String(data?.backgroundColor);
   const status = String(data?.status);
-
+  const textAlign = String(data?.textAlign);
+  console.log(textAlign, 'textAlign');
   const customColor = String(data?.color ?? 'inherit');
   const color =
     status === NodeStatus.PENDING || status === NodeStatus.CLOSE
@@ -38,10 +44,11 @@ export const TextArea = ({
     setIsHover(false);
   };
 
-  const textAreaStyles: React.CSSProperties = {
+  const textAreaStyles: Styles = {
     fontSize,
     backgroundColor,
     color,
+    textAlign,
     pointerEvents: isEdit ? 'all' : 'none',
   };
 
