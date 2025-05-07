@@ -17,7 +17,7 @@ export const Sidebar = ({
 }: SidebarProps) => {
   const sidebarStyles: Styles = {
     [position]: 0,
-    '--width': `${width ?? 200}px`,
+    '--width': `${width ?? 16}vw`,
   };
 
   return (

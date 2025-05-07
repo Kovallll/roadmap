@@ -56,7 +56,7 @@ export const NodeSidebar = () => {
     },
   ];
 
-  const width = isEdit ? 200 : 500;
+  const width = isEdit ? 16 : 32;
   const title = isEdit ? 'Редактирование узла' : '';
 
   return (
