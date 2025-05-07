@@ -7,9 +7,7 @@ export const useUndoRedo = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const isMac = navigator.platform.toUpperCase().includes('MAC');
-      const ctrlKey = isMac ? e.metaKey : e.ctrlKey;
-
+      const ctrlKey = e.ctrlKey;
       if (ctrlKey && e.key === 'z' && !e.shiftKey) {
         e.preventDefault();
         undo();
