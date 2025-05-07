@@ -8,7 +8,7 @@ import { useCanvasStore } from '@/shared/model/store/canvasStore';
 
 export const EditButton = ({ canvasId }: EditButtonProps) => {
   const setIsEdit = useCanvasStore.use.setIsEdit();
-  const token = useAuthStore.use.accessToken();
+  const token = useAuthStore.use.refreshToken();
   const navigate = useNavigate();
 
   const handleEditCanvas = () => {

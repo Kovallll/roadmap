@@ -1,6 +1,7 @@
 import { InternalNode, Node, Edge } from '@xyflow/react';
 import { MIN_DISTANCE } from './constants';
 import { ClosestNodeResult } from './types';
+import { v4 as uuidv4 } from 'uuid';
 
 const getHandlesByDirection = (dx: number, dy: number) => {
   const horizontal = Math.abs(dx) > Math.abs(dy);
@@ -59,7 +60,7 @@ export const getClosestEdge = (
   const { sourceHandle, targetHandle } = getHandlesByDirection(dx, dy);
 
   return {
-    id: `${sourceNode.id}-${targetNode.id}`,
+    id: uuidv4(),
     source: sourceNode.id,
     target: targetNode.id,
     sourceHandle,

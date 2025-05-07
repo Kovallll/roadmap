@@ -7,6 +7,7 @@ import { EdgeTypes, edgeTypes } from './constants';
 import styles from './styles.module.scss';
 
 import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
+import { capitalizeText } from '@/shared/lib';
 import { colors } from '@/shared/styles/theme';
 import { useReactFlow } from '@xyflow/react';
 
@@ -28,7 +29,7 @@ export const EdgeSidebar = () => {
   };
 
   const handleChangeSelect = (type: string) => {
-    handleUpdate('type', type);
+    handleUpdate('type', type.toLocaleLowerCase());
   };
 
   const handleChangeLineWidth = (value: string | null) => {
@@ -48,16 +49,16 @@ export const EdgeSidebar = () => {
   };
 
   const lineColor = (selectedEdge.data?.strokeColor as string) || colors.black;
-  const lineWidth = (selectedEdge.data?.strokeWidth as string) || '';
+  const lineWidth = (selectedEdge.data?.strokeWidth as string) || '1';
   const textColor = (selectedEdge.data?.color as string) || colors.black;
   const type = selectedEdge?.type || EdgeTypes.Default;
-  const label = (selectedEdge.data?.label as string) || '';
+  const label = (selectedEdge.data?.label as string) ?? '';
 
   return (
     <Sidebar title="Редактирование связи" className={styles.sidebar}>
       <Typography.Text className={styles.label}>Тип связи</Typography.Text>
       <Select
-        value={type}
+        value={capitalizeText(type)}
         onChange={handleChangeSelect}
         className={styles.select}
       >
@@ -67,7 +68,7 @@ export const EdgeSidebar = () => {
           </Option>
         ))}
       </Select>
-      {selectedEdge?.type === EdgeTypes.Custom && (
+      {selectedEdge?.type === EdgeTypes.Custom.toLowerCase() && (
         <>
           <Typography.Text className={styles.label}>Цвет линии</Typography.Text>
           <ColorPicker value={lineColor} onChange={handleChangeLineColor} />

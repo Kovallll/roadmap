@@ -16,6 +16,7 @@ import { useAlignLinesStore } from '@/features/align/model';
 import { checkAlignment, getAlignPosition } from '@/features/align/lib';
 import { getClosestEdge } from '@/features/proximityConnect/lib';
 import { useFlowStore } from '@/features/hotkeys/model';
+import { v4 as uuidv4 } from 'uuid';
 
 let isUndo = true;
 
@@ -70,7 +71,11 @@ export const useCanvasHandlers = () => {
   const onConnect: OnConnect = useCallback(
     ({ source, target, sourceHandle, targetHandle }) => {
       setEdges(
-        (eds) => addEdge({ source, target, sourceHandle, targetHandle }, eds),
+        (eds) =>
+          addEdge(
+            { source, target, sourceHandle, targetHandle, id: uuidv4() },
+            eds
+          ),
         { undo: true }
       );
     },
@@ -90,7 +95,7 @@ export const useCanvasHandlers = () => {
         const remaining = acc.filter((e) => !connected.includes(e));
         const newEdges = incomers.flatMap(({ id: source }) =>
           outgoers.map(({ id: target }) => ({
-            id: `${source}->${target}`,
+            id: uuidv4(),
             source,
             target,
           }))

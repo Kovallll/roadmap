@@ -17,10 +17,10 @@ const MapPage = () => {
 
   const setIsEdit = useCanvasStore.use.setIsEdit();
 
-  const accessToken = useAuthStore.use.accessToken();
+  const refreshToken = useAuthStore.use.refreshToken();
   const token = searchParams.get('token');
 
-  if (token && token !== accessToken) {
+  if (token && token !== refreshToken) {
     navigate(`${RoutePath.MAP}/${id}`);
     setIsEdit(false);
   }

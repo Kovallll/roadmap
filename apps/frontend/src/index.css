@@ -40,3 +40,17 @@ body {
     border-radius: 4px;
   }
 }
+
+.ant-select-selection-item {
+  color: #2c3144;
+}
+.ant-select-item-option-content {
+  color: #2c3144;
+}
+
+.ant-select-item-option-selected {
+  background: transparent !important;
+  .ant-select-item-option-content {
+    color: #f17900 !important;
+  }
+}

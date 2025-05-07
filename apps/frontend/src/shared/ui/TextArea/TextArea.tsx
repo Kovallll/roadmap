@@ -29,7 +29,7 @@ export const TextArea = ({
   const backgroundColor = String(data?.backgroundColor);
   const status = String(data?.status);
   const textAlign = String(data?.textAlign);
-  console.log(textAlign, 'textAlign');
+
   const customColor = String(data?.color ?? 'inherit');
   const color =
     status === NodeStatus.PENDING || status === NodeStatus.CLOSE

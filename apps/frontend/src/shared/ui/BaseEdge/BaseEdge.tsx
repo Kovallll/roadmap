@@ -3,6 +3,7 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 import { colors } from '@/shared/styles/theme';
+import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 import {
   BaseEdge as FlowBaseEdge,
   EdgeLabelRenderer,
@@ -21,6 +22,7 @@ export const BaseEdge = ({
   data,
   ...props
 }: EdgeProps) => {
+  const selectedEdge = useSelectedEdgeStore.use.selectedEdge();
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,
@@ -31,21 +33,26 @@ export const BaseEdge = ({
   });
 
   const textColor = String(data?.color) || colors.black;
-  const strokeWidth = Number(data?.strokeWidth) || 2;
-  const strokeColor = String(data?.strokeColor) || colors.black;
-  const label = String(data?.label) || '';
+  const strokeWidth = Number(data?.strokeWidth);
+  const strokeColor = String(data?.strokeColor ?? colors.primary);
+  const label = String(data?.label ?? '');
+
+  const getEdgeColor = () => {
+    if (selectedEdge?.id === id) {
+      return colors.secondary;
+    } else return strokeColor;
+  };
 
   const edgeStyles = {
     strokeWidth,
-    stroke: strokeColor,
+    stroke: getEdgeColor(),
   };
 
   const labelStyles = {
-    left: `${labelX}px`,
-    top: `${labelY}px`,
+    left: labelX,
+    top: labelY,
     color: textColor,
   };
-
   return (
     <>
       <FlowBaseEdge id={id} path={edgePath} {...props} style={edgeStyles} />

@@ -29,3 +29,7 @@ export const getStatusColor = (status: string) => {
     nodeStatuses.find((node) => status === node.value)?.color ?? colors.black
   );
 };
+
+export const capitalizeText = (text: string) => {
+  return text[0].toUpperCase() + text.slice(1);
+};
