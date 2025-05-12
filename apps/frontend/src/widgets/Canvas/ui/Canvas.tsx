@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { nodeColor } from '../lib';
 import { CanvasProps, useCanvasHandlers, useNodeEdgeHandles } from '../model';
@@ -24,6 +24,12 @@ import {
 } from '@xyflow/react';
 
 const Canvas = ({ canvas }: CanvasProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleChangeOpen = (value: boolean) => {
+    setIsOpen(value);
+  };
+
   const {
     onDrop,
     onDragOver,
@@ -42,7 +48,7 @@ const Canvas = ({ canvas }: CanvasProps) => {
     nodes,
     onEdgesChange,
     onNodesChange,
-  } = useNodeEdgeHandles(canvas);
+  } = useNodeEdgeHandles(canvas, handleChangeOpen);
 
   useNodeClipboard();
   useUndoRedo();
@@ -84,8 +90,8 @@ const Canvas = ({ canvas }: CanvasProps) => {
       >
         <Background variant={BackgroundVariant.Lines} />
         <ComponentsSidebar nodeLabels={nodeLabels} />
-        <NodeSidebar />
-        <EdgeSidebar />
+        <NodeSidebar isOpen={isOpen} handleChangeOpen={handleChangeOpen} />
+        <EdgeSidebar isOpen={isOpen} handleChangeOpen={handleChangeOpen} />
         <Controls />
         <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
         <AlignLines />

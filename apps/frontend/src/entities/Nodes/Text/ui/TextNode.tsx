@@ -9,8 +9,8 @@ export const TextNode = memo((props: NodeProps) => {
   const { updateNodeData } = useReactFlow();
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      updateNodeData(id, (prev) => ({ ...prev, label: e.target.value }));
+    (value: string) => {
+      updateNodeData(id, (prev) => ({ ...prev, label: value }));
     },
     [id, updateNodeData]
   );

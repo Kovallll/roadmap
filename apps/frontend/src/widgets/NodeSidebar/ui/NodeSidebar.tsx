@@ -1,15 +1,15 @@
-import { Tabs } from 'antd';
+import { Drawer } from 'antd';
+import { set } from 'lodash';
 
+import { NodeSidebarProps } from '../model/types';
 import styles from './styles.module.scss';
 
-import { NodeContentEditor } from '@/entities/NodeContentEditor/ui/NodeContentEditor';
 import { NodeContentViewer } from '@/entities/NodeContentViewer/ui/NodeContentViewer';
 import { NodePropsEditor } from '@/entities/NodePropsEditor/ui/NodePropsEditor';
-import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
 import { selectedNodeStore, useCanvasStore } from '@/shared/model/store';
 import { useReactFlow } from '@xyflow/react';
 
-export const NodeSidebar = () => {
+export const NodeSidebar = ({ isOpen, handleChangeOpen }: NodeSidebarProps) => {
   const { selectedNode, setSelectedNode } = selectedNodeStore();
   const { updateNode } = useReactFlow();
 
@@ -22,50 +22,33 @@ export const NodeSidebar = () => {
     value: string | number | null | object
   ) => {
     updateNode(selectedNode.id, (prev) => {
-      const newData = {
-        ...prev.data,
-        [field]: value,
-      };
+      const newData = { ...prev.data };
+      set(newData, field, value);
       setSelectedNode({ ...selectedNode, data: newData });
-      return {
-        data: newData,
-      };
+      return { data: newData };
     });
   };
 
-  const tabs = [
-    {
-      key: 'props',
-      label: 'Свойства',
-      children: (
-        <NodePropsEditor
-          selectedNode={selectedNode}
-          handleUpdate={handleUpdate}
-        />
-      ),
-    },
-    {
-      key: 'content',
-      label: 'Контент',
-      children: (
-        <NodeContentEditor
-          selectedNode={selectedNode}
-          handleUpdate={handleUpdate}
-        />
-      ),
-    },
-  ];
-
-  const width = isEdit ? 16 : 32;
-  const title = isEdit ? 'Редактирование узла' : '';
+  const onClose = () => {
+    handleChangeOpen(false);
+  };
 
   return (
-    <Sidebar title={title} className={styles.sidebar} width={width}>
+    <Drawer
+      placement={'right'}
+      closable={false}
+      onClose={onClose}
+      width={isEdit ? 350 : 600}
+      open={isOpen}
+      className={styles.drawer}
+      mask={false}
+      keyboard
+    >
       {isEdit ? (
-        <Tabs defaultActiveKey="code" items={tabs} />
+        <NodePropsEditor handleUpdate={handleUpdate} onCloseDrawer={onClose} />
       ) : (
-        <NodeContentViewer selectedNode={selectedNode} />
+        <NodeContentViewer />
       )}
-    </Sidebar>
+    </Drawer>
   );
 };

@@ -12,8 +12,8 @@ export const NoteNode = memo((props: NodeProps) => {
   const { updateNodeData } = useReactFlow();
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      updateNodeData(id, { ...data, label: e.target.value });
+    (value: string) => {
+      updateNodeData(id, { ...data, label: value });
     },
     [id, data, updateNodeData]
   );

@@ -1,0 +1,14 @@
+.alignIcon {
+  font-size: $font-xl;
+  cursor: pointer;
+  color: $gray;
+  transition: color 0.2s;
+}
+
+.alignIcon:hover {
+  color: $disabled;
+}
+
+.active {
+  color: $secondary-color;
+}

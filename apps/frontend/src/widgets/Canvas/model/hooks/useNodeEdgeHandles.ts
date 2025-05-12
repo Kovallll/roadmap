@@ -13,7 +13,10 @@ import {
 } from '@xyflow/react';
 import { useCallback, useEffect } from 'react';
 
-export const useNodeEdgeHandles = (canvas: Canvas) => {
+export const useNodeEdgeHandles = (
+  canvas: Canvas,
+  handleChangeOpen: (value: boolean) => void
+) => {
   const nodes = useFlowStore.use.nodes();
   const edges = useFlowStore.use.edges();
   const setNodes = useFlowStore.use.setNodes();
@@ -53,6 +56,7 @@ export const useNodeEdgeHandles = (canvas: Canvas) => {
 
   const handleSelectNode = useCallback(
     (_: React.MouseEvent, node: Node) => {
+      handleChangeOpen(true);
       setSelectedEdge(null);
       setSelectedNode(node);
     },

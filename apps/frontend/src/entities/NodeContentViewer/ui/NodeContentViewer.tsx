@@ -1,39 +1,23 @@
-import { Divider, Typography } from 'antd';
+import { ContentArea } from './ContentArea/ContentArea';
 
-import { NodeContentViewerProps } from '../model';
-import styles from './styles.module.scss';
+import PlaygroundNodes from '@/entities/NodeContentEditor/ui/nodes/PlaygroundNodes';
+import PlaygroundEditorTheme from '@/entities/NodeContentEditor/ui/themes/PlaygroundEditorTheme';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
 
-import { StatusSelect } from '@/shared/ui/StatusSelect/ui/StatusSelect';
-
-const { Title, Paragraph, Link, Text } = Typography;
-
-export const NodeContentViewer = ({ selectedNode }: NodeContentViewerProps) => {
-  if (!selectedNode) return null;
-
-  const description = (selectedNode?.data?.description as string) || '';
-  const title = (selectedNode?.data?.title as string) || '';
-  const linkTitle = (selectedNode?.data?.linkTitle as string) || '';
-  const link = (selectedNode?.data?.link as string) || '';
+export const NodeContentViewer = () => {
+  const initialConfig = {
+    editorState: null,
+    namespace: 'ReadOnlyViewer',
+    nodes: [...PlaygroundNodes],
+    onError: (error: Error) => {
+      throw error;
+    },
+    theme: PlaygroundEditorTheme,
+  };
 
   return (
-    <div className={styles.viewer}>
-      <StatusSelect />
-      {title && <Title level={1}>{title}</Title>}
-
-      {description && <Paragraph>{description}</Paragraph>}
-
-      {link && (
-        <>
-          <Divider orientation="left">
-            <Text>Ссылки</Text>
-          </Divider>
-          <div className={styles.linkSection}>
-            <Link href={link} target="_blank" rel="noopener noreferrer">
-              {linkTitle ?? 'Полезный ресурс'}
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+    <LexicalComposer initialConfig={initialConfig}>
+      <ContentArea />
+    </LexicalComposer>
   );
 };

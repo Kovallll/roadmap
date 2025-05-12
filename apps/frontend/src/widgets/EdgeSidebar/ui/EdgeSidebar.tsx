@@ -1,19 +1,26 @@
-import { ColorPicker, Input, InputNumber, Select, Typography } from 'antd';
+import {
+  ColorPicker,
+  Divider,
+  Drawer,
+  Input,
+  InputNumber,
+  Select,
+  Typography,
+} from 'antd';
 import { AggregationColor } from 'antd/es/color-picker/color';
 import { set } from 'lodash';
 
-import { store } from '../model';
+import { EdgeSidebarProps, store } from '../model';
 import { EdgeTypes, edgeTypes } from './constants';
 import styles from './styles.module.scss';
 
-import { Sidebar } from '@/entities/Sidebar/ui/Sidebar';
 import { capitalizeText } from '@/shared/lib';
 import { colors } from '@/shared/styles/theme';
 import { useReactFlow } from '@xyflow/react';
 
 const { Option } = Select;
 
-export const EdgeSidebar = () => {
+export const EdgeSidebar = ({ isOpen, handleChangeOpen }: EdgeSidebarProps) => {
   const { selectedEdge, setSelectedEdge } = store();
   const { updateEdge } = useReactFlow();
 
@@ -29,7 +36,7 @@ export const EdgeSidebar = () => {
   };
 
   const handleChangeSelect = (type: string) => {
-    handleUpdate('type', type.toLocaleLowerCase());
+    handleUpdate('data.type', type.toLocaleLowerCase());
   };
 
   const handleChangeLineWidth = (value: string | null) => {
@@ -48,14 +55,28 @@ export const EdgeSidebar = () => {
     handleUpdate('data.label', e.target.value);
   };
 
+  const onClose = () => {
+    handleChangeOpen(false);
+  };
+
   const lineColor = (selectedEdge.data?.strokeColor as string) || colors.black;
   const lineWidth = (selectedEdge.data?.strokeWidth as string) || '1';
   const textColor = (selectedEdge.data?.color as string) || colors.black;
-  const type = selectedEdge?.type || EdgeTypes.Default;
+  const type = (selectedEdge.data?.type as string) || EdgeTypes.Default;
   const label = (selectedEdge.data?.label as string) ?? '';
 
   return (
-    <Sidebar title="Редактирование связи" className={styles.sidebar}>
+    <Drawer
+      placement={'right'}
+      closable={false}
+      onClose={onClose}
+      open={isOpen}
+      className={styles.drawer}
+      mask={false}
+      keyboard
+    >
+      <Typography.Title level={2}>Редактирование cвязи</Typography.Title>
+      <Divider />
       <Typography.Text className={styles.label}>Тип связи</Typography.Text>
       <Select
         value={capitalizeText(type)}
@@ -68,28 +89,18 @@ export const EdgeSidebar = () => {
           </Option>
         ))}
       </Select>
-      {selectedEdge?.type === EdgeTypes.Custom.toLowerCase() && (
-        <>
-          <Typography.Text className={styles.label}>Цвет линии</Typography.Text>
-          <ColorPicker value={lineColor} onChange={handleChangeLineColor} />
-          <Typography.Text className={styles.label}>
-            Цвет Текста
-          </Typography.Text>
-          <ColorPicker value={textColor} onChange={handleChangeTextColor} />
-          <Typography.Text className={styles.label}>
-            Текст на связи
-          </Typography.Text>
-          <Input value={label} onChange={handleChangeLabel} />
-          <Typography.Text className={styles.label}>
-            Толщина линии
-          </Typography.Text>
-          <InputNumber
-            type="number"
-            value={lineWidth}
-            onChange={handleChangeLineWidth}
-          />
-        </>
-      )}
-    </Sidebar>
+      <Typography.Text className={styles.label}>Цвет линии</Typography.Text>
+      <ColorPicker value={lineColor} onChange={handleChangeLineColor} />
+      <Typography.Text className={styles.label}>Цвет Текста</Typography.Text>
+      <ColorPicker value={textColor} onChange={handleChangeTextColor} />
+      <Typography.Text className={styles.label}>Текст на связи</Typography.Text>
+      <Input value={label} onChange={handleChangeLabel} />
+      <Typography.Text className={styles.label}>Толщина линии</Typography.Text>
+      <InputNumber
+        type="number"
+        value={lineWidth}
+        onChange={handleChangeLineWidth}
+      />
+    </Drawer>
   );
 };

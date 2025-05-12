@@ -1,5 +1,6 @@
 import { Canvas, CanvasData } from '@roadmap/canvas/types';
 import { NodeProps, Node } from '@xyflow/react';
+import { AlignTypes } from './enums';
 
 export type BaseNodeProps = {
   nodeProps: NodeProps;
@@ -17,8 +18,10 @@ export type AuthState = {
 export type ListItem = { id: string; label: string };
 
 export type TextAreaProps = {
+  onChange: (value: string) => void;
+  value: string;
   data?: Record<string, unknown>;
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>;
 
 export type WithSelectors<S> = S extends { getState: () => infer T }
   ? S & { use: { [K in keyof T]: () => T[K] } }
@@ -46,3 +49,5 @@ export type CanvasState = {
 export type Styles = { [x: string]: string | number };
 
 export type NodeStatusType = { color: string; value: string };
+
+export type AlignType = `${AlignTypes}`;

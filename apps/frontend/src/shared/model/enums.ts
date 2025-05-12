@@ -18,3 +18,9 @@ export enum NodeStatus {
   PENDING = 'Pending',
   CLOSE = 'Close',
 }
+
+export enum AlignTypes {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+}

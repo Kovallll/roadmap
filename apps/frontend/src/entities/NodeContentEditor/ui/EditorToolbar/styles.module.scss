@@ -1,0 +1,31 @@
+.toolbar {
+  display: flex;
+  margin-bottom: 1px;
+  background: #fff;
+  padding: 4px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.toolbarItem {
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.spaced {
+  margin-right: 2px;
+}
+
+.active {
+  color: $secondary-color;
+}
+
+.divider {
+  height: auto;
+}

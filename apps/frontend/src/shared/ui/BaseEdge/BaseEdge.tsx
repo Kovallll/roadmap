@@ -2,13 +2,13 @@ import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
+import { getEdgePath } from '@/shared/lib';
 import { colors } from '@/shared/styles/theme';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 import {
   BaseEdge as FlowBaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  getBezierPath,
 } from '@xyflow/react';
 
 export const BaseEdge = ({
@@ -23,7 +23,8 @@ export const BaseEdge = ({
   ...props
 }: EdgeProps) => {
   const selectedEdge = useSelectedEdgeStore.use.selectedEdge();
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const type = String(data?.type);
+  const { path, labelX, labelY } = getEdgePath(type, {
     sourceX,
     sourceY,
     sourcePosition,
@@ -55,7 +56,7 @@ export const BaseEdge = ({
   };
   return (
     <>
-      <FlowBaseEdge id={id} path={edgePath} {...props} style={edgeStyles} />
+      <FlowBaseEdge id={id} path={path} {...props} style={edgeStyles} />
       {label && (
         <EdgeLabelRenderer>
           <div

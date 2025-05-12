@@ -15,25 +15,25 @@ import { useReactFlow } from '@xyflow/react';
 const { Text } = Typography;
 
 export const StatusSelect = memo(() => {
+  const [status, setStatus] = useState<string>(NodeStatus.PENDING);
   const selectedNode = useSelectedNodeStore.use.selectedNode();
   const canvas = useCanvasStore.use.canvas();
 
   const { updateNode } = useReactFlow();
   const { mutate } = useSaveCanvas(canvas?.id ?? '', false);
 
-  const nodeStatus =
-    (selectedNode?.data?.status as string) || NodeStatus.PENDING;
-
-  const [status, setStatus] = useState(nodeStatus);
-
   useEffect(() => {
+    const nodeStatus =
+      (selectedNode?.data?.status as string) || NodeStatus.PENDING;
     setStatus(nodeStatus);
-  }, [nodeStatus, status]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!selectedNode || !canvas) return null;
 
   const handleChangeStatus = (status: string) => {
     setStatus(status);
+
     if (!canvas.data?.nodes) return;
 
     const updatedCanvas = {

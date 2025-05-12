@@ -1,70 +1,72 @@
-import { useState } from 'react';
-import { Input } from 'antd';
+import { useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
-import { getStatusColor } from '@/shared/lib';
+import { getStatusColor, textAlignMap } from '@/shared/lib';
 import {
+  AlignTypes,
   NodeStatus,
   Styles,
   TextAreaProps,
   useCanvasStore,
 } from '@/shared/model';
-
-const { TextArea: AntdTextArea } = Input;
+import { colors, fontSizes } from '@/shared/styles/theme';
 
 export const TextArea = ({
   value,
   onChange,
-  placeholder,
   className,
   data,
+  style,
 }: TextAreaProps) => {
-  const [isHover, setIsHover] = useState(false);
-
   const isEdit = useCanvasStore.use.isEdit();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const fontSize = Number(data?.fontSize);
+  const fontSize = Number(data?.fontSize ?? fontSizes.lg);
   const backgroundColor = String(data?.backgroundColor);
   const status = String(data?.status);
-  const textAlign = String(data?.textAlign);
+  const justifyContent = String(data?.justifyContent ?? AlignTypes.START);
+  const alignItems = String(data?.alignItems ?? AlignTypes.START);
+  const customColor = String(data?.color ?? colors.black);
 
-  const customColor = String(data?.color ?? 'inherit');
   const color =
     status === NodeStatus.PENDING || status === NodeStatus.CLOSE
       ? customColor
       : getStatusColor(status);
 
-  const handleMouseOver = () => {
-    setIsHover(isEdit ? true : false);
+  const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
+    const value = e.currentTarget.innerText;
+    onChange?.(value);
   };
 
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
+  useEffect(() => {
+    if (ref.current && ref.current.innerText !== value) {
+      ref.current.innerText = String(value ?? '');
+    }
+  }, [value]);
 
-  const textAreaStyles: Styles = {
+  const stylesObj: Styles = {
+    justifyContent,
+    alignItems,
     fontSize,
     backgroundColor,
     color,
-    textAlign,
+    textAlign: textAlignMap[justifyContent],
     pointerEvents: isEdit ? 'all' : 'none',
   };
 
   return (
-    <AntdTextArea
-      value={value}
-      onChange={onChange}
-      className={cn(styles.textarea, 'nodrag', 'nowheel', className, {
-        [styles.hover]: isHover,
+    <div
+      ref={ref}
+      contentEditable={isEdit}
+      onInput={handleInput}
+      className={cn(styles.editable, className, 'nodrag', 'nowheel', {
         [styles.crossed]:
           status === NodeStatus.CLOSE || status === NodeStatus.DONE,
       })}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-      placeholder={placeholder}
-      style={textAreaStyles}
+      style={{ ...stylesObj, ...style }}
+      suppressContentEditableWarning
     />
   );
 };

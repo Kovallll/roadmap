@@ -5,9 +5,15 @@ import { ConfigProvider } from 'antd';
 import { MapHeader } from './MapHeader';
 
 import { useCanvas } from '@/features/canvas/model';
-import { RoutePath, useAuthStore, useCanvasStore } from '@/shared/model';
+import {
+  RoutePath,
+  useAuthStore,
+  useCanvasStore,
+  useSelectedNodeStore,
+} from '@/shared/model';
 import { colors } from '@/shared/styles/theme';
 import Canvas from '@/widgets/Canvas/ui/Canvas';
+import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 
 const MapPage = () => {
   const { id } = useParams();
@@ -15,6 +21,8 @@ const MapPage = () => {
   const navigate = useNavigate();
   const canvasId = id || '';
 
+  const setSelectedNode = useSelectedNodeStore.use.setSelectedNode();
+  const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
   const setIsEdit = useCanvasStore.use.setIsEdit();
 
   const refreshToken = useAuthStore.use.refreshToken();
@@ -36,7 +44,12 @@ const MapPage = () => {
 
   useEffect(() => {
     if (data) setCanvas(data);
-  }, [data, setCanvas]);
+
+    return () => {
+      setSelectedNode(null);
+      setSelectedEdge(null);
+    };
+  }, [data, setCanvas, setSelectedEdge, setSelectedNode]);
 
   if (!data) return null;
 

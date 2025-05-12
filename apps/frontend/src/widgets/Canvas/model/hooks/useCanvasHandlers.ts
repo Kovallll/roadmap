@@ -20,13 +20,8 @@ import { v4 as uuidv4 } from 'uuid';
 let isUndo = true;
 
 export const useCanvasHandlers = () => {
-  const {
-    getNodes,
-    getEdges,
-    flowToScreenPosition,
-    screenToFlowPosition,
-    getInternalNode,
-  } = useReactFlow();
+  const { getNodes, getEdges, flowToScreenPosition, screenToFlowPosition } =
+    useReactFlow();
 
   const setNodes = useFlowStore.use.setNodes();
   const setEdges = useFlowStore.use.setEdges();
@@ -72,7 +67,14 @@ export const useCanvasHandlers = () => {
       setEdges(
         (eds) =>
           addEdge(
-            { source, target, sourceHandle, targetHandle, id: uuidv4() },
+            {
+              source,
+              target,
+              sourceHandle,
+              targetHandle,
+              id: uuidv4(),
+              type: 'custom',
+            },
             eds
           ),
         { undo: true }

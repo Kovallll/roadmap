@@ -1,15 +1,7 @@
-export const edgeTypes = [
-  'Default',
-  'Step',
-  'SmoothStep',
-  'Straight',
-  'Custom',
-];
+export const edgeTypes = ['Default', 'Smooth', 'Straight'];
 
 export enum EdgeTypes {
   Default = 'Default',
-  Step = 'Step',
   SmoothStep = 'SmoothStep',
   Straight = 'Straight',
-  Custom = 'Custom',
 }

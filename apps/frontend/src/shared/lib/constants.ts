@@ -3,15 +3,16 @@ import { Position } from '@xyflow/react';
 import styles from '../ui/BaseNode/styles.module.scss';
 import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
 import { NoteNode } from '@/entities/Nodes/Note/ui/Note';
-import { ListNode } from '@/entities/Nodes/List/ui/List';
-import { NodeStatus } from '../model';
+import { AlignTypes, NodeStatus } from '../model';
 import { colors } from '../styles/theme';
 
 export const nodeTypes = {
   Text: TextNode,
   Note: NoteNode,
-  List: ListNode,
 };
+
+export const defaultNodeWidth = 100;
+export const defaultNodeHeight = 'auto';
 
 export const nodeStatuses = [
   { color: colors.success, value: NodeStatus.DONE },
@@ -49,3 +50,9 @@ export const handles = [
     className: styles.bottom,
   },
 ];
+
+export const textAlignMap: Record<string, 'left' | 'center' | 'right'> = {
+  [AlignTypes.START]: 'left',
+  [AlignTypes.CENTER]: 'center',
+  [AlignTypes.END]: 'right',
+};

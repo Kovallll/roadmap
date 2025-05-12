@@ -1,72 +1,81 @@
-import { Input, Typography } from 'antd';
+import { useState } from 'react';
+import { Button, Flex, Layout, Typography } from 'antd';
+import { SerializedEditorState } from 'lexical';
 
-import { NodeContentEditorProps } from '../model';
+import { SharedHistoryContext } from './context/SharedHistoryContext';
+import { ToolbarContext } from './context/ToolbarContext';
+import { Editor } from './Editor/Editor';
+import PlaygroundNodes from './nodes/PlaygroundNodes';
+import { TableContext } from './plugins/TablePlugin';
 import styles from './styles.module.scss';
+import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 
-import { TextArea } from '@/shared/ui/TextArea/TextArea';
+import './styles.css';
+import { selectedNodeStore } from '@/shared/model';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { useReactFlow } from '@xyflow/react';
 
 export const NodeContentEditor = ({
-  selectedNode,
-  handleUpdate,
-}: NodeContentEditorProps) => {
+  onCloseDrawer,
+}: {
+  onCloseDrawer: () => void;
+}) => {
+  const [serializedContent, setSerializedContent] =
+    useState<SerializedEditorState>();
+  const { selectedNode, setSelectedNode } = selectedNodeStore();
+  const { updateNode } = useReactFlow();
+
+  const initialConfig = {
+    editorState: null,
+    namespace: 'Playground',
+    nodes: [...PlaygroundNodes],
+    onError: (error: Error) => {
+      throw error;
+    },
+    theme: PlaygroundEditorTheme,
+  };
   if (!selectedNode) return null;
-
-  const handleChangeDescription = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    handleUpdate('description', e.target.value);
+  const content = selectedNode.data.content as SerializedEditorState;
+  const handleSaveContent = () => {
+    const newData = { ...selectedNode.data, content: serializedContent };
+    updateNode(selectedNode.id, { data: newData });
+    setSelectedNode({
+      ...selectedNode,
+      data: newData,
+    });
+    onCloseDrawer();
   };
 
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleUpdate('title', e.target.value);
+  const hadnleEditContent = (content: SerializedEditorState) => {
+    setSerializedContent(content);
   };
 
-  const handleChangeLinkTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleUpdate('linkTitle', e.target.value);
-  };
-
-  const handleChangeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleUpdate('link', e.target.value);
-  };
-
-  const description = (selectedNode?.data?.description as string) || '';
-  const title = (selectedNode?.data?.title as string) || '';
-  const linkTitle = (selectedNode?.data?.linkTitle as string) || '';
-  const link = (selectedNode?.data?.link as string) || '';
+  const title = selectedNode?.data.label as string;
 
   return (
-    <div className={styles.field}>
-      <Typography.Text className={styles.label}>Заголовок</Typography.Text>
-      <Input
-        value={title}
-        onChange={handleChangeTitle}
-        placeholder="Добавьте заголовок"
-        className={styles.title}
-      />
-      <Typography.Text className={styles.label}>Описание</Typography.Text>
-      <TextArea
-        value={description}
-        onChange={handleChangeDescription}
-        placeholder="Добавьте описание"
-        className={styles.description}
-      />
-
-      <Typography.Text className={styles.label}>
-        Заголовок ссылки
-      </Typography.Text>
-      <Input
-        value={linkTitle}
-        onChange={handleChangeLinkTitle}
-        placeholder="Заголовок"
-        className={styles.title}
-      />
-      <Typography.Text className={styles.label}>Ссылка</Typography.Text>
-      <Input
-        value={link}
-        onChange={handleChangeLink}
-        placeholder="Ссылка на внешний ресурс"
-        className={styles.title}
-      />
-    </div>
+    <>
+      <Layout.Header className={styles.editorHeader}>
+        <Flex
+          justify="space-between"
+          align="center"
+          className={styles.headerContent}
+        >
+          <Typography.Title className={styles.title}>{title}</Typography.Title>
+          <Button onClick={handleSaveContent}>Сохранить описание</Button>
+        </Flex>
+      </Layout.Header>
+      <LexicalComposer initialConfig={initialConfig}>
+        <SharedHistoryContext>
+          <TableContext>
+            <ToolbarContext>
+              <Editor
+                editContent={hadnleEditContent}
+                initialSerializedContent={content}
+              />
+            </ToolbarContext>
+          </TableContext>
+        </SharedHistoryContext>
+      </LexicalComposer>
+    </>
   );
 };
