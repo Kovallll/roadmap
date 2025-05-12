@@ -8,7 +8,7 @@
 
 .floating-text-format-popup {
   display: flex;
-  background: #fff;
+  background: #2c3144;
   padding: 4px;
   vertical-align: middle;
   position: absolute;
@@ -48,7 +48,7 @@
   margin-top: 2px;
   vertical-align: -0.25em;
   display: flex;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 .floating-text-format-popup button.popup-item:disabled i.format {

@@ -7,11 +7,12 @@
  */
 
 .font-size-input {
+  background: #2c3144;
   font-weight: bold;
   font-size: 14px;
-  color: #777;
+  color: white;
   border-radius: 5px;
-  border-color: grey;
+  border-color: #2c3144;
   height: 15px;
   padding: 2px 4px;
   text-align: center;

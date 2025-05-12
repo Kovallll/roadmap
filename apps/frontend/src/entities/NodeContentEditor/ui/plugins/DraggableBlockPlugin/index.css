@@ -14,7 +14,7 @@
 .draggable-block-menu .icon {
   width: 16px;
   height: 16px;
-  opacity: 0.3;
+  opacity: 1;
   background-image: url(../../images/icons/draggable-block-menu.svg);
 }
 
@@ -23,6 +23,7 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
+  opacity: 1;
   background-image: url(../../images/icons/plus.svg);
 }
 
@@ -31,7 +32,7 @@
 }
 
 .draggable-block-menu .icon:hover {
-  background-color: #efefef;
+  background-color: #999;
 }
 
 .draggable-block-target-line {

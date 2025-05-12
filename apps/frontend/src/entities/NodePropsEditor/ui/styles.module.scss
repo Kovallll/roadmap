@@ -1,21 +1,16 @@
-.sidebar {
-  top: $gap-xxxl;
-}
-
 .label {
   display: block;
-  font-size: $font-xs;
+  font-size: $font-sm;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: $gap-xs;
 }
 
-.numberInput {
-  width: 100%;
+.section {
+  margin-bottom: $gap-xs;
 }
 
-.alignButtons {
-  display: flex;
-  gap: $gap-md;
+.input {
+  width: 176px;
 }
 
 .alignIcon {
@@ -31,4 +26,18 @@
 
 .active {
   color: $secondary-color;
+}
+
+.drawer {
+  height: 80vh !important;
+  background: $primary-color !important;
+  padding: 0 $gap-lg;
+}
+
+.contentButton {
+  margin-bottom: $gap-sm;
+}
+
+.picker {
+  width: min-content;
 }
