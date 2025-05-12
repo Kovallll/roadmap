@@ -1,5 +1,3 @@
-import { ElementFormatType } from 'lexical';
-
 import { INITIAL_TOOLBAR_STATE } from '../lib';
 
 import { Node } from '@xyflow/react';

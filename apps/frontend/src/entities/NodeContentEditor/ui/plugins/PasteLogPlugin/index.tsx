@@ -28,6 +28,8 @@ export default function PasteLogPlugin(): JSX.Element {
         COMMAND_PRIORITY_NORMAL
       );
     }
+
+    return undefined;
   }, [editor, isActive]);
 
   return (

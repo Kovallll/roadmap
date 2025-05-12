@@ -11,7 +11,7 @@
   background-color: rgba(40, 40, 40, 0.6);
   flex-grow: 0px;
   flex-shrink: 1px;
-  z-index: 1000;
+  z-index: 1000000;
 }
 .Modal__modal {
   padding: 20px;

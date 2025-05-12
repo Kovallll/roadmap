@@ -33,7 +33,6 @@ import {
   UpdateFontSizeType,
 } from '../ToolbarPlugin/utils';
 import {
-  isAddComment,
   isCapitalize,
   isCenterAlign,
   isClearFormatting,

@@ -2,7 +2,6 @@ import type { JSX } from 'react';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 import {
   $getNodeByKey,
-  $getRoot,
   $getSelection,
   $isElementNode,
   $isRangeSelection,
@@ -36,8 +35,6 @@ import { EmbedConfigs } from '../AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
 import { InsertInlineImageDialog } from '../InlineImagePlugin';
-import InsertLayoutDialog from '../LayoutPlugin/InsertLayoutDialog';
-import { INSERT_PAGE_BREAK } from '../PageBreakPlugin';
 import { SHORTCUTS } from '../ShortcutsPlugin/shortcuts';
 import { InsertTableDialog } from '../TablePlugin';
 import FontSize from './fontSize';
@@ -1059,15 +1056,6 @@ export const ToolbarPlugin = ({
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {
-                    activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
-                  }}
-                  className="item"
-                >
-                  <i className="icon page-break" />
-                  <span className="text">Page Break</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
                     showModal('Insert Image', (onClose) => (
                       <InsertImageDialog
                         activeEditor={activeEditor}
@@ -1107,20 +1095,6 @@ export const ToolbarPlugin = ({
                 >
                   <i className="icon table" />
                   <span className="text">Table</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    showModal('Insert Columns Layout', (onClose) => (
-                      <InsertLayoutDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ));
-                  }}
-                  className="item"
-                >
-                  <i className="icon columns" />
-                  <span className="text">Columns Layout</span>
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {

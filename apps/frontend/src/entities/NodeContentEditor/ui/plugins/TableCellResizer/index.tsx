@@ -9,7 +9,6 @@ import type { JSX } from 'react';
 import {
   CSSProperties,
   PointerEventHandler,
-  ReactPortal,
   useCallback,
   useEffect,
   useMemo,
@@ -267,6 +266,7 @@ function TableCellResizer({ editor }: { editor: LexicalEditor }): JSX.Element {
         }
       }
     }
+    return undefined;
   };
 
   const updateColumnWidth = useCallback(
@@ -453,7 +453,7 @@ function TableCellResizer({ editor }: { editor: LexicalEditor }): JSX.Element {
   );
 }
 
-export default function TableCellResizerPlugin(): null | ReactPortal {
+export default function TableCellResizerPlugin(): any {
   const [editor] = useLexicalComposerContext();
   const isEditable = useLexicalEditable();
 

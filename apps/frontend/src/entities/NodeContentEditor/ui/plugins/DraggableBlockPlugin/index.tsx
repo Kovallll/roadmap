@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {JSX} from 'react';
-import {useRef, useState} from 'react';
-import {$createParagraphNode, $getNearestNodeFromDOMNode} from 'lexical';
+import type { JSX } from 'react';
+import { useRef, useState } from 'react';
+import { $createParagraphNode, $getNearestNodeFromDOMNode } from 'lexical';
 
 import './index.css';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {DraggableBlockPlugin_EXPERIMENTAL} from '@lexical/react/LexicalDraggableBlockPlugin';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { DraggableBlockPlugin_EXPERIMENTAL } from '@lexical/react/LexicalDraggableBlockPlugin';
 
 const DRAGGABLE_BLOCK_MENU_CLASSNAME = 'draggable-block-menu';
 
@@ -25,10 +25,10 @@ export default function DraggableBlockPlugin({
   anchorElem?: HTMLElement;
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
-  const menuRef = useRef<HTMLDivElement>(null);
-  const targetLineRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const targetLineRef = useRef<HTMLDivElement | null>(null);
   const [draggableElement, setDraggableElement] = useState<HTMLElement | null>(
-    null,
+    null
   );
 
   function insertBlock(e: React.MouseEvent) {
@@ -55,8 +55,8 @@ export default function DraggableBlockPlugin({
   return (
     <DraggableBlockPlugin_EXPERIMENTAL
       anchorElem={anchorElem}
-      menuRef={menuRef}
-      targetLineRef={targetLineRef}
+      menuRef={menuRef as any}
+      targetLineRef={targetLineRef as any}
       menuComponent={
         <div ref={menuRef} className="icon draggable-block-menu">
           <button

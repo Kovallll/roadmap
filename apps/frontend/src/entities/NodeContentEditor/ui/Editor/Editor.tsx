@@ -21,12 +21,10 @@ import FloatingTextFormatToolbarPlugin from '../plugins/FloatingTextFormatToolba
 import ImagesPlugin from '../plugins/ImagesPlugin';
 import InlineImagePlugin from '../plugins/InlineImagePlugin';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
-import { LayoutPlugin } from '../plugins/LayoutPlugin/LayoutPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
 import MarkdownShortcutPlugin from '../plugins/MarkdownShortcutPlugin';
 import { MaxLengthPlugin } from '../plugins/MaxLengthPlugin';
 import MentionsPlugin from '../plugins/MentionsPlugin';
-import PageBreakPlugin from '../plugins/PageBreakPlugin';
 import ShortcutsPlugin from '../plugins/ShortcutsPlugin';
 import SpecialTextPlugin from '../plugins/SpecialTextPlugin';
 import TabFocusPlugin from '../plugins/TabFocusPlugin';
@@ -206,8 +204,6 @@ export const Editor = ({
             <TabIndentationPlugin maxIndent={7} />
             <CollapsiblePlugin />
             <OnChangePlugin onChange={onChange} />
-            <PageBreakPlugin />
-            <LayoutPlugin />
             {floatingAnchorElem && (
               <>
                 <FloatingLinkEditorPlugin

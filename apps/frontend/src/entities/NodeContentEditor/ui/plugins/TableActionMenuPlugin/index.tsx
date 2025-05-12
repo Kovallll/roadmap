@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import { ReactPortal, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ElementNode, LexicalEditor } from 'lexical';
 import {
@@ -104,14 +104,14 @@ type TableCellActionMenuProps = Readonly<{
   cellMerge: boolean;
 }>;
 
-function TableActionMenu({
+const TableActionMenu = ({
   onClose,
   tableCellNode: _tableCellNode,
   setIsMenuOpen,
   contextRef,
   cellMerge,
   showColorPickerModal,
-}: TableCellActionMenuProps) {
+}: TableCellActionMenuProps): JSX.Element => {
   const [editor] = useLexicalComposerContext();
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [tableCellNode, updateTableCellNode] = useState(_tableCellNode);
@@ -686,7 +686,7 @@ function TableActionMenu({
     </div>,
     document.body
   );
-}
+};
 
 function TableCellActionMenuContainer({
   anchorElem,
@@ -694,7 +694,7 @@ function TableCellActionMenuContainer({
 }: {
   anchorElem: HTMLElement;
   cellMerge: boolean;
-}): JSX.Element {
+}) {
   const [editor] = useLexicalComposerContext();
 
   const menuButtonRef = useRef<HTMLDivElement | null>(null);
@@ -935,15 +935,22 @@ export default function TableActionMenuPlugin({
 }: {
   anchorElem?: HTMLElement;
   cellMerge?: boolean;
-}): null | ReactPortal {
+}) {
   const isEditable = useLexicalEditable();
-  return createPortal(
-    isEditable ? (
-      <TableCellActionMenuContainer
-        anchorElem={anchorElem}
-        cellMerge={cellMerge}
-      />
-    ) : null,
-    anchorElem
+
+  if (!isEditable) {
+    return null;
+  }
+
+  return (
+    <>
+      {createPortal(
+        <TableCellActionMenuContainer
+          anchorElem={anchorElem}
+          cellMerge={cellMerge}
+        />,
+        anchorElem
+      )}
+    </>
   );
 }

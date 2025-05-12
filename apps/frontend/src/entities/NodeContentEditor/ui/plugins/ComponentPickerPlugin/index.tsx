@@ -14,8 +14,6 @@ import { useModal } from '../../hooks/useModal';
 import { EmbedConfigs } from '../AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
-import InsertLayoutDialog from '../LayoutPlugin/InsertLayoutDialog';
-import { INSERT_PAGE_BREAK } from '../PageBreakPlugin';
 import { InsertTableDialog } from '../TablePlugin';
 
 import { $createCodeNode } from '@lexical/code';
@@ -224,11 +222,6 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       onSelect: () =>
         editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined),
     }),
-    new ComponentPickerOption('Page Break', {
-      icon: <i className="icon page-break" />,
-      keywords: ['page break', 'divider'],
-      onSelect: () => editor.dispatchCommand(INSERT_PAGE_BREAK, undefined),
-    }),
     ...EmbedConfigs.map(
       (embedConfig) =>
         new ComponentPickerOption(`Embed ${embedConfig.contentName}`, {
@@ -251,14 +244,6 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       keywords: ['collapse', 'collapsible', 'toggle'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_COLLAPSIBLE_COMMAND, undefined),
-    }),
-    new ComponentPickerOption('Columns Layout', {
-      icon: <i className="icon columns" />,
-      keywords: ['columns', 'layout', 'grid'],
-      onSelect: () =>
-        showModal('Insert Columns Layout', (onClose) => (
-          <InsertLayoutDialog activeEditor={editor} onClose={onClose} />
-        )),
     }),
     ...(['left', 'center', 'right', 'justify'] as const).map(
       (alignment) =>

@@ -22,7 +22,7 @@ function indent(tagName: HeadingTagType) {
     return 'heading2';
   } else if (tagName === 'h3') {
     return 'heading3';
-  }
+  } else return 'heading 3';
 }
 
 function isHeadingAtTheTopOfThePage(element: HTMLElement): boolean {

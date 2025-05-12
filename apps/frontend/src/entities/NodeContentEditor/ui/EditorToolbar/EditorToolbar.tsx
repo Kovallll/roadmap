@@ -43,8 +43,6 @@ import {
   InsertImagePayload,
 } from '../plugins/ImagesPlugin';
 import { InsertInlineImageDialog } from '../plugins/InlineImagePlugin';
-import InsertLayoutDialog from '../plugins/LayoutPlugin/InsertLayoutDialog';
-import { INSERT_PAGE_BREAK } from '../plugins/PageBreakPlugin';
 import { InsertTableDialog } from '../plugins/TablePlugin';
 import FontSize from '../plugins/ToolbarPlugin/fontSize';
 import { getSelectedNode } from '../utils/getSelectedNode';
@@ -1051,15 +1049,7 @@ export default function ToolbarPlugin({
                   <i className="icon horizontal-rule" />
                   <span className="text">Horizontal Rule</span>
                 </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
-                  }}
-                  className="item"
-                >
-                  <i className="icon page-break" />
-                  <span className="text">Page Break</span>
-                </DropDownItem>
+
                 <DropDownItem
                   onClick={() => {
                     showModal('Insert Image', (onClose) => (
@@ -1113,20 +1103,6 @@ export default function ToolbarPlugin({
                 >
                   <i className="icon table" />
                   <span className="text">Table</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    showModal('Insert Columns Layout', (onClose) => (
-                      <InsertLayoutDialog
-                        activeEditor={activeEditor}
-                        onClose={onClose}
-                      />
-                    ));
-                  }}
-                  className="item"
-                >
-                  <i className="icon columns" />
-                  <span className="text">Columns Layout</span>
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {

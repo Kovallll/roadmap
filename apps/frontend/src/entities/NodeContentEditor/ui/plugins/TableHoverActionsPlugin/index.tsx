@@ -313,7 +313,7 @@ export default function TableHoverActionsPlugin({
   anchorElem = document.body,
 }: {
   anchorElem?: HTMLElement;
-}): React.ReactPortal | null {
+}): any {
   const isEditable = useLexicalEditable();
 
   return isEditable
