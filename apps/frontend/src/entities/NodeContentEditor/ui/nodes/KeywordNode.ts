@@ -7,7 +7,6 @@
  */
 
 import type {EditorConfig, LexicalNode, SerializedTextNode} from 'lexical';
-
 import {$applyNodeReplacement, TextNode} from 'lexical';
 
 export type SerializedKeywordNode = SerializedTextNode;
@@ -45,7 +44,7 @@ export class KeywordNode extends TextNode {
   }
 }
 
-export function $createKeywordNode(keyword: string = ''): KeywordNode {
+export function $createKeywordNode(keyword = ''): KeywordNode {
   return $applyNodeReplacement(new KeywordNode(keyword));
 }
 

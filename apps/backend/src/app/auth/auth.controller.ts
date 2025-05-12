@@ -1,17 +1,18 @@
+import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './local-auth.guard';
+
+import { HttpExceptionFilter } from '@/filters/HttpExceptionFilter';
+import { CreateUserDto } from '@/modules/users/dto/create-user.dto';
 import {
   Body,
   Controller,
   Post,
   Request,
-  UseGuards,
   UseFilters,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local-auth.guard';
-import { HttpExceptionFilter } from '@/filters/HttpExceptionFilter';
-import { CreateUserDto } from '@/modules/users/dto/create-user.dto';
 
 @Controller('auth')
 @UseFilters(HttpExceptionFilter)

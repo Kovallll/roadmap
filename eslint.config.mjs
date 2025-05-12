@@ -10,6 +10,7 @@ export default [
       '**/dist',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
+      '**/prisma/',
     ],
   },
   {
@@ -39,6 +40,7 @@ export default [
           ],
         },
       ],
+      '@typescript-eslint/no-unused-expressions': ['warn'],
       'simple-import-sort/imports': [
         'error',
         {

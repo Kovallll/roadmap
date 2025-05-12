@@ -6,12 +6,10 @@
  *
  */
 
-import type {JSX} from 'react';
+import type { JSX } from 'react';
+import { HTMLInputTypeAttribute } from 'react';
 
 import './Input.css';
-
-import * as React from 'react';
-import {HTMLInputTypeAttribute} from 'react';
 
 type Props = Readonly<{
   'data-test-id'?: string;

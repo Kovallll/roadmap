@@ -1,5 +1,6 @@
-import { AlignType } from '@/shared/model';
 import { LexicalEditor } from 'lexical';
+
+import { AlignType } from '@/shared/model';
 
 export type AlignComponentProps = {
   children: React.ReactNode;

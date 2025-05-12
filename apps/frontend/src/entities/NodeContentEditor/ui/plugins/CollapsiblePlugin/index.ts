@@ -6,14 +6,7 @@
  *
  */
 
-import './Collapsible.css';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {
-  $findMatchingParent,
-  $insertNodeToNearestRoot,
-  mergeRegister,
-} from '@lexical/utils';
+import {useEffect} from 'react';
 import {
   $createParagraphNode,
   $getSelection,
@@ -26,7 +19,6 @@ import {
   KEY_ARROW_RIGHT_COMMAND,
   KEY_ARROW_UP_COMMAND,
 } from 'lexical';
-import {useEffect} from 'react';
 
 import {
   $createCollapsibleContainerNode,
@@ -43,6 +35,14 @@ import {
   $isCollapsibleTitleNode,
   CollapsibleTitleNode,
 } from './CollapsibleTitleNode';
+
+import './Collapsible.css';
+import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
+import {
+  $findMatchingParent,
+  $insertNodeToNearestRoot,
+  mergeRegister,
+} from '@lexical/utils';
 
 export const INSERT_COLLAPSIBLE_COMMAND = createCommand<void>(
   'INSERT_COLLAPSIBLE_COMMAND',

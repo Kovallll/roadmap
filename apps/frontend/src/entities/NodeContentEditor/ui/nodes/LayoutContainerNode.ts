@@ -17,9 +17,9 @@ import type {
   SerializedElementNode,
   Spread,
 } from 'lexical';
+import {ElementNode} from 'lexical';
 
 import {addClassNamesToElement} from '@lexical/utils';
-import {ElementNode} from 'lexical';
 
 export type SerializedLayoutContainerNode = Spread<
   {
@@ -134,7 +134,7 @@ export class LayoutContainerNode extends ElementNode {
 }
 
 export function $createLayoutContainerNode(
-  templateColumns: string = '',
+  templateColumns = '',
 ): LayoutContainerNode {
   return new LayoutContainerNode(templateColumns);
 }

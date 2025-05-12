@@ -1,7 +1,8 @@
+import { useCallback, useEffect } from 'react';
+
 import { useFlowStore } from '@/features/hotkeys/model';
 import { useCanvasStore, useSelectedNodeStore } from '@/shared/model/store';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
-
 import { Canvas } from '@roadmap/canvas/types';
 import {
   applyEdgeChanges,
@@ -11,7 +12,6 @@ import {
   OnEdgesChange,
   OnNodesChange,
 } from '@xyflow/react';
-import { useCallback, useEffect } from 'react';
 
 export const useNodeEdgeHandles = (
   canvas: Canvas,

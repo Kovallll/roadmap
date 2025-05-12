@@ -6,12 +6,9 @@
  *
  */
 
-import type {BaseSelection, NodeKey, TextNode} from 'lexical';
 import type {JSX} from 'react';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$isAtNodeEnd} from '@lexical/selection';
-import {mergeRegister} from '@lexical/utils';
+import {useCallback, useEffect} from 'react';
+import type {BaseSelection, NodeKey, TextNode} from 'lexical';
 import {
   $addUpdateTag,
   $createTextNode,
@@ -25,7 +22,6 @@ import {
   KEY_ARROW_RIGHT_COMMAND,
   KEY_TAB_COMMAND,
 } from 'lexical';
-import {useCallback, useEffect} from 'react';
 
 import {useToolbarState} from '../../context/ToolbarContext';
 import {
@@ -33,6 +29,10 @@ import {
   AutocompleteNode,
 } from '../../nodes/AutocompleteNode';
 import {addSwipeRightListener} from '../../utils/swipe';
+
+import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
+import {$isAtNodeEnd} from '@lexical/selection';
+import {mergeRegister} from '@lexical/utils';
 
 const HISTORY_MERGE = {tag: HISTORY_MERGE_TAG};
 
@@ -109,7 +109,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
     let lastMatch: null | string = null;
     let lastSuggestion: null | string = null;
     let searchPromise: null | SearchPromise = null;
-    let prevNodeFormat: number = 0;
+    let prevNodeFormat = 0;
     function $clearSuggestion() {
       const autocompleteNode =
         autocompleteNodeKey !== null

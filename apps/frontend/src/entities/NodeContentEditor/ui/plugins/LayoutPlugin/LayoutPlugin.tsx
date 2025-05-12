@@ -6,14 +6,8 @@
  *
  */
 
+import {useEffect} from 'react';
 import type {ElementNode, LexicalCommand, LexicalNode, NodeKey} from 'lexical';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {
-  $findMatchingParent,
-  $insertNodeToNearestRoot,
-  mergeRegister,
-} from '@lexical/utils';
 import {
   $createParagraphNode,
   $getNodeByKey,
@@ -27,7 +21,6 @@ import {
   KEY_ARROW_RIGHT_COMMAND,
   KEY_ARROW_UP_COMMAND,
 } from 'lexical';
-import {useEffect} from 'react';
 
 import {
   $createLayoutContainerNode,
@@ -39,6 +32,13 @@ import {
   $isLayoutItemNode,
   LayoutItemNode,
 } from '../../nodes/LayoutItemNode';
+
+import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
+import {
+  $findMatchingParent,
+  $insertNodeToNearestRoot,
+  mergeRegister,
+} from '@lexical/utils';
 
 export const INSERT_LAYOUT_COMMAND: LexicalCommand<string> =
   createCommand<string>();

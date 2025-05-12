@@ -6,9 +6,7 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import * as React from 'react';
+import type { JSX } from 'react';
 
 export default function DocsPlugin(): JSX.Element {
   return (

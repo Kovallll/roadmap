@@ -7,6 +7,12 @@
  */
 
 import type {JSX} from 'react';
+import {createContext, useContext, useEffect, useMemo, useState} from 'react';
+import {EditorThemeClasses, Klass, LexicalEditor, LexicalNode} from 'lexical';
+
+import Button from '../ui/Button';
+import {DialogActions} from '../ui/Dialog';
+import TextInput from '../ui/TextInput';
 
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {
@@ -15,12 +21,6 @@ import {
   TableNode,
   TableRowNode,
 } from '@lexical/table';
-import {EditorThemeClasses, Klass, LexicalEditor, LexicalNode} from 'lexical';
-import {createContext, useContext, useEffect, useMemo, useState} from 'react';
-
-import Button from '../ui/Button';
-import {DialogActions} from '../ui/Dialog';
-import TextInput from '../ui/TextInput';
 
 export type InsertTableCommandPayload = Readonly<{
   columns: string;

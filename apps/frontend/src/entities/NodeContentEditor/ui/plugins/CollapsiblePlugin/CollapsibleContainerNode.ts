@@ -6,7 +6,6 @@
  *
  */
 
-import {IS_CHROME} from '@lexical/utils';
 import {
   $getSiblingCaret,
   $isElementNode,
@@ -26,6 +25,8 @@ import {
 } from 'lexical';
 
 import {setDomHiddenUntilFound} from './CollapsibleUtils';
+
+import {IS_CHROME} from '@lexical/utils';
 
 type SerializedCollapsibleContainerNode = Spread<
   {

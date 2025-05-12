@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCanvasDto } from './dto/create-canvas.dto';
 import { UpdateCanvasDto } from './dto/update-canvas.dto';
+
+import { Injectable } from '@nestjs/common';
 import { Canvas } from '@prisma/client';
 
 @Injectable()

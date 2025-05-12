@@ -1,3 +1,11 @@
+import {
+  $createParagraphNode,
+  $getSelection,
+  $isRangeSelection,
+  $isTextNode,
+  LexicalEditor,
+} from 'lexical';
+
 import { $createCodeNode } from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,
@@ -15,13 +23,6 @@ import {
 import { $setBlocksType } from '@lexical/selection';
 import { $isTableSelection } from '@lexical/table';
 import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
-import {
-  $createParagraphNode,
-  $getSelection,
-  $isRangeSelection,
-  $isTextNode,
-  LexicalEditor,
-} from 'lexical';
 
 export const formatParagraph = (editor: LexicalEditor) => {
   editor.update(() => {

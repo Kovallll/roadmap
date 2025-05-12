@@ -6,7 +6,6 @@
  *
  */
 
-import {IS_CHROME} from '@lexical/utils';
 import {
   $createParagraphNode,
   $isElementNode,
@@ -22,6 +21,8 @@ import {
 
 import {$isCollapsibleContainerNode} from './CollapsibleContainerNode';
 import {$isCollapsibleContentNode} from './CollapsibleContentNode';
+
+import {IS_CHROME} from '@lexical/utils';
 
 type SerializedCollapsibleTitleNode = SerializedElementNode;
 

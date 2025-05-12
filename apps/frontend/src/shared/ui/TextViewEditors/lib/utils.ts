@@ -1,11 +1,13 @@
 import { $getSelection, LexicalEditor } from 'lexical';
+
 import { UpdateFontSizeType } from '../model/enums';
-import { $patchStyleText } from '@lexical/selection';
 import {
   DEFAULT_FONT_SIZE,
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
 } from './constants';
+
+import { $patchStyleText } from '@lexical/selection';
 export const calculateNextFontSize = (
   currentFontSize: number,
   updateType: UpdateFontSizeType | null

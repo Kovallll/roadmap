@@ -6,19 +6,24 @@
  *
  */
 
-import type {BaseSelection, LexicalEditor} from 'lexical';
-import type {JSX} from 'react';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {IS_APPLE} from '@lexical/utils';
+import type { JSX } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import type { BaseSelection, LexicalEditor } from 'lexical';
 import {
   $createParagraphNode,
   $createTextNode,
   $getRoot,
   getDOMSelection,
 } from 'lexical';
-import * as React from 'react';
-import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
+
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { IS_APPLE } from '@lexical/utils';
 
 const copy = (text: string | null) => {
   const textArea = document.createElement('textarea');
@@ -30,7 +35,7 @@ const copy = (text: string | null) => {
   textArea.select();
   try {
     const result = document.execCommand('copy');
-    // eslint-disable-next-line no-console
+     
     console.log(result);
   } catch (error) {
     console.error(error);
@@ -42,7 +47,7 @@ const download = (filename: string, text: string | null) => {
   const a = document.createElement('a');
   a.setAttribute(
     'href',
-    'data:text/plain;charset=utf-8,' + encodeURIComponent(text || ''),
+    'data:text/plain;charset=utf-8,' + encodeURIComponent(text || '')
   );
   a.setAttribute('download', filename);
   a.style.display = 'none';
@@ -108,15 +113,15 @@ export function isSelectAll(event: KeyboardEvent): boolean {
 
 // stolen from LexicalSelection-test
 function sanitizeSelection(selection: Selection) {
-  const {anchorNode, focusNode} = selection;
-  let {anchorOffset, focusOffset} = selection;
+  const { anchorNode, focusNode } = selection;
+  let { anchorOffset, focusOffset } = selection;
   if (anchorOffset !== 0) {
     anchorOffset--;
   }
   if (focusOffset !== 0) {
     focusOffset--;
   }
-  return {anchorNode, anchorOffset, focusNode, focusOffset};
+  return { anchorNode, anchorOffset, focusNode, focusOffset };
 }
 
 function getPathFromNodeToEditor(node: Node, rootElement: HTMLElement | null) {
@@ -126,8 +131,8 @@ function getPathFromNodeToEditor(node: Node, rootElement: HTMLElement | null) {
     if (currentNode !== null && currentNode !== undefined) {
       path.unshift(
         Array.from(currentNode?.parentNode?.childNodes ?? []).indexOf(
-          currentNode as ChildNode,
-        ),
+          currentNode as ChildNode
+        )
       );
     }
     currentNode = currentNode?.parentNode;
@@ -156,7 +161,7 @@ type Step = {
 type Steps = Step[];
 
 function useTestRecorder(
-  editor: LexicalEditor,
+  editor: LexicalEditor
 ): [JSX.Element, JSX.Element | null] {
   const [steps, setSteps] = useState<Steps>([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -230,24 +235,24 @@ ${steps.map(formatStep).join(`\n`)}
               // for typing events we just append the text
               return [
                 ...steps.slice(0, currentIndex),
-                {...lastStep, value: lastStep.value + value},
+                { ...lastStep, value: lastStep.value + value },
               ];
             } else {
               // for other events we bump the counter if their values are the same
               if (lastStep.value === value) {
                 return [
                   ...steps.slice(0, currentIndex),
-                  {...lastStep, count: lastStep.count + 1},
+                  { ...lastStep, count: lastStep.count + 1 },
                 ];
               }
             }
           }
         }
         // could not group, just append a new one
-        return [...currentSteps, {count: 1, name, value}];
+        return [...currentSteps, { count: 1, name, value }];
       });
     },
-    [steps, setSteps],
+    [steps, setSteps]
   );
 
   useLayoutEffect(() => {
@@ -280,7 +285,7 @@ ${steps.map(formatStep).join(`\n`)}
     return editor.registerRootListener(
       (
         rootElement: null | HTMLElement,
-        prevRootElement: null | HTMLElement,
+        prevRootElement: null | HTMLElement
       ) => {
         if (prevRootElement !== null) {
           prevRootElement.removeEventListener('keydown', onKeyDown);
@@ -290,7 +295,7 @@ ${steps.map(formatStep).join(`\n`)}
           rootElement.addEventListener('keydown', onKeyDown);
           rootElement.addEventListener('keyup', onKeyUp);
         }
-      },
+      }
     );
   }, [editor, isRecording, pushStep]);
 
@@ -314,7 +319,7 @@ ${steps.map(formatStep).join(`\n`)}
 
   useEffect(() => {
     const removeUpdateListener = editor.registerUpdateListener(
-      ({editorState, dirtyLeaves, dirtyElements}) => {
+      ({ editorState, dirtyLeaves, dirtyElements }) => {
         if (!isRecording) {
           return;
         }
@@ -343,7 +348,7 @@ ${steps.map(formatStep).join(`\n`)}
         if (testContent !== null) {
           setTemplatedTest(testContent);
         }
-      },
+      }
     );
     return removeUpdateListener;
   }, [editor, generateTestContent, isRecording, pushStep]);
@@ -377,7 +382,7 @@ ${steps.map(formatStep).join(`\n`)}
       }
       setIsRecording((currentIsRecording) => !currentIsRecording);
     },
-    [isRecording],
+    [isRecording]
   );
 
   const onSnapshotClick = useCallback(() => {
@@ -392,7 +397,7 @@ ${steps.map(formatStep).join(`\n`)}
     ) {
       return;
     }
-    const {anchorNode, anchorOffset, focusNode, focusOffset} =
+    const { anchorNode, anchorOffset, focusNode, focusOffset } =
       sanitizeSelection(browserSelection);
     const rootElement = getCurrentEditor().getRootElement();
     let anchorPath;

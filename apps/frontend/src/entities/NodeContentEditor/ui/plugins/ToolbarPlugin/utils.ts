@@ -5,6 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+import {
+  $createParagraphNode,
+  $getSelection,
+  $isRangeSelection,
+  $isTextNode,
+  LexicalEditor,
+} from 'lexical';
+
+import {
+  DEFAULT_FONT_SIZE,
+  MAX_ALLOWED_FONT_SIZE,
+  MIN_ALLOWED_FONT_SIZE,
+} from '../../context/ToolbarContext';
+
 import {$createCodeNode} from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,
@@ -22,21 +36,8 @@ import {
 import {$patchStyleText, $setBlocksType} from '@lexical/selection';
 import {$isTableSelection} from '@lexical/table';
 import {$getNearestBlockElementAncestorOrThrow} from '@lexical/utils';
-import {
-  $createParagraphNode,
-  $getSelection,
-  $isRangeSelection,
-  $isTextNode,
-  LexicalEditor,
-} from 'lexical';
 
-import {
-  DEFAULT_FONT_SIZE,
-  MAX_ALLOWED_FONT_SIZE,
-  MIN_ALLOWED_FONT_SIZE,
-} from '../../context/ToolbarContext';
-
-// eslint-disable-next-line no-shadow
+ 
 export enum UpdateFontSizeType {
   increment = 1,
   decrement,

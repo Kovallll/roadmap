@@ -1,6 +1,8 @@
-import { Node } from '@xyflow/react';
 import { ElementFormatType } from 'lexical';
+
 import { INITIAL_TOOLBAR_STATE } from '../lib';
+
+import { Node } from '@xyflow/react';
 
 export type NodeContentEditorProps = {
   selectedNode: Node | null;

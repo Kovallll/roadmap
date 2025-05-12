@@ -1,5 +1,6 @@
-import { axiosInstance } from '@/app/api/axiosInstance';
 import { API_URL } from './constants';
+
+import { axiosInstance } from '@/app/api/axiosInstance';
 import { User } from '@roadmap/user/types';
 
 export const getUser = async (id: string) => {

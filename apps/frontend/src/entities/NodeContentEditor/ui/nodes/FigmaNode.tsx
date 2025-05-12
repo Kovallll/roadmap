@@ -1,11 +1,4 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
+import type { JSX } from 'react';
 import type {
   EditorConfig,
   ElementFormatType,
@@ -14,14 +7,12 @@ import type {
   NodeKey,
   Spread,
 } from 'lexical';
-import type {JSX} from 'react';
 
-import {BlockWithAlignableContents} from '@lexical/react/LexicalBlockWithAlignableContents';
+import { BlockWithAlignableContents } from '@lexical/react/LexicalBlockWithAlignableContents';
 import {
   DecoratorBlockNode,
   SerializedDecoratorBlockNode,
 } from '@lexical/react/LexicalDecoratorBlockNode';
-import * as React from 'react';
 
 type FigmaComponentProps = Readonly<{
   className: Readonly<{
@@ -43,7 +34,8 @@ function FigmaComponent({
     <BlockWithAlignableContents
       className={className}
       format={format}
-      nodeKey={nodeKey}>
+      nodeKey={nodeKey}
+    >
       <iframe
         width="560"
         height="315"
@@ -75,7 +67,7 @@ export class FigmaNode extends DecoratorBlockNode {
 
   static importJSON(serializedNode: SerializedFigmaNode): FigmaNode {
     return $createFigmaNode(serializedNode.documentID).updateFromJSON(
-      serializedNode,
+      serializedNode
     );
   }
 
@@ -101,7 +93,7 @@ export class FigmaNode extends DecoratorBlockNode {
 
   getTextContent(
     _includeInert?: boolean | undefined,
-    _includeDirectionless?: false | undefined,
+    _includeDirectionless?: false | undefined
   ): string {
     return `https://www.figma.com/file/${this.__id}`;
   }
@@ -128,7 +120,7 @@ export function $createFigmaNode(documentID: string): FigmaNode {
 }
 
 export function $isFigmaNode(
-  node: FigmaNode | LexicalNode | null | undefined,
+  node: FigmaNode | LexicalNode | null | undefined
 ): node is FigmaNode {
   return node instanceof FigmaNode;
 }

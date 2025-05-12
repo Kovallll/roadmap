@@ -1,5 +1,6 @@
-import { Canvas } from '@roadmap/canvas/types';
 import { ButtonProps } from 'antd';
+
+import { Canvas } from '@roadmap/canvas/types';
 
 export type SaveButtonProps = {
   canvas: Canvas;

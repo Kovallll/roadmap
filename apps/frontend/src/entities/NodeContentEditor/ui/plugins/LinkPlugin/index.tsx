@@ -6,12 +6,11 @@
  *
  */
 
-import type {JSX} from 'react';
+import type { JSX } from 'react';
 
-import {LinkPlugin as LexicalLinkPlugin} from '@lexical/react/LexicalLinkPlugin';
-import * as React from 'react';
+import { validateUrl } from '../../utils/url';
 
-import {validateUrl} from '../../utils/url';
+import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 
 type Props = {
   hasLinkAttributes?: boolean;

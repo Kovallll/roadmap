@@ -1,5 +1,5 @@
-import { SiderProps } from 'antd';
 import { ReactNode } from 'react';
+import { SiderProps } from 'antd';
 
 export type SidebarProps = {
   children: ReactNode;

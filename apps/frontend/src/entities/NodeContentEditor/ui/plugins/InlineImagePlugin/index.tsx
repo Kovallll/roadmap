@@ -5,13 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {Position} from '../../nodes/InlineImageNode/InlineImageNode';
-import type {JSX} from 'react';
-
-import '../../nodes/InlineImageNode/InlineImageNode.css';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$wrapNodeInElement, mergeRegister} from '@lexical/utils';
+import type { ChangeEvent, JSX } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   $createParagraphNode,
   $createRangeSelection,
@@ -32,9 +27,8 @@ import {
   LexicalCommand,
   LexicalEditor,
 } from 'lexical';
-import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
 
+import type { Position } from '../../nodes/InlineImageNode/InlineImageNode';
 import {
   $createInlineImageNode,
   $isInlineImageNode,
@@ -42,10 +36,14 @@ import {
   InlineImagePayload,
 } from '../../nodes/InlineImageNode/InlineImageNode';
 import Button from '../../ui/Button';
-import {DialogActions} from '../../ui/Dialog';
+import { DialogActions } from '../../ui/Dialog';
 import FileInput from '../../ui/FileInput';
 import Select from '../../ui/Select';
 import TextInput from '../../ui/TextInput';
+
+import '../../nodes/InlineImageNode/InlineImageNode.css';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
 
 export type InsertInlineImagePayload = Readonly<InlineImagePayload>;
 
@@ -68,11 +66,11 @@ export function InsertInlineImageDialog({
 
   const isDisabled = src === '';
 
-  const handleShowCaptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowCaptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setShowCaption(e.target.checked);
   };
 
-  const handlePositionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handlePositionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setPosition(e.target.value as Position);
   };
 
@@ -101,14 +99,14 @@ export function InsertInlineImageDialog({
   }, [activeEditor]);
 
   const handleOnClick = () => {
-    const payload = {altText, position, showCaption, src};
+    const payload = { altText, position, showCaption, src };
     activeEditor.dispatchCommand(INSERT_INLINE_IMAGE_COMMAND, payload);
     onClose();
   };
 
   return (
     <>
-      <div style={{marginBottom: '1em'}}>
+      <div style={{ marginBottom: '1em' }}>
         <FileInput
           label="Image Upload"
           onChange={loadImage}
@@ -116,7 +114,7 @@ export function InsertInlineImageDialog({
           data-test-id="image-modal-file-upload"
         />
       </div>
-      <div style={{marginBottom: '1em'}}>
+      <div style={{ marginBottom: '1em' }}>
         <TextInput
           label="Alt Text"
           placeholder="Descriptive alternative text"
@@ -127,11 +125,12 @@ export function InsertInlineImageDialog({
       </div>
 
       <Select
-        style={{marginBottom: '1em', width: '290px'}}
+        style={{ marginBottom: '1em', width: '290px' }}
         label="Position"
         name="position"
         id="position-select"
-        onChange={handlePositionChange}>
+        onChange={handlePositionChange}
+      >
         <option value="left">Left</option>
         <option value="right">Right</option>
         <option value="full">Full Width</option>
@@ -152,7 +151,8 @@ export function InsertInlineImageDialog({
         <Button
           data-test-id="image-modal-file-upload-btn"
           disabled={isDisabled}
-          onClick={() => handleOnClick()}>
+          onClick={() => handleOnClick()}
+        >
           Confirm
         </Button>
       </DialogActions>
@@ -180,29 +180,29 @@ export default function InlineImagePlugin(): JSX.Element | null {
 
           return true;
         },
-        COMMAND_PRIORITY_EDITOR,
+        COMMAND_PRIORITY_EDITOR
       ),
       editor.registerCommand<DragEvent>(
         DRAGSTART_COMMAND,
         (event) => {
           return $onDragStart(event);
         },
-        COMMAND_PRIORITY_HIGH,
+        COMMAND_PRIORITY_HIGH
       ),
       editor.registerCommand<DragEvent>(
         DRAGOVER_COMMAND,
         (event) => {
           return $onDragover(event);
         },
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand<DragEvent>(
         DROP_COMMAND,
         (event) => {
           return $onDrop(event, editor);
         },
-        COMMAND_PRIORITY_HIGH,
-      ),
+        COMMAND_PRIORITY_HIGH
+      )
     );
   }, [editor]);
 
@@ -238,7 +238,7 @@ function $onDragStart(event: DragEvent): boolean {
         width: node.__width,
       },
       type: 'image',
-    }),
+    })
   );
 
   return true;
@@ -293,7 +293,7 @@ function getDragImageData(event: DragEvent): null | InsertInlineImagePayload {
   if (!dragData) {
     return null;
   }
-  const {type, data} = JSON.parse(dragData);
+  const { type, data } = JSON.parse(dragData);
   if (type !== 'image') {
     return null;
   }

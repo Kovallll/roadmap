@@ -1,7 +1,7 @@
-import { Canvas, CreateCanvasDto } from '@roadmap/canvas/types';
-
 import { API_URL } from './constants';
+
 import { axiosInstance } from '@/app/api/axiosInstance';
+import { Canvas, CreateCanvasDto } from '@roadmap/canvas/types';
 
 export const getUserCanvasById = async (id: string) => {
   const { data } = await axiosInstance.get<Canvas>(`${API_URL}/${id}`);

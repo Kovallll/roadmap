@@ -1,6 +1,7 @@
-import { Canvas, CanvasData } from '@roadmap/canvas/types';
-import { NodeProps, Node } from '@xyflow/react';
 import { AlignTypes } from './enums';
+
+import { Canvas, CanvasData } from '@roadmap/canvas/types';
+import { Node,NodeProps } from '@xyflow/react';
 
 export type BaseNodeProps = {
   nodeProps: NodeProps;

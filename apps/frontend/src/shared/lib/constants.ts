@@ -1,10 +1,11 @@
-import { TextNode } from '@/entities/Nodes/Text/ui/TextNode';
-import { Position } from '@xyflow/react';
-import styles from '../ui/BaseNode/styles.module.scss';
-import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
-import { NoteNode } from '@/entities/Nodes/Note/ui/Note';
 import { AlignTypes, NodeStatus } from '../model';
 import { colors } from '../styles/theme';
+import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
+import styles from '../ui/BaseNode/styles.module.scss';
+
+import { NoteNode } from '@/entities/Nodes/Note/ui/Note';
+import { TextNode } from '@/entities/Nodes/Text/ui/TextNode';
+import { Position } from '@xyflow/react';
 
 export const nodeTypes = {
   Text: TextNode,

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useSaveCanvas } from '@/features/canvas/model';
 import { useCanvasStore } from '@/shared/model';
 

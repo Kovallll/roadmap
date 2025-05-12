@@ -6,12 +6,11 @@
  *
  */
 
-import type {LexicalEditor} from 'lexical';
-import type {JSX} from 'react';
+import type { JSX } from 'react';
+import { useRef } from 'react';
+import type { LexicalEditor } from 'lexical';
 
-import {calculateZoomLevel} from '@lexical/utils';
-import * as React from 'react';
-import {useRef} from 'react';
+import { calculateZoomLevel } from '@lexical/utils';
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -36,8 +35,8 @@ export default function ImageResizer({
   captionsEnabled,
 }: {
   editor: LexicalEditor;
-  buttonRef: {current: null | HTMLButtonElement};
-  imageRef: {current: null | HTMLElement};
+  buttonRef: { current: null | HTMLButtonElement };
+  imageRef: { current: null | HTMLElement };
   maxWidth?: number;
   onResizeEnd: (width: 'inherit' | number, height: 'inherit' | number) => void;
   onResizeStart: () => void;
@@ -99,25 +98,25 @@ export default function ImageResizer({
       editorRootElement.style.setProperty(
         'cursor',
         `${cursorDir}-resize`,
-        'important',
+        'important'
       );
     }
     if (document.body !== null) {
       document.body.style.setProperty(
         'cursor',
         `${cursorDir}-resize`,
-        'important',
+        'important'
       );
       userSelect.current.value = document.body.style.getPropertyValue(
-        '-webkit-user-select',
+        '-webkit-user-select'
       );
       userSelect.current.priority = document.body.style.getPropertyPriority(
-        '-webkit-user-select',
+        '-webkit-user-select'
       );
       document.body.style.setProperty(
         '-webkit-user-select',
         `none`,
-        'important',
+        'important'
       );
     }
   };
@@ -131,14 +130,14 @@ export default function ImageResizer({
       document.body.style.setProperty(
         '-webkit-user-select',
         userSelect.current.value,
-        userSelect.current.priority,
+        userSelect.current.priority
       );
     }
   };
 
   const handlePointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
-    direction: number,
+    direction: number
   ) => {
     if (!editor.isEditable()) {
       return;
@@ -149,7 +148,7 @@ export default function ImageResizer({
 
     if (image !== null && controlWrapper !== null) {
       event.preventDefault();
-      const {width, height} = image.getBoundingClientRect();
+      const { width, height } = image.getBoundingClientRect();
       const zoom = calculateZoomLevel(image);
       const positioning = positioningRef.current;
       positioning.startWidth = width;
@@ -192,7 +191,7 @@ export default function ImageResizer({
         const width = clamp(
           positioning.startWidth + diff,
           minWidth,
-          maxWidthContainer,
+          maxWidthContainer
         );
 
         const height = width / positioning.ratio;
@@ -207,7 +206,7 @@ export default function ImageResizer({
         const height = clamp(
           positioning.startHeight + diff,
           minHeight,
-          maxHeightContainer,
+          maxHeightContainer
         );
 
         image.style.height = `${height}px`;
@@ -219,7 +218,7 @@ export default function ImageResizer({
         const width = clamp(
           positioning.startWidth + diff,
           minWidth,
-          maxWidthContainer,
+          maxWidthContainer
         );
 
         image.style.width = `${width}px`;
@@ -260,7 +259,8 @@ export default function ImageResizer({
           ref={buttonRef}
           onClick={() => {
             setShowCaption(!showCaption);
-          }}>
+          }}
+        >
           Add Caption
         </button>
       )}

@@ -1,5 +1,6 @@
-import { alignDiff } from '@/shared/lib';
 import { AlignmentLine } from '../model';
+
+import { alignDiff } from '@/shared/lib';
 import { Node, XYPosition } from '@xyflow/react';
 
 export const checkAlignment = (

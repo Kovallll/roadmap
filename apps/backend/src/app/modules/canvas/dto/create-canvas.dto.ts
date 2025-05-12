@@ -1,4 +1,4 @@
-import { IsUUID, IsObject, IsString, IsOptional } from 'class-validator';
+import { IsObject, IsOptional,IsString, IsUUID } from 'class-validator';
 
 import type { CanvasData } from '@roadmap/canvas/types';
 

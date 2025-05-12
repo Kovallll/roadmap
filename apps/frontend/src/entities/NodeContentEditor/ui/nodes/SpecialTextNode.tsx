@@ -7,9 +7,9 @@
  */
 
 import type {EditorConfig, LexicalNode, SerializedTextNode} from 'lexical';
+import {$applyNodeReplacement, TextNode} from 'lexical';
 
 import {addClassNamesToElement} from '@lexical/utils';
-import {$applyNodeReplacement, TextNode} from 'lexical';
 
 /** @noInheritDoc */
 export class SpecialTextNode extends TextNode {

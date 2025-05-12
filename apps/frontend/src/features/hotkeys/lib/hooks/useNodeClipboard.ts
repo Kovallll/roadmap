@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Node } from '@xyflow/react';
 import { v4 as uuidv4 } from 'uuid';
-import { pasteOffset } from '../constants';
+
 import { useFlowStore } from '../../model';
+import { pasteOffset } from '../constants';
+
+import { Node } from '@xyflow/react';
 
 export const useNodeClipboard = () => {
   const clipboard = useRef<Node[]>([]);

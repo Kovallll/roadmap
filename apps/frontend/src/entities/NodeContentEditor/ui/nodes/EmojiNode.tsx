@@ -13,7 +13,6 @@ import type {
   SerializedTextNode,
   Spread,
 } from 'lexical';
-
 import {$applyNodeReplacement, TextNode} from 'lexical';
 
 export type SerializedEmojiNode = Spread<

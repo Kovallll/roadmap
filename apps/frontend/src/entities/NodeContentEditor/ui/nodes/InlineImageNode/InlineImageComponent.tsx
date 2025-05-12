@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type { JSX } from 'react';
-import * as React from 'react';
+import type { ChangeEvent, JSX } from 'react';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import type { BaseSelection, LexicalEditor, NodeKey } from 'lexical';
 import {
@@ -109,11 +108,11 @@ export function UpdateInlineImageDialog({
   const [showCaption, setShowCaption] = useState(node.getShowCaption());
   const [position, setPosition] = useState<Position>(node.getPosition());
 
-  const handleShowCaptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowCaptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setShowCaption(e.target.checked);
   };
 
-  const handlePositionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handlePositionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setPosition(e.target.value as Position);
   };
 

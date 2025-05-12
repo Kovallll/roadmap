@@ -1,11 +1,4 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
+import { type JSX, lazy } from 'react';
 import type {
   DOMConversionMap,
   DOMConversionOutput,
@@ -19,10 +12,6 @@ import type {
   SerializedLexicalNode,
   Spread,
 } from 'lexical';
-import type {JSX} from 'react';
-
-import {HashtagNode} from '@lexical/hashtag';
-import {LinkNode} from '@lexical/link';
 import {
   $applyNodeReplacement,
   createEditor,
@@ -32,12 +21,14 @@ import {
   RootNode,
   TextNode,
 } from 'lexical';
-import * as React from 'react';
 
-import {EmojiNode} from './EmojiNode';
-import {KeywordNode} from './KeywordNode';
+import { EmojiNode } from './EmojiNode';
+import { KeywordNode } from './KeywordNode';
 
-const ImageComponent = React.lazy(() => import('./ImageComponent'));
+import { HashtagNode } from '@lexical/hashtag';
+import { LinkNode } from '@lexical/link';
+
+const ImageComponent = lazy(() => import('./ImageComponent'));
 
 export interface ImagePayload {
   altText: string;
@@ -65,9 +56,9 @@ function $convertImageElement(domNode: Node): null | DOMConversionOutput {
   if (img.src.startsWith('file:///') || isGoogleDocCheckboxImg(img)) {
     return null;
   }
-  const {alt: altText, src, width, height} = img;
-  const node = $createImageNode({altText, height, src, width});
-  return {node};
+  const { alt: altText, src, width, height } = img;
+  const node = $createImageNode({ altText, height, src, width });
+  return { node };
 }
 
 export type SerializedImageNode = Spread<
@@ -108,12 +99,13 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       node.__showCaption,
       node.__caption,
       node.__captionsEnabled,
-      node.__key,
+      node.__key
     );
   }
 
   static importJSON(serializedNode: SerializedImageNode): ImageNode {
-    const {altText, height, width, maxWidth, src, showCaption} = serializedNode;
+    const { altText, height, width, maxWidth, src, showCaption } =
+      serializedNode;
     return $createImageNode({
       altText,
       height,
@@ -126,7 +118,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
   updateFromJSON(serializedNode: LexicalUpdateJSON<SerializedImageNode>): this {
     const node = super.updateFromJSON(serializedNode);
-    const {caption} = serializedNode;
+    const { caption } = serializedNode;
 
     const nestedEditor = node.__caption;
     const editorState = nestedEditor.parseEditorState(caption.editorState);
@@ -142,7 +134,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     element.setAttribute('alt', this.__altText);
     element.setAttribute('width', this.__width.toString());
     element.setAttribute('height', this.__height.toString());
-    return {element};
+    return { element };
   }
 
   static importDOM(): DOMConversionMap | null {
@@ -163,7 +155,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     showCaption?: boolean,
     caption?: LexicalEditor,
     captionsEnabled?: boolean,
-    key?: NodeKey,
+    key?: NodeKey
   ) {
     super(key);
     this.__src = src;
@@ -205,7 +197,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
   setWidthAndHeight(
     width: 'inherit' | number,
-    height: 'inherit' | number,
+    height: 'inherit' | number
   ): void {
     const writable = this.getWritable();
     writable.__width = width;
@@ -280,13 +272,13 @@ export function $createImageNode({
       showCaption,
       caption,
       captionsEnabled,
-      key,
-    ),
+      key
+    )
   );
 }
 
 export function $isImageNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is ImageNode {
   return node instanceof ImageNode;
 }

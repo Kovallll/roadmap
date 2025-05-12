@@ -1,5 +1,7 @@
 import { create } from 'zustand';
-import { SetState, UndoRedoOptions, FlowState } from './types';
+
+import { FlowState,SetState, UndoRedoOptions } from './types';
+
 import { createSelectors } from '@/shared/model';
 import { Edge, Node } from '@xyflow/react';
 

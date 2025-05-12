@@ -6,7 +6,7 @@
  *
  */
 
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { LexicalEditor } from 'lexical';
 
 import {
@@ -42,8 +42,8 @@ export default function FontSize({
   disabled: boolean;
   editor: LexicalEditor;
 }) {
-  const [inputValue, setInputValue] = React.useState<string>(selectionFontSize);
-  const [inputChangeFlag, setInputChangeFlag] = React.useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(selectionFontSize);
+  const [inputChangeFlag, setInputChangeFlag] = useState<boolean>(false);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValueNumber = Number(inputValue);
@@ -84,7 +84,7 @@ export default function FontSize({
     setInputChangeFlag(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setInputValue(selectionFontSize);
   }, [selectionFontSize]);
 

@@ -1,10 +1,10 @@
-import { axiosInstance } from '@/app/api/axiosInstance';
-import { useMutation } from '@tanstack/react-query';
-import { User } from '@roadmap/user/types';
-
 import { toast } from 'react-toastify';
-import { ApiResponseError, useAuthStore } from '@/shared/model';
 import { AxiosError } from 'axios';
+
+import { axiosInstance } from '@/app/api/axiosInstance';
+import { ApiResponseError, useAuthStore } from '@/shared/model';
+import { User } from '@roadmap/user/types';
+import { useMutation } from '@tanstack/react-query';
 
 export const useLogin = () => {
   const setTokens = useAuthStore.use.setTokens();

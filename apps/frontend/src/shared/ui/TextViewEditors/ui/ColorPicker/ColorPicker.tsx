@@ -1,6 +1,5 @@
 import type { JSX } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import * as React from 'react';
 import { Flex, Input, Typography } from 'antd';
 
 import './styles.css';

@@ -1,3 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
+import { nodeStatuses } from '../constants';
+import { EdgePathData } from '../types';
+
+import { colors } from '@/shared/styles/theme';
 import {
   getBezierPath,
   getSimpleBezierPath,
@@ -5,10 +11,6 @@ import {
   getStraightPath,
   Node,
 } from '@xyflow/react';
-import { v4 as uuidv4 } from 'uuid';
-import { nodeStatuses } from '../constants';
-import { colors } from '@/shared/styles/theme';
-import { EdgePathData } from '../types';
 
 export const createNode = (
   type: string,

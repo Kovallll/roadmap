@@ -6,17 +6,15 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import './KatexEquationAlterer.css';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import * as React from 'react';
-import {useCallback, useState} from 'react';
-import {ErrorBoundary} from 'react-error-boundary';
+import type { JSX } from 'react';
+import { useCallback, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import Button from '../ui/Button';
 import KatexRenderer from './KatexRenderer';
+
+import './KatexEquationAlterer.css';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 type Props = {
   initialEquation?: string;

@@ -1,8 +1,9 @@
 import type { JSX } from 'react';
-import * as React from 'react';
 import {
+  createContext,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -15,7 +16,7 @@ type DropDownContextType = {
   registerItem: (ref: React.RefObject<HTMLButtonElement>) => void;
 };
 
-const DropDownContext = React.createContext<DropDownContextType | null>(null);
+const DropDownContext = createContext<DropDownContextType | null>(null);
 
 const dropDownPadding = 4;
 
@@ -32,7 +33,7 @@ export function DropDownItem({
 }) {
   const ref = useRef<HTMLButtonElement | null>(null);
 
-  const dropDownContext = React.useContext(DropDownContext);
+  const dropDownContext = useContext(DropDownContext);
 
   if (dropDownContext === null) {
     throw new Error('DropDownItem must be used within a DropDown');

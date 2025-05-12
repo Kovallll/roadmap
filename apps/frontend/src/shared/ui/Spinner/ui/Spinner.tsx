@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import { Flex, Spin } from 'antd';
 
 import styles from './styles.module.scss';
 
 import { LoadingOutlined } from '@ant-design/icons';
 
-export const Spinner: React.FC = () => (
+export const Spinner: FC = () => (
   <Flex
     align="center"
     justify="center"

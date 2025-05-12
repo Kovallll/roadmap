@@ -1,5 +1,6 @@
-import { Canvas } from '@roadmap/canvas/types';
 import { useState } from 'react';
+
+import { Canvas } from '@roadmap/canvas/types';
 
 export const useSearch = (canvasList: Canvas[]) => {
   const [search, setSearch] = useState('');

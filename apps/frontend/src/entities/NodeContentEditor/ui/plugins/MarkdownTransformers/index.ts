@@ -7,6 +7,25 @@
  */
 
 import {
+  $createTextNode,
+  $isParagraphNode,
+  $isTextNode,
+  LexicalNode,
+} from 'lexical';
+
+import {
+  $createImageNode,
+  $isImageNode,
+  ImageNode,
+} from '../../nodes/ImageNode';
+import {
+  $createTweetNode,
+  $isTweetNode,
+  TweetNode,
+} from '../../nodes/TweetNode';
+import emojiList from '../../utils/emoji-list';
+
+import {
   $convertFromMarkdownString,
   $convertToMarkdownString,
   CHECK_LIST,
@@ -35,24 +54,6 @@ import {
   TableNode,
   TableRowNode,
 } from '@lexical/table';
-import {
-  $createTextNode,
-  $isParagraphNode,
-  $isTextNode,
-  LexicalNode,
-} from 'lexical';
-
-import {
-  $createImageNode,
-  $isImageNode,
-  ImageNode,
-} from '../../nodes/ImageNode';
-import {
-  $createTweetNode,
-  $isTweetNode,
-  TweetNode,
-} from '../../nodes/TweetNode';
-import emojiList from '../../utils/emoji-list';
 
 export const HR: ElementTransformer = {
   dependencies: [HorizontalRuleNode],

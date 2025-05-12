@@ -6,7 +6,6 @@
  *
  */
 
-import {IS_CHROME} from '@lexical/utils';
 import {
   DOMConversionMap,
   DOMConversionOutput,
@@ -20,6 +19,8 @@ import {
 
 import {$isCollapsibleContainerNode} from './CollapsibleContainerNode';
 import {domOnBeforeMatch, setDomHiddenUntilFound} from './CollapsibleUtils';
+
+import {IS_CHROME} from '@lexical/utils';
 
 type SerializedCollapsibleContentNode = SerializedElementNode;
 

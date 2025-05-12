@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+
 import { CanvasState } from '../types';
+
 import { createSelectors } from '@/shared/model';
 import { Canvas, CanvasData } from '@roadmap/canvas/types';
 

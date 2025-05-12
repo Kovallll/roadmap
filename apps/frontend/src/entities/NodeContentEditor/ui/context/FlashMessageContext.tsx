@@ -6,8 +6,7 @@
  *
  */
 
-import type {JSX} from 'react';
-
+import type { JSX } from 'react';
 import {
   createContext,
   ReactNode,
@@ -19,13 +18,10 @@ import {
 
 import FlashMessage from '../ui/FlashMessage';
 
-export type ShowFlashMessage = (
-  message?: React.ReactNode,
-  duration?: number,
-) => void;
+export type ShowFlashMessage = (message?: ReactNode, duration?: number) => void;
 
 interface FlashMessageProps {
-  message?: React.ReactNode;
+  message?: ReactNode;
   duration?: number;
 }
 
@@ -41,14 +37,14 @@ export const FlashMessageContext = ({
   const [props, setProps] = useState(INITIAL_STATE);
   const showFlashMessage = useCallback<ShowFlashMessage>(
     (message, duration) =>
-      setProps(message ? {duration, message} : INITIAL_STATE),
-    [],
+      setProps(message ? { duration, message } : INITIAL_STATE),
+    []
   );
   useEffect(() => {
     if (props.message) {
       const timeoutId = setTimeout(
         () => setProps(INITIAL_STATE),
-        props.duration ?? DEFAULT_DURATION,
+        props.duration ?? DEFAULT_DURATION
       );
       return () => clearTimeout(timeoutId);
     }

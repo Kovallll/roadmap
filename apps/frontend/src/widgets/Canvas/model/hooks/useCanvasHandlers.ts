@@ -1,4 +1,11 @@
 import { useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+import { checkAlignment, getAlignPosition } from '@/features/align/lib';
+import { useAlignLinesStore } from '@/features/align/model';
+import { useFlowStore } from '@/features/hotkeys/model';
+import { createNode } from '@/shared/lib';
+import { useTypeStore } from '@/widgets/ComponentsSidebar/model';
 import {
   addEdge,
   getConnectedEdges,
@@ -9,13 +16,6 @@ import {
   useReactFlow,
   useStoreApi,
 } from '@xyflow/react';
-
-import { useTypeStore } from '@/widgets/ComponentsSidebar/model';
-import { createNode } from '@/shared/lib';
-import { useAlignLinesStore } from '@/features/align/model';
-import { checkAlignment, getAlignPosition } from '@/features/align/lib';
-import { useFlowStore } from '@/features/hotkeys/model';
-import { v4 as uuidv4 } from 'uuid';
 
 let isUndo = true;
 

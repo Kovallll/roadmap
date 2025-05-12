@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {LexicalEditor} from 'lexical';
 import type {JSX} from 'react';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {TextNode} from 'lexical';
 import {useEffect} from 'react';
+import type {LexicalEditor} from 'lexical';
+import {TextNode} from 'lexical';
 
 import {
   $createSpecialTextNode,
   SpecialTextNode,
 } from '../../nodes/SpecialTextNode';
+
+import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 
 const BRACKETED_TEXT_REGEX = /\[([^\[\]]+)\]/; // eslint-disable-line
 

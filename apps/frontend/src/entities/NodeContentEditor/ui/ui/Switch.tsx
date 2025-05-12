@@ -6,10 +6,8 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import * as React from 'react';
-import {useMemo} from 'react';
+import type { JSX } from 'react';
+import { useMemo } from 'react';
 
 export default function Switch({
   checked,
@@ -30,7 +28,8 @@ export default function Switch({
         role="switch"
         aria-checked={checked}
         id={buttonId}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <span />
       </button>
     </div>

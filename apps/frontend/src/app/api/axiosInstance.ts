@@ -1,6 +1,7 @@
+import axios from 'axios';
+
 import { LOCAL_STORAGE } from '@/shared/model';
 import { useAuthStore } from '@/shared/model';
-import axios from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACK_HOST,

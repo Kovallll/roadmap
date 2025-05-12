@@ -6,10 +6,8 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import {ElementFormatType} from 'lexical';
-import React, {
+import type { JSX } from 'react';
+import {
   createContext,
   ReactNode,
   useCallback,
@@ -18,6 +16,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { ElementFormatType } from 'lexical';
 
 export const MIN_ALLOWED_FONT_SIZE = 8;
 export const MAX_ALLOWED_FONT_SIZE = 72;
@@ -44,7 +43,6 @@ export const blockTypeToBlockName = {
 };
 
 //disable eslint sorting rule for quick reference to toolbar state
-/* eslint-disable sort-keys-fix/sort-keys-fix */
 const INITIAL_TOOLBAR_STATE = {
   bgColor: '#fff',
   blockType: 'paragraph' as keyof typeof blockTypeToBlockName,
@@ -85,7 +83,7 @@ type ContextShape = {
   toolbarState: ToolbarState;
   updateToolbarState<Key extends ToolbarStateKey>(
     key: Key,
-    value: ToolbarStateValue<Key>,
+    value: ToolbarStateValue<Key>
   ): void;
 };
 
@@ -106,7 +104,7 @@ export const ToolbarContext = ({
         [key]: value,
       }));
     },
-    [],
+    []
   );
 
   useEffect(() => {

@@ -6,13 +6,8 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import './index.css';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {useLexicalNodeSelection} from '@lexical/react/useLexicalNodeSelection';
-import {mergeRegister} from '@lexical/utils';
+import type { JSX } from 'react';
+import { useEffect } from 'react';
 import {
   CLICK_COMMAND,
   COMMAND_PRIORITY_HIGH,
@@ -24,12 +19,15 @@ import {
   NodeKey,
   SerializedLexicalNode,
 } from 'lexical';
-import * as React from 'react';
-import {useEffect} from 'react';
+
+import './index.css';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
+import { mergeRegister } from '@lexical/utils';
 
 export type SerializedPageBreakNode = SerializedLexicalNode;
 
-function PageBreakComponent({nodeKey}: {nodeKey: NodeKey}) {
+function PageBreakComponent({ nodeKey }: { nodeKey: NodeKey }) {
   const [editor] = useLexicalComposerContext();
   const [isSelected, setSelected, clearSelection] =
     useLexicalNodeSelection(nodeKey);
@@ -51,8 +49,8 @@ function PageBreakComponent({nodeKey}: {nodeKey: NodeKey}) {
 
           return false;
         },
-        COMMAND_PRIORITY_LOW,
-      ),
+        COMMAND_PRIORITY_LOW
+      )
     );
   }, [clearSelection, editor, isSelected, nodeKey, setSelected]);
 
@@ -120,7 +118,7 @@ export class PageBreakNode extends DecoratorNode<JSX.Element> {
 }
 
 function $convertPageBreakElement(): DOMConversionOutput {
-  return {node: $createPageBreakNode()};
+  return { node: $createPageBreakNode() };
 }
 
 export function $createPageBreakNode(): PageBreakNode {
@@ -128,7 +126,7 @@ export function $createPageBreakNode(): PageBreakNode {
 }
 
 export function $isPageBreakNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is PageBreakNode {
   return node instanceof PageBreakNode;
 }

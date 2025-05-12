@@ -13,9 +13,9 @@ import type {
   LexicalNode,
   SerializedElementNode,
 } from 'lexical';
+import {ElementNode} from 'lexical';
 
 import {addClassNamesToElement} from '@lexical/utils';
-import {ElementNode} from 'lexical';
 
 export type SerializedLayoutItemNode = SerializedElementNode;
 

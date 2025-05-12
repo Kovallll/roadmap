@@ -6,14 +6,9 @@
  *
  */
 
-import type {JSX} from 'react';
-
-import {$isLinkNode, TOGGLE_LINK_COMMAND} from '@lexical/link';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {
-  LexicalContextMenuPlugin,
-  MenuOption,
-} from '@lexical/react/LexicalContextMenuPlugin';
+import type { JSX } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import * as ReactDOM from 'react-dom';
 import {
   $getNearestNodeFromDOMNode,
   $getSelection,
@@ -25,9 +20,13 @@ import {
   type LexicalNode,
   PASTE_COMMAND,
 } from 'lexical';
-import {useCallback, useMemo} from 'react';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import {
+  LexicalContextMenuPlugin,
+  MenuOption,
+} from '@lexical/react/LexicalContextMenuPlugin';
 
 function ContextMenuItem({
   index,
@@ -56,7 +55,8 @@ function ContextMenuItem({
       aria-selected={isSelected}
       id={'typeahead-item-' + index}
       onMouseEnter={onMouseEnter}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <span className="text">{option.title}</span>
     </li>
   );
@@ -98,7 +98,7 @@ export class ContextMenuOption extends MenuOption {
     title: string,
     options: {
       onSelect: (targetNode: LexicalNode | null) => void;
-    },
+    }
   ) {
     super(title);
     this.title = title;
@@ -198,20 +198,20 @@ export default function ContextMenuPlugin(): JSX.Element {
     ];
   }, [editor]);
 
-  const [options, setOptions] = React.useState(defaultOptions);
+  const [options, setOptions] = useState(defaultOptions);
 
   const onSelectOption = useCallback(
     (
       selectedOption: ContextMenuOption,
       targetNode: LexicalNode | null,
-      closeMenu: () => void,
+      closeMenu: () => void
     ) => {
       editor.update(() => {
         selectedOption.onSelect(targetNode);
         closeMenu();
       });
     },
-    [editor],
+    [editor]
   );
 
   const onWillOpen = (event: MouseEvent) => {
@@ -248,7 +248,7 @@ export default function ContextMenuPlugin(): JSX.Element {
           selectOptionAndCleanUp,
           setHighlightedIndex,
         },
-        {setMenuRef},
+        { setMenuRef }
       ) =>
         anchorElementRef.current
           ? ReactDOM.createPortal(
@@ -259,7 +259,8 @@ export default function ContextMenuPlugin(): JSX.Element {
                   userSelect: 'none',
                   width: 200,
                 }}
-                ref={setMenuRef}>
+                ref={setMenuRef}
+              >
                 <ContextMenu
                   options={options}
                   selectedItemIndex={selectedIndex}
@@ -272,7 +273,7 @@ export default function ContextMenuPlugin(): JSX.Element {
                   }}
                 />
               </div>,
-              anchorElementRef.current,
+              anchorElementRef.current
             )
           : null
       }

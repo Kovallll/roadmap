@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+
 import { UserState } from './types';
+
 import { createSelectors } from '@/shared/model';
 import { User } from '@roadmap/user/types';
 
