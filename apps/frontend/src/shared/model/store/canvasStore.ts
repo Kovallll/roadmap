@@ -12,6 +12,8 @@ export const canvasStore = create<CanvasState>((set) => ({
   setCanvasData: (canvasData: CanvasData) => set({ canvasData }),
   isEdit: false,
   setIsEdit: (isEdit: boolean) => set({ isEdit }),
+  isSave: true,
+  setIsSave: (isSave: boolean) => set({ isSave }),
 }));
 
 export const useCanvasStore = createSelectors(canvasStore);

@@ -82,7 +82,7 @@ export const NodePropsEditor = ({
   const width = (selectedNode.data?.width as number) ?? defaultNodeWidth;
   const height =
     (selectedNode.data?.height as number | string) ?? defaultNodeHeight;
-  console.log(textColor, 'textColor');
+
   const ButtonColor = height === 'auto' ? colors.secondary : colors.black;
   const buttonAutoHeightStyles = {
     border: `2px solid ${ButtonColor}`,

@@ -9,6 +9,7 @@ import { useNodeClipboard } from '@/features/hotkeys/lib';
 import { useSaveWithShortcut } from '@/features/hotkeys/lib/hooks/useSaveWithShortcut';
 import { useUndoRedo } from '@/features/hotkeys/lib/hooks/useUndoRedo';
 import { useFlowStore } from '@/features/hotkeys/model';
+import { useUnsaveChanges } from '@/features/unsave-changes/model';
 import { edgeTypes, nodeLabels, nodeTypes } from '@/shared/lib';
 import { useCanvasStore } from '@/shared/model';
 import { ComponentsSidebar } from '@/widgets/ComponentsSidebar/ui/ComponentsSidebar';
@@ -50,9 +51,13 @@ const Canvas = ({ canvas }: CanvasProps) => {
     onNodesChange,
   } = useNodeEdgeHandles(canvas, handleChangeOpen);
 
+  const isSave = useCanvasStore.use.isSave();
+  const isEdit = useCanvasStore.use.isEdit();
+
   useNodeClipboard();
   useUndoRedo();
   useSaveWithShortcut();
+  useUnsaveChanges(!isSave);
 
   const resetUndoRedo = useFlowStore.use.reset();
 
@@ -61,8 +66,6 @@ const Canvas = ({ canvas }: CanvasProps) => {
       resetUndoRedo();
     };
   }, [resetUndoRedo]);
-
-  const isEdit = useCanvasStore.use.isEdit();
 
   return (
     <div className={styles.container}>

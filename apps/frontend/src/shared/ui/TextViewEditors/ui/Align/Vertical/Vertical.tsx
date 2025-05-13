@@ -25,7 +25,6 @@ export const Vertical = ({ alignItems, handleChange }: AlignVerticalProps) => {
     handleChange(AlignTypes.END);
   };
 
-  console.log(alignItems, 'alignItems');
   return (
     <Flex gap={gaps.lg}>
       <VerticalAlignTopOutlined

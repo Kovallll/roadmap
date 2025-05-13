@@ -33,13 +33,7 @@ const copy = (text: string | null) => {
   document.body?.appendChild(textArea);
   textArea.focus();
   textArea.select();
-  try {
-    const result = document.execCommand('copy');
-     
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+
   document.body?.removeChild(textArea);
 };
 

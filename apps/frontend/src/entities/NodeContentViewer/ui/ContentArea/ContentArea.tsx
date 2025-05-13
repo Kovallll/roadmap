@@ -12,11 +12,13 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
 export const ContentArea = () => {
   const [editor] = useLexicalComposerContext();
+
   const selectedNode = useSelectedNodeStore.use.selectedNode();
 
   const content = selectedNode?.data?.content as SerializedEditorState;
 
   useEffect(() => {
+    if (!content) return;
     const parsed = editor.parseEditorState(content);
     editor.setEditorState(parsed);
     editor.setEditable(false);

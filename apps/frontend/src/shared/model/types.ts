@@ -1,7 +1,7 @@
 import { AlignTypes } from './enums';
 
 import { Canvas, CanvasData } from '@roadmap/canvas/types';
-import { Node,NodeProps } from '@xyflow/react';
+import { Node, NodeProps } from '@xyflow/react';
 
 export type BaseNodeProps = {
   nodeProps: NodeProps;
@@ -45,6 +45,8 @@ export type CanvasState = {
   setCanvasData: (canvasData: CanvasData) => void;
   isEdit: boolean;
   setIsEdit: (isEdit: boolean) => void;
+  isSave: boolean;
+  setIsSave: (isSave: boolean) => void;
 };
 
 export type Styles = { [x: string]: string | number };
