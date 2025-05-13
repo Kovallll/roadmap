@@ -21,15 +21,13 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import { useSharedHistoryContext } from '../context/SharedHistoryContext';
-import brokenImage from '../images/image-broken.svg';
-import EmojisPlugin from '../plugins/EmojisPlugin';
+import { useSharedHistoryContext } from '../../model';
+import ContentEditable from '../components/ContentEditable';
+import ImageResizer from '../components/ImageResizer';
+import brokenImage from '../images/icons/image-broken.svg';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
-import MentionsPlugin from '../plugins/MentionsPlugin';
-import ContentEditable from '../ui/ContentEditable';
-import ImageResizer from '../ui/ImageResizer';
-import { $isImageNode } from './ImageNode';
+import { $isImageNode } from './ImageNode/ImageNode';
 
 import './ImageNode.css';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
@@ -455,9 +453,7 @@ export default function ImageComponent({
           <div className="image-caption-container">
             <LexicalNestedComposer initialEditor={caption}>
               <AutoFocusPlugin />
-              <MentionsPlugin />
               <LinkPlugin />
-              <EmojisPlugin />
               <HashtagPlugin />
               <KeywordsPlugin />
               <HistoryPlugin externalHistoryState={historyState} />

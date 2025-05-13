@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type {
   DOMExportOutput,
   EditorConfig,
@@ -14,9 +6,9 @@ import type {
   SerializedTextNode,
   Spread,
 } from 'lexical';
-import {TextNode} from 'lexical';
+import { TextNode } from 'lexical';
 
-import {uuid as UUID} from '../plugins/AutocompletePlugin';
+import { uuid as UUID } from '../plugins/AutocompletePlugin';
 
 export type SerializedAutocompleteNode = Spread<
   {
@@ -45,11 +37,11 @@ export class AutocompleteNode extends TextNode {
   }
 
   static importJSON(
-    serializedNode: SerializedAutocompleteNode,
+    serializedNode: SerializedAutocompleteNode
   ): AutocompleteNode {
     return $createAutocompleteNode(
       serializedNode.text,
-      serializedNode.uuid,
+      serializedNode.uuid
     ).updateFromJSON(serializedNode);
   }
 
@@ -70,7 +62,7 @@ export class AutocompleteNode extends TextNode {
   }
 
   exportDOM(_: LexicalEditor): DOMExportOutput {
-    return {element: null};
+    return { element: null };
   }
 
   excludeFromCopy() {
@@ -89,7 +81,7 @@ export class AutocompleteNode extends TextNode {
 
 export function $createAutocompleteNode(
   text: string,
-  uuid: string,
+  uuid: string
 ): AutocompleteNode {
   return new AutocompleteNode(text, uuid).setMode('token');
 }

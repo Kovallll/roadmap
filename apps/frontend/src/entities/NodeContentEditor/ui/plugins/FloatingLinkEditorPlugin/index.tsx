@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 import type { JSX } from 'react';
 import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -24,9 +17,9 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
-import { sanitizeUrl } from '../../utils/url';
+import { getSelectedNode } from '../../../lib/utils/getSelectedNode';
+import { setFloatingElemPositionForLinkEditor } from '../../../lib/utils/setFloatingElemPositionForLinkEditor';
+import { sanitizeUrl } from '../../../lib/utils/url';
 
 import './index.css';
 import {

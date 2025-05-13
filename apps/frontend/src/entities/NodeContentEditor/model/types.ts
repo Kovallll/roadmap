@@ -1,3 +1,4 @@
+import { SerializedEditorState } from 'lexical';
 import { INITIAL_TOOLBAR_STATE } from '../lib';
 
 import { Node } from '@xyflow/react';
@@ -19,4 +20,9 @@ export type ContextShape = {
     key: Key,
     value: ToolbarStateValue<Key>
   ): void;
+};
+
+export type EditorHeaderProps = {
+  serializedContent: SerializedEditorState | null;
+  onCloseDrawer: () => void;
 };

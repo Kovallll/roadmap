@@ -1,22 +1,18 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+import type { JSX } from 'react';
+import { useEffect } from 'react';
+import {
+  COMMAND_PRIORITY_EDITOR,
+  createCommand,
+  LexicalCommand,
+} from 'lexical';
 
-import type {JSX} from 'react';
-import {useEffect} from 'react';
-import {COMMAND_PRIORITY_EDITOR, createCommand, LexicalCommand} from 'lexical';
+import { $createTweetNode, TweetNode } from '../../nodes/TweetNode';
 
-import {$createTweetNode, TweetNode} from '../../nodes/TweetNode';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$insertNodeToNearestRoot} from '@lexical/utils';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $insertNodeToNearestRoot } from '@lexical/utils';
 
 export const INSERT_TWEET_COMMAND: LexicalCommand<string> = createCommand(
-  'INSERT_TWEET_COMMAND',
+  'INSERT_TWEET_COMMAND'
 );
 
 export default function TwitterPlugin(): JSX.Element | null {
@@ -35,7 +31,7 @@ export default function TwitterPlugin(): JSX.Element | null {
 
         return true;
       },
-      COMMAND_PRIORITY_EDITOR,
+      COMMAND_PRIORITY_EDITOR
     );
   }, [editor]);
 

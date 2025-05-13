@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import {
   $getSiblingCaret,
   $isElementNode,
@@ -24,9 +16,9 @@ import {
   Spread,
 } from 'lexical';
 
-import {setDomHiddenUntilFound} from './CollapsibleUtils';
+import { setDomHiddenUntilFound } from './CollapsibleUtils';
 
-import {IS_CHROME} from '@lexical/utils';
+import { IS_CHROME } from '@lexical/utils';
 
 type SerializedCollapsibleContainerNode = Spread<
   {
@@ -36,7 +28,7 @@ type SerializedCollapsibleContainerNode = Spread<
 >;
 
 export function $convertDetailsElement(
-  domNode: HTMLDetailsElement,
+  domNode: HTMLDetailsElement
 ): DOMConversionOutput | null {
   const isOpen = domNode.open !== undefined ? domNode.open : true;
   const node = $createCollapsibleContainerNode(isOpen);
@@ -143,10 +135,10 @@ export class CollapsibleContainerNode extends ElementNode {
   }
 
   static importJSON(
-    serializedNode: SerializedCollapsibleContainerNode,
+    serializedNode: SerializedCollapsibleContainerNode
   ): CollapsibleContainerNode {
     return $createCollapsibleContainerNode(serializedNode.open).updateFromJSON(
-      serializedNode,
+      serializedNode
     );
   }
 
@@ -154,7 +146,7 @@ export class CollapsibleContainerNode extends ElementNode {
     const element = document.createElement('details');
     element.classList.add('Collapsible__container');
     element.setAttribute('open', this.__open.toString());
-    return {element};
+    return { element };
   }
 
   exportJSON(): SerializedCollapsibleContainerNode {
@@ -179,13 +171,13 @@ export class CollapsibleContainerNode extends ElementNode {
 }
 
 export function $createCollapsibleContainerNode(
-  isOpen: boolean,
+  isOpen: boolean
 ): CollapsibleContainerNode {
   return new CollapsibleContainerNode(isOpen);
 }
 
 export function $isCollapsibleContainerNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is CollapsibleContainerNode {
   return node instanceof CollapsibleContainerNode;
 }

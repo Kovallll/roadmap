@@ -1,20 +1,12 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+import type { JSX } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { EditorThemeClasses, Klass, LexicalEditor, LexicalNode } from 'lexical';
 
-import type {JSX} from 'react';
-import {createContext, useContext, useEffect, useMemo, useState} from 'react';
-import {EditorThemeClasses, Klass, LexicalEditor, LexicalNode} from 'lexical';
+import Button from '../components/Button';
+import { DialogActions } from '../components/Dialog';
+import TextInput from '../components/TextInput';
 
-import Button from '../ui/Button';
-import {DialogActions} from '../ui/Dialog';
-import TextInput from '../ui/TextInput';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
   INSERT_TABLE_COMMAND,
   TableCellNode,
@@ -33,7 +25,7 @@ export type CellContextShape = {
   cellEditorPlugins: null | JSX.Element | Array<JSX.Element>;
   set: (
     cellEditorConfig: null | CellEditorConfig,
-    cellEditorPlugins: null | JSX.Element | Array<JSX.Element>,
+    cellEditorPlugins: null | JSX.Element | Array<JSX.Element>
   ) => void;
 };
 
@@ -53,7 +45,7 @@ export const CellContext = createContext<CellContextShape>({
   },
 });
 
-export function TableContext({children}: {children: JSX.Element}) {
+export function TableContext({ children }: { children: JSX.Element }) {
   const [contextValue, setContextValue] = useState<{
     cellEditorConfig: null | CellEditorConfig;
     cellEditorPlugins: null | JSX.Element | Array<JSX.Element>;
@@ -68,11 +60,12 @@ export function TableContext({children}: {children: JSX.Element}) {
           cellEditorConfig: contextValue.cellEditorConfig,
           cellEditorPlugins: contextValue.cellEditorPlugins,
           set: (cellEditorConfig, cellEditorPlugins) => {
-            setContextValue({cellEditorConfig, cellEditorPlugins});
+            setContextValue({ cellEditorConfig, cellEditorPlugins });
           },
         }),
-        [contextValue.cellEditorConfig, contextValue.cellEditorPlugins],
-      )}>
+        [contextValue.cellEditorConfig, contextValue.cellEditorPlugins]
+      )}
+    >
       {children}
     </CellContext.Provider>
   );
@@ -147,7 +140,7 @@ export function TablePlugin({
   useEffect(() => {
     if (!editor.hasNodes([TableNode, TableRowNode, TableCellNode])) {
       throw new Error(
-        'TablePlugin: TableNode, TableRowNode, or TableCellNode is not registered on editor',
+        'TablePlugin: TableNode, TableRowNode, or TableCellNode is not registered on editor'
       );
     }
   }, [editor]);

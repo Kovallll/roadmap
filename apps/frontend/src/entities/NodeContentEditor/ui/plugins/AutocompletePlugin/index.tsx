@@ -1,14 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-import type {JSX} from 'react';
-import {useCallback, useEffect} from 'react';
-import type {BaseSelection, NodeKey, TextNode} from 'lexical';
+import type { JSX } from 'react';
+import { useCallback, useEffect } from 'react';
+import type { BaseSelection, NodeKey, TextNode } from 'lexical';
 import {
   $addUpdateTag,
   $createTextNode,
@@ -23,18 +15,18 @@ import {
   KEY_TAB_COMMAND,
 } from 'lexical';
 
-import {useToolbarState} from '../../context/ToolbarContext';
+import { addSwipeRightListener } from '../../../lib/utils/swipe';
+import { useToolbarState } from '../../../model';
 import {
   $createAutocompleteNode,
   AutocompleteNode,
 } from '../../nodes/AutocompleteNode';
-import {addSwipeRightListener} from '../../utils/swipe';
 
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$isAtNodeEnd} from '@lexical/selection';
-import {mergeRegister} from '@lexical/utils';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $isAtNodeEnd } from '@lexical/selection';
+import { mergeRegister } from '@lexical/utils';
 
-const HISTORY_MERGE = {tag: HISTORY_MERGE_TAG};
+const HISTORY_MERGE = { tag: HISTORY_MERGE_TAG };
 
 declare global {
   interface Navigator {
@@ -102,7 +94,7 @@ function formatSuggestionText(suggestion: string): string {
 export default function AutocompletePlugin(): JSX.Element | null {
   const [editor] = useLexicalComposerContext();
   const query = useQuery();
-  const {toolbarState} = useToolbarState();
+  const { toolbarState } = useToolbarState();
 
   useEffect(() => {
     let autocompleteNodeKey: null | NodeKey = null;
@@ -129,7 +121,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
     }
     function updateAsyncSuggestion(
       refSearchPromise: SearchPromise,
-      newSuggestion: null | string,
+      newSuggestion: null | string
     ) {
       if (searchPromise !== refSearchPromise || newSuggestion === null) {
         // Outdated or no suggestion
@@ -147,7 +139,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
         prevNodeFormat = prevNode.getFormat();
         const node = $createAutocompleteNode(
           formatSuggestionText(newSuggestion),
-          uuid,
+          uuid
         )
           .setFormat(prevNodeFormat)
           .setStyle(`font-size: ${toolbarState.fontSize}`);
@@ -235,23 +227,23 @@ export default function AutocompletePlugin(): JSX.Element | null {
     return mergeRegister(
       editor.registerNodeTransform(
         AutocompleteNode,
-        $handleAutocompleteNodeTransform,
+        $handleAutocompleteNodeTransform
       ),
       editor.registerUpdateListener(handleUpdate),
       editor.registerCommand(
         KEY_TAB_COMMAND,
         $handleKeypressCommand,
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand(
         KEY_ARROW_RIGHT_COMMAND,
         $handleKeypressCommand,
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       ...(rootElem !== null
         ? [addSwipeRightListener(rootElem, handleSwipeRight)]
         : []),
-      unmountSuggestion,
+      unmountSuggestion
     );
   }, [editor, query, toolbarState.fontSize]);
 
@@ -289,7 +281,7 @@ class AutocompleteServer {
           : searchText;
         const match = this.DATABASE.find(
           (dictionaryWord) =>
-            dictionaryWord.startsWith(caseInsensitiveSearchText) ?? null,
+            dictionaryWord.startsWith(caseInsensitiveSearchText) ?? null
         );
         if (match === undefined) {
           return resolve(null);
@@ -1589,7 +1581,6 @@ const DICTIONARY = [
   'calculation',
   'consolidated',
   'occasions',
-  'equations',
   'exceptional',
   'respondents',
   'considerations',

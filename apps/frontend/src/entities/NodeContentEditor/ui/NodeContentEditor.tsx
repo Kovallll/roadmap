@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { Button, Flex, Layout, Typography } from 'antd';
 import { SerializedEditorState } from 'lexical';
 
-import { SharedHistoryContext } from './context/SharedHistoryContext';
-import { ToolbarContext } from './context/ToolbarContext';
+import { editorTheme } from '../lib';
+import { SharedHistoryContext } from '../model';
+import { ToolbarContext } from '../model';
 import { Editor } from './Editor/Editor';
-import PlaygroundNodes from './nodes/PlaygroundNodes';
+import { EditorHeader } from './EditorHeader/EditorHeader';
+import EditorNodes from './nodes/EditorNodes';
 import { TableContext } from './plugins/TablePlugin';
-import styles from './styles.module.scss';
-import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 
 import './styles.css';
 import { selectedNodeStore } from '@/shared/model';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
-import { useReactFlow } from '@xyflow/react';
 
 export const NodeContentEditor = ({
   onCloseDrawer,
@@ -21,55 +19,37 @@ export const NodeContentEditor = ({
   onCloseDrawer: () => void;
 }) => {
   const [serializedContent, setSerializedContent] =
-    useState<SerializedEditorState>();
-  const { selectedNode, setSelectedNode } = selectedNodeStore();
-  const { updateNode } = useReactFlow();
+    useState<SerializedEditorState | null>(null);
+  const { selectedNode } = selectedNodeStore();
 
   const initialConfig = {
     editorState: null,
-    namespace: 'Playground',
-    nodes: [...PlaygroundNodes],
+    namespace: 'Editor',
+    nodes: [...EditorNodes],
     onError: (error: Error) => {
       throw error;
     },
-    theme: PlaygroundEditorTheme,
+    theme: editorTheme,
   };
   if (!selectedNode) return null;
   const content = selectedNode.data.content as SerializedEditorState;
-  const handleSaveContent = () => {
-    const newData = { ...selectedNode.data, content: serializedContent };
-    updateNode(selectedNode.id, { data: newData });
-    setSelectedNode({
-      ...selectedNode,
-      data: newData,
-    });
-    onCloseDrawer();
-  };
 
-  const hadnleEditContent = (content: SerializedEditorState) => {
+  const handleEditContent = (content: SerializedEditorState) => {
     setSerializedContent(content);
   };
 
-  const title = selectedNode?.data.label as string;
-
   return (
     <>
-      <Layout.Header className={styles.editorHeader}>
-        <Flex
-          justify="space-between"
-          align="center"
-          className={styles.headerContent}
-        >
-          <Typography.Title className={styles.title}>{title}</Typography.Title>
-          <Button onClick={handleSaveContent}>Сохранить описание</Button>
-        </Flex>
-      </Layout.Header>
+      <EditorHeader
+        serializedContent={serializedContent}
+        onCloseDrawer={onCloseDrawer}
+      />
       <LexicalComposer initialConfig={initialConfig}>
         <SharedHistoryContext>
           <TableContext>
             <ToolbarContext>
               <Editor
-                editContent={hadnleEditContent}
+                editContent={handleEditContent}
                 initialSerializedContent={content}
               />
             </ToolbarContext>

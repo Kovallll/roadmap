@@ -13,9 +13,9 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import { getDOMRangeRect } from '../../utils/getDOMRangeRect';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPosition } from '../../utils/setFloatingElemPosition';
+import { getDOMRangeRect } from '../../../lib/utils/getDOMRangeRect';
+import { getSelectedNode } from '../../../lib/utils/getSelectedNode';
+import { setFloatingElemPosition } from '../../../lib/utils/setFloatingElemPosition';
 
 import './index.css';
 import { $isCodeHighlightNode } from '@lexical/code';

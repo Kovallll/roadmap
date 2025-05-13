@@ -10,12 +10,12 @@ import {
   TextNode,
 } from 'lexical';
 
-import { useModal } from '../../hooks/useModal';
 import { EmbedConfigs } from '../AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
 import { InsertTableDialog } from '../TablePlugin';
 
+import { useModal } from '@/entities/NodeContentEditor/model';
 import { $createCodeNode } from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,

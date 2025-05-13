@@ -14,10 +14,10 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import { useModal } from '../../hooks/useModal';
-import ColorPicker from '../../ui/ColorPicker';
-import DropDown, { DropDownItem } from '../../ui/DropDown';
+import ColorPicker from '../../components/ColorPicker';
+import DropDown, { DropDownItem } from '../../components/DropDown';
 
+import { useModal } from '@/entities/NodeContentEditor/model';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useLexicalEditable } from '@lexical/react/useLexicalEditable';
 import {
@@ -710,7 +710,7 @@ function TableCellActionMenuContainer({
   const checkTableCellOverflow = useCallback(
     (tableCellParentNodeDOM: HTMLElement): boolean => {
       const scrollableContainer = tableCellParentNodeDOM.closest(
-        '.PlaygroundEditorTheme__tableScrollableWrapper'
+        '.EditorTheme__tableScrollableWrapper'
       );
       if (scrollableContainer) {
         const containerRect = (

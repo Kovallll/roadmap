@@ -3,8 +3,8 @@ import { Flex } from 'antd';
 import { ContentArea } from './ContentArea/ContentArea';
 import styles from './styles.module.scss';
 
-import PlaygroundNodes from '@/entities/NodeContentEditor/ui/nodes/PlaygroundNodes';
-import PlaygroundEditorTheme from '@/entities/NodeContentEditor/ui/themes/PlaygroundEditorTheme';
+import { editorTheme } from '@/entities/NodeContentEditor/lib';
+import EditorNodes from '@/entities/NodeContentEditor/ui/nodes/EditorNodes';
 import { StatusSelect } from '@/shared/ui/StatusSelect/ui/StatusSelect';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 
@@ -12,11 +12,11 @@ export const NodeContentViewer = () => {
   const initialConfig = {
     editorState: null,
     namespace: 'ReadOnlyViewer',
-    nodes: [...PlaygroundNodes],
+    nodes: [...EditorNodes],
     onError: (error: Error) => {
       throw error;
     },
-    theme: PlaygroundEditorTheme,
+    theme: editorTheme,
   };
 
   return (

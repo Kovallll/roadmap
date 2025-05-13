@@ -2,8 +2,9 @@ import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
 import { EditorState, SerializedEditorState } from 'lexical';
 
-import { useSettings } from '../context/SettingsContext';
-import { useSharedHistoryContext } from '../context/SharedHistoryContext';
+import { useSettings } from '../../model';
+import { useSharedHistoryContext } from '../../model';
+import ContentEditable from '../components/ContentEditable';
 import AutocompletePlugin from '../plugins/AutocompletePlugin';
 import AutoEmbedPlugin from '../plugins/AutoEmbedPlugin';
 import AutoLinkPlugin from '../plugins/AutoLinkPlugin';
@@ -13,8 +14,6 @@ import ComponentPickerPlugin from '../plugins/ComponentPickerPlugin';
 import ContextMenuPlugin from '../plugins/ContextMenuPlugin';
 import DragDropPaste from '../plugins/DragDropPastePlugin';
 import DraggableBlockPlugin from '../plugins/DraggableBlockPlugin';
-import EmojiPickerPlugin from '../plugins/EmojiPickerPlugin';
-import EmojisPlugin from '../plugins/EmojisPlugin';
 import FigmaPlugin from '../plugins/FigmaPlugin';
 import FloatingLinkEditorPlugin from '../plugins/FloatingLinkEditorPlugin';
 import FloatingTextFormatToolbarPlugin from '../plugins/FloatingTextFormatToolbarPlugin';
@@ -22,9 +21,6 @@ import ImagesPlugin from '../plugins/ImagesPlugin';
 import InlineImagePlugin from '../plugins/InlineImagePlugin';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
-import MarkdownShortcutPlugin from '../plugins/MarkdownShortcutPlugin';
-import { MaxLengthPlugin } from '../plugins/MaxLengthPlugin';
-import MentionsPlugin from '../plugins/MentionsPlugin';
 import ShortcutsPlugin from '../plugins/ShortcutsPlugin';
 import SpecialTextPlugin from '../plugins/SpecialTextPlugin';
 import TabFocusPlugin from '../plugins/TabFocusPlugin';
@@ -35,7 +31,6 @@ import TableOfContentsPlugin from '../plugins/TableOfContentsPlugin';
 import { ToolbarPlugin } from '../plugins/ToolbarPlugin';
 import TwitterPlugin from '../plugins/TwitterPlugin';
 import YouTubePlugin from '../plugins/YouTubePlugin';
-import ContentEditable from '../ui/ContentEditable';
 
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { CharacterLimitPlugin } from '@lexical/react/LexicalCharacterLimitPlugin';
@@ -68,7 +63,6 @@ export const Editor = ({
   const {
     settings: {
       isCollab,
-      isMaxLength,
       isCharLimit,
       hasLinkAttributes,
       isCharLimitUtf8,
@@ -156,16 +150,12 @@ export const Editor = ({
           !isRichText ? 'plain-text' : ''
         }`}
       >
-        {isMaxLength && <MaxLengthPlugin maxLength={30} />}
         <DragDropPaste />
         <AutoFocusPlugin />
         {selectionAlwaysOnDisplay && <SelectionAlwaysOnDisplay />}
         <ClearEditorPlugin />
         <ComponentPickerPlugin />
-        <EmojiPickerPlugin />
         <AutoEmbedPlugin />
-        <MentionsPlugin />
-        <EmojisPlugin />
         <HashtagPlugin />
         <KeywordsPlugin />
         <AutoLinkPlugin />
@@ -182,7 +172,6 @@ export const Editor = ({
               }
               ErrorBoundary={LexicalErrorBoundary}
             />
-            <MarkdownShortcutPlugin />
             <CodeHighlightPlugin />
             <ListPlugin hasStrictIndent={listStrictIndent} />
             <CheckListPlugin />

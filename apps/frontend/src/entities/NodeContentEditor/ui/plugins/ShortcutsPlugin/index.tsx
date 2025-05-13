@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import { Dispatch, useEffect } from 'react';
 import {
   COMMAND_PRIORITY_NORMAL,
@@ -18,20 +10,8 @@ import {
   OUTDENT_CONTENT_COMMAND,
 } from 'lexical';
 
-import { useToolbarState } from '../../context/ToolbarContext';
-import { sanitizeUrl } from '../../utils/url';
-import {
-  clearFormatting,
-  formatBulletList,
-  formatCheckList,
-  formatCode,
-  formatHeading,
-  formatNumberedList,
-  formatParagraph,
-  formatQuote,
-  updateFontSize,
-  UpdateFontSizeType,
-} from '../ToolbarPlugin/utils';
+import { sanitizeUrl } from '../../../lib/utils/url';
+import { useToolbarState } from '../../../model';
 import {
   isCapitalize,
   isCenterAlign,
@@ -59,6 +39,18 @@ import {
   isUppercase,
 } from './shortcuts';
 
+import {
+  clearFormatting,
+  formatBulletList,
+  formatCheckList,
+  formatCode,
+  formatHeading,
+  formatNumberedList,
+  formatParagraph,
+  formatQuote,
+  updateFontSize,
+  UpdateFontSizeType,
+} from '@/entities/NodeContentEditor/lib';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { HeadingTagType } from '@lexical/rich-text';
 

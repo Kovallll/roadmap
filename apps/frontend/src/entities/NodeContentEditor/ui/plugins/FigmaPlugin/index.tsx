@@ -1,22 +1,18 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+import type { JSX } from 'react';
+import { useEffect } from 'react';
+import {
+  COMMAND_PRIORITY_EDITOR,
+  createCommand,
+  LexicalCommand,
+} from 'lexical';
 
-import type {JSX} from 'react';
-import {useEffect} from 'react';
-import {COMMAND_PRIORITY_EDITOR, createCommand, LexicalCommand} from 'lexical';
+import { $createFigmaNode, FigmaNode } from '../../nodes/FigmaNode';
 
-import {$createFigmaNode, FigmaNode} from '../../nodes/FigmaNode';
-
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$insertNodeToNearestRoot} from '@lexical/utils';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $insertNodeToNearestRoot } from '@lexical/utils';
 
 export const INSERT_FIGMA_COMMAND: LexicalCommand<string> = createCommand(
-  'INSERT_FIGMA_COMMAND',
+  'INSERT_FIGMA_COMMAND'
 );
 
 export default function FigmaPlugin(): JSX.Element | null {
@@ -34,7 +30,7 @@ export default function FigmaPlugin(): JSX.Element | null {
         $insertNodeToNearestRoot(figmaNode);
         return true;
       },
-      COMMAND_PRIORITY_EDITOR,
+      COMMAND_PRIORITY_EDITOR
     );
   }, [editor]);
 

@@ -1,23 +1,15 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 import type { LexicalEditor } from 'lexical';
 
-import { useModal } from '../../hooks/useModal';
-import Button from '../../ui/Button';
-import { DialogActions } from '../../ui/Dialog';
+import Button from '../../components/Button';
+import { DialogActions } from '../../components/Dialog';
 import { INSERT_FIGMA_COMMAND } from '../FigmaPlugin';
 import { INSERT_TWEET_COMMAND } from '../TwitterPlugin';
 import { INSERT_YOUTUBE_COMMAND } from '../YouTubePlugin';
 
+import { useModal } from '@/entities/NodeContentEditor/model';
 import {
   AutoEmbedOption,
   EmbedConfig,

@@ -22,7 +22,6 @@ import {
   UNDO_COMMAND,
 } from 'lexical';
 
-import catTypingGif from '../../images/cat-typing.gif';
 import {
   blockTypeToBlockName,
   formatBulletList,
@@ -32,21 +31,16 @@ import {
   formatNumberedList,
   formatParagraph,
   formatQuote,
+  getSelectedNode,
 } from '../../lib';
-import { useToolbarState } from '../context/ToolbarContext';
-import { useModal } from '../hooks';
+import { sanitizeUrl } from '../../lib';
+import { useModal, useToolbarState } from '../../model';
 import { EmbedConfigs } from '../plugins/AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../plugins/CollapsiblePlugin';
-import {
-  INSERT_IMAGE_COMMAND,
-  InsertImageDialog,
-  InsertImagePayload,
-} from '../plugins/ImagesPlugin';
+import { InsertImageDialog } from '../plugins/ImagesPlugin';
 import { InsertInlineImageDialog } from '../plugins/InlineImagePlugin';
 import { InsertTableDialog } from '../plugins/TablePlugin';
 import FontSize from '../plugins/ToolbarPlugin/fontSize';
-import { getSelectedNode } from '../utils/getSelectedNode';
-import { sanitizeUrl } from '../utils/url';
 
 import { SHORTCUTS } from '@/shared/ui/TextViewEditors/lib';
 import {
@@ -731,9 +725,6 @@ export default function ToolbarPlugin({
     },
     [activeEditor, selectedElementKey]
   );
-  const insertGifOnClick = (payload: InsertImagePayload) => {
-    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-  };
 
   const canViewerSeeInsertDropdown = !toolbarState.isImageCaption;
   const canViewerSeeInsertCodeButton = !toolbarState.isImageCaption;
@@ -1077,18 +1068,6 @@ export default function ToolbarPlugin({
                 >
                   <i className="icon image" />
                   <span className="text">Inline Image</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    insertGifOnClick({
-                      altText: 'Cat typing on a laptop',
-                      src: catTypingGif,
-                    })
-                  }
-                  className="item"
-                >
-                  <i className="icon gif" />
-                  <span className="text">GIF</span>
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {

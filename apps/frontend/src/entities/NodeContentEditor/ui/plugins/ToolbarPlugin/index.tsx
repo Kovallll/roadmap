@@ -22,15 +22,15 @@ import {
   UNDO_COMMAND,
 } from 'lexical';
 
+import { getSelectedNode } from '../../../lib/utils/getSelectedNode';
+import { sanitizeUrl } from '../../../lib/utils/url';
 import {
   blockTypeToBlockName,
+  useModal,
   useToolbarState,
-} from '../../context/ToolbarContext';
-import { useModal } from '../../hooks/useModal';
-import DropDown, { DropDownItem } from '../../ui/DropDown';
-import DropdownColorPicker from '../../ui/DropdownColorPicker';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { sanitizeUrl } from '../../utils/url';
+} from '../../../model';
+import DropDown, { DropDownItem } from '../../components/DropDown';
+import DropdownColorPicker from '../../components/DropdownColorPicker';
 import { EmbedConfigs } from '../AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
@@ -38,6 +38,7 @@ import { InsertInlineImageDialog } from '../InlineImagePlugin';
 import { SHORTCUTS } from '../ShortcutsPlugin/shortcuts';
 import { InsertTableDialog } from '../TablePlugin';
 import FontSize from './fontSize';
+
 import {
   clearFormatting,
   formatBulletList,
@@ -47,8 +48,7 @@ import {
   formatNumberedList,
   formatParagraph,
   formatQuote,
-} from './utils';
-
+} from '@/entities/NodeContentEditor/lib';
 import {
   $isCodeNode,
   CODE_LANGUAGE_FRIENDLY_NAME_MAP,

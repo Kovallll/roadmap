@@ -1,26 +1,15 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import { useEffect, useState } from 'react';
 import { LexicalEditor } from 'lexical';
 
-import {
-  MAX_ALLOWED_FONT_SIZE,
-  MIN_ALLOWED_FONT_SIZE,
-} from '../../context/ToolbarContext';
+import { MAX_ALLOWED_FONT_SIZE, MIN_ALLOWED_FONT_SIZE } from '../../../model';
 import { SHORTCUTS } from '../ShortcutsPlugin/shortcuts';
+
+import './fontSize.css';
 import {
   updateFontSize,
   updateFontSizeInSelection,
   UpdateFontSizeType,
-} from './utils';
-
-import './fontSize.css';
+} from '@/entities/NodeContentEditor/lib';
 
 export function parseAllowedFontSize(input: string): string {
   const match = input.match(/^(\d+(?:\.\d+)?)px$/);

@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -29,18 +21,16 @@ import {
   LexicalEditor,
 } from 'lexical';
 
-import landscapeImage from '../../images/landscape.jpg';
-import yellowFlowerImage from '../../images/yellow-flower.jpg';
+import Button from '../../components/Button';
+import { DialogActions, DialogButtonsList } from '../../components/Dialog';
+import FileInput from '../../components/FileInput';
+import TextInput from '../../components/TextInput';
 import {
   $createImageNode,
   $isImageNode,
   ImageNode,
   ImagePayload,
-} from '../../nodes/ImageNode';
-import Button from '../../ui/Button';
-import { DialogActions, DialogButtonsList } from '../../ui/Dialog';
-import FileInput from '../../ui/FileInput';
-import TextInput from '../../ui/TextInput';
+} from '../../nodes/ImageNode/ImageNode';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
@@ -170,25 +160,6 @@ export function InsertImageDialog({
     <>
       {!mode && (
         <DialogButtonsList>
-          <Button
-            data-test-id="image-modal-option-sample"
-            onClick={() =>
-              onClick(
-                hasModifier.current
-                  ? {
-                      altText:
-                        'Daylight fir trees forest glacier green high ice landscape',
-                      src: landscapeImage,
-                    }
-                  : {
-                      altText: 'Yellow flower in tilt shift lens',
-                      src: yellowFlowerImage,
-                    }
-              )
-            }
-          >
-            Sample
-          </Button>
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}

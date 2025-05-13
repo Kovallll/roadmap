@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 import type { ChangeEvent, JSX } from 'react';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import type { BaseSelection, LexicalEditor, NodeKey } from 'lexical';
@@ -21,17 +14,17 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import { useModal } from '../../hooks/useModal';
+import Button from '../../components/Button';
+import ContentEditable from '../../components/ContentEditable';
+import { DialogActions } from '../../components/Dialog';
+import Select from '../../components/Select';
+import TextInput from '../../components/TextInput';
 import LinkPlugin from '../../plugins/LinkPlugin';
-import Button from '../../ui/Button';
-import ContentEditable from '../../ui/ContentEditable';
-import { DialogActions } from '../../ui/Dialog';
-import Select from '../../ui/Select';
-import TextInput from '../../ui/TextInput';
 import type { Position } from './InlineImageNode';
 import { InlineImageNode } from './InlineImageNode';
 
 import './InlineImageNode.css';
+import { useModal } from '@/entities/NodeContentEditor/model';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';

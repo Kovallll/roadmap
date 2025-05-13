@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import {
   DOMConversionMap,
   DOMConversionOutput,
@@ -17,15 +9,15 @@ import {
   SerializedElementNode,
 } from 'lexical';
 
-import {$isCollapsibleContainerNode} from './CollapsibleContainerNode';
-import {domOnBeforeMatch, setDomHiddenUntilFound} from './CollapsibleUtils';
+import { $isCollapsibleContainerNode } from './CollapsibleContainerNode';
+import { domOnBeforeMatch, setDomHiddenUntilFound } from './CollapsibleUtils';
 
-import {IS_CHROME} from '@lexical/utils';
+import { IS_CHROME } from '@lexical/utils';
 
 type SerializedCollapsibleContentNode = SerializedElementNode;
 
 export function $convertCollapsibleContentElement(
-  domNode: HTMLElement,
+  domNode: HTMLElement
 ): DOMConversionOutput | null {
   const node = $createCollapsibleContentNode();
   return {
@@ -50,7 +42,7 @@ export class CollapsibleContentNode extends ElementNode {
         const containerNode = this.getParentOrThrow();
         if (!$isCollapsibleContainerNode(containerNode)) {
           throw new Error(
-            'Expected parent node to be a CollapsibleContainerNode',
+            'Expected parent node to be a CollapsibleContainerNode'
           );
         }
         if (!containerNode.__open) {
@@ -62,7 +54,7 @@ export class CollapsibleContentNode extends ElementNode {
           const containerNode = this.getParentOrThrow().getLatest();
           if (!$isCollapsibleContainerNode(containerNode)) {
             throw new Error(
-              'Expected parent node to be a CollapsibleContainerNode',
+              'Expected parent node to be a CollapsibleContainerNode'
             );
           }
           if (!containerNode.__open) {
@@ -96,11 +88,11 @@ export class CollapsibleContentNode extends ElementNode {
     const element = document.createElement('div');
     element.classList.add('Collapsible__content');
     element.setAttribute('data-lexical-collapsible-content', 'true');
-    return {element};
+    return { element };
   }
 
   static importJSON(
-    serializedNode: SerializedCollapsibleContentNode,
+    serializedNode: SerializedCollapsibleContentNode
   ): CollapsibleContentNode {
     return $createCollapsibleContentNode().updateFromJSON(serializedNode);
   }
@@ -115,7 +107,7 @@ export function $createCollapsibleContentNode(): CollapsibleContentNode {
 }
 
 export function $isCollapsibleContentNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is CollapsibleContentNode {
   return node instanceof CollapsibleContentNode;
 }

@@ -1,15 +1,7 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+import type { EditorConfig, LexicalNode, SerializedTextNode } from 'lexical';
+import { $applyNodeReplacement, TextNode } from 'lexical';
 
-import type {EditorConfig, LexicalNode, SerializedTextNode} from 'lexical';
-import {$applyNodeReplacement, TextNode} from 'lexical';
-
-import {addClassNamesToElement} from '@lexical/utils';
+import { addClassNamesToElement } from '@lexical/utils';
 
 /** @noInheritDoc */
 export class SpecialTextNode extends TextNode {
@@ -66,7 +58,7 @@ export function $createSpecialTextNode(text = ''): SpecialTextNode {
  * @returns True if the node is a SpecialTextNode.
  */
 export function $isSpecialTextNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is SpecialTextNode {
   return node instanceof SpecialTextNode;
 }

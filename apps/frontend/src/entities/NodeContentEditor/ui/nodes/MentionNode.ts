@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import {
   $applyNodeReplacement,
   type DOMConversionMap,
@@ -27,7 +19,7 @@ export type SerializedMentionNode = Spread<
 >;
 
 function $convertMentionElement(
-  domNode: HTMLElement,
+  domNode: HTMLElement
 ): DOMConversionOutput | null {
   const textContent = domNode.textContent;
   const mentionName = domNode.getAttribute('data-lexical-mention-name');
@@ -35,7 +27,7 @@ function $convertMentionElement(
   if (textContent !== null) {
     const node = $createMentionNode(
       typeof mentionName === 'string' ? mentionName : textContent,
-      textContent,
+      textContent
     );
     return {
       node,
@@ -58,7 +50,7 @@ export class MentionNode extends TextNode {
   }
   static importJSON(serializedNode: SerializedMentionNode): MentionNode {
     return $createMentionNode(serializedNode.mentionName).updateFromJSON(
-      serializedNode,
+      serializedNode
     );
   }
 
@@ -89,7 +81,7 @@ export class MentionNode extends TextNode {
       element.setAttribute('data-lexical-mention-name', this.__mention);
     }
     element.textContent = this.__text;
-    return {element};
+    return { element };
   }
 
   static importDOM(): DOMConversionMap | null {
@@ -121,7 +113,7 @@ export class MentionNode extends TextNode {
 
 export function $createMentionNode(
   mentionName: string,
-  textContent?: string,
+  textContent?: string
 ): MentionNode {
   const mentionNode = new MentionNode(mentionName, (textContent = mentionName));
   mentionNode.setMode('segmented').toggleDirectionless();
@@ -129,7 +121,7 @@ export function $createMentionNode(
 }
 
 export function $isMentionNode(
-  node: LexicalNode | null | undefined,
+  node: LexicalNode | null | undefined
 ): node is MentionNode {
   return node instanceof MentionNode;
 }
