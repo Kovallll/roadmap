@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { Button, Flex } from 'antd';
 import {
   $createParagraphNode,
   $createRangeSelection,
@@ -21,10 +22,8 @@ import {
   LexicalEditor,
 } from 'lexical';
 
-import Button from '../../components/Button';
-import { DialogActions, DialogButtonsList } from '../../components/Dialog';
-import FileInput from '../../components/FileInput';
-import TextInput from '../../components/TextInput';
+import { FileInput } from '../../components/FileInput';
+import { TextInput } from '../../components/TextInput';
 import {
   $createImageNode,
   $isImageNode,
@@ -32,6 +31,7 @@ import {
   ImagePayload,
 } from '../../nodes/ImageNode/ImageNode';
 
+import { gaps } from '@/shared/styles/theme';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
 
@@ -66,7 +66,7 @@ export function InsertImageUriDialogBody({
         value={altText}
         data-test-id="image-modal-alt-text-input"
       />
-      <DialogActions>
+      <Flex justify="end">
         <Button
           data-test-id="image-modal-confirm-btn"
           disabled={isDisabled}
@@ -74,7 +74,7 @@ export function InsertImageUriDialogBody({
         >
           Confirm
         </Button>
-      </DialogActions>
+      </Flex>
     </>
   );
 }
@@ -86,7 +86,7 @@ export function InsertImageUploadedDialogBody({
 }) {
   const [src, setSrc] = useState('');
   const [altText, setAltText] = useState('');
-
+  console.log(src, 'src');
   const isDisabled = src === '';
 
   const loadImage = (files: FileList | null) => {
@@ -103,7 +103,7 @@ export function InsertImageUploadedDialogBody({
   };
 
   return (
-    <>
+    <Flex vertical gap={gaps.md}>
       <FileInput
         label="Image Upload"
         onChange={loadImage}
@@ -117,7 +117,7 @@ export function InsertImageUploadedDialogBody({
         value={altText}
         data-test-id="image-modal-alt-text-input"
       />
-      <DialogActions>
+      <Flex justify="end">
         <Button
           data-test-id="image-modal-file-upload-btn"
           disabled={isDisabled}
@@ -125,8 +125,8 @@ export function InsertImageUploadedDialogBody({
         >
           Confirm
         </Button>
-      </DialogActions>
-    </>
+      </Flex>
+    </Flex>
   );
 }
 
@@ -159,7 +159,7 @@ export function InsertImageDialog({
   return (
     <>
       {!mode && (
-        <DialogButtonsList>
+        <Flex vertical gap={gaps.md}>
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}
@@ -172,7 +172,7 @@ export function InsertImageDialog({
           >
             File
           </Button>
-        </DialogButtonsList>
+        </Flex>
       )}
       {mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
       {mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}

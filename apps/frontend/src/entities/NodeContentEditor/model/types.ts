@@ -8,11 +8,11 @@ export type NodeContentEditorProps = {
   handleUpdate: (field: string, value: string | number | null) => void;
 };
 
-type ToolbarState = typeof INITIAL_TOOLBAR_STATE;
+export type ToolbarState = typeof INITIAL_TOOLBAR_STATE;
 
 // Utility type to get keys and infer value types
-type ToolbarStateKey = keyof ToolbarState;
-type ToolbarStateValue<Key extends ToolbarStateKey> = ToolbarState[Key];
+export type ToolbarStateKey = keyof ToolbarState;
+export type ToolbarStateValue<Key extends ToolbarStateKey> = ToolbarState[Key];
 
 export type ContextShape = {
   toolbarState: ToolbarState;
@@ -25,4 +25,8 @@ export type ContextShape = {
 export type EditorHeaderProps = {
   serializedContent: SerializedEditorState | null;
   onCloseDrawer: () => void;
+};
+
+export type DropDownContextType = {
+  registerItem: (ref: React.RefObject<HTMLButtonElement | null>) => void;
 };

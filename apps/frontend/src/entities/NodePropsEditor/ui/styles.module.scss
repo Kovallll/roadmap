@@ -32,6 +32,12 @@
   height: 80vh !important;
   background: $primary-color !important;
   padding: 0 $gap-lg;
+
+  @layer antd {
+    .ant-drawer-body {
+      padding: 0 !important;
+    }
+  }
 }
 
 .contentButton {

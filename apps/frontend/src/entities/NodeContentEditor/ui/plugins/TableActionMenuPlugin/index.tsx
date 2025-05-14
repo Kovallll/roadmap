@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Button, Typography } from 'antd';
 import type { ElementNode, LexicalEditor } from 'lexical';
 import {
   $getSelection,
@@ -14,8 +15,8 @@ import {
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 
-import ColorPicker from '../../components/ColorPicker';
-import DropDown, { DropDownItem } from '../../components/DropDown';
+import { ColorPicker } from '../../components/ColorPicker';
+import { DropDown, DropDownItem } from '../../components/DropDown';
 
 import { useModal } from '@/entities/NodeContentEditor/model';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -465,25 +466,23 @@ const TableActionMenu = ({
   if (cellMerge) {
     if (canMergeCells) {
       mergeCellButton = (
-        <button
-          type="button"
+        <Button
           className="item"
           onClick={() => mergeTableCellsAtSelection()}
           data-test-id="table-merge-cells"
         >
-          <span className="text">Merge cells</span>
-        </button>
+          <Typography.Text className="text">Merge cells</Typography.Text>
+        </Button>
       );
     } else if (canUnmergeCell) {
       mergeCellButton = (
-        <button
-          type="button"
+        <Button
           className="item"
           onClick={() => unmergeTableCellsAtSelection()}
           data-test-id="table-unmerge-cells"
         >
-          <span className="text">Unmerge cells</span>
-        </button>
+          <Typography.Text className="text">Unmerge cells</Typography.Text>
+        </Button>
       );
     }
   }
@@ -497,8 +496,7 @@ const TableActionMenu = ({
       }}
     >
       {mergeCellButton}
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() =>
           showColorPickerModal('Cell background color', () => (
@@ -510,16 +508,15 @@ const TableActionMenu = ({
         }
         data-test-id="table-background-color"
       >
-        <span className="text">Background color</span>
-      </button>
-      <button
-        type="button"
+        <Typography.Text className="text">Background color</Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => toggleRowStriping()}
         data-test-id="table-row-striping"
       >
-        <span className="text">Toggle Row Striping</span>
-      </button>
+        <Typography.Text className="text">Toggle Row Striping</Typography.Text>
+      </Button>
       <DropDown
         buttonLabel="Vertical Align"
         buttonClassName="item"
@@ -533,7 +530,7 @@ const TableActionMenu = ({
         >
           <div className="icon-text-container">
             <i className="icon vertical-top" />
-            <span className="text">Top Align</span>
+            <Typography.Text className="text">Top Align</Typography.Text>
           </div>
         </DropDownItem>
         <DropDownItem
@@ -544,7 +541,7 @@ const TableActionMenu = ({
         >
           <div className="icon-text-container">
             <i className="icon vertical-middle" />
-            <span className="text">Middle Align</span>
+            <Typography.Text className="text">Middle Align</Typography.Text>
           </div>
         </DropDownItem>
         <DropDownItem
@@ -555,134 +552,127 @@ const TableActionMenu = ({
         >
           <div className="icon-text-container">
             <i className="icon vertical-bottom" />
-            <span className="text">Bottom Align</span>
+            <Typography.Text className="text">Bottom Align</Typography.Text>
           </div>
         </DropDownItem>
       </DropDown>
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() => toggleFirstRowFreeze()}
         data-test-id="table-freeze-first-row"
       >
-        <span className="text">Toggle First Row Freeze</span>
-      </button>
-      <button
-        type="button"
+        <Typography.Text className="text">
+          Toggle First Row Freeze
+        </Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => toggleFirstColumnFreeze()}
         data-test-id="table-freeze-first-column"
       >
-        <span className="text">Toggle First Column Freeze</span>
-      </button>
+        <Typography.Text className="text">
+          Toggle First Column Freeze
+        </Typography.Text>
+      </Button>
       <hr />
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() => insertTableRowAtSelection(false)}
         data-test-id="table-insert-row-above"
       >
-        <span className="text">
+        <Typography.Text className="text">
           Insert{' '}
           {selectionCounts.rows === 1 ? 'row' : `${selectionCounts.rows} rows`}{' '}
           above
-        </span>
-      </button>
-      <button
-        type="button"
+        </Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => insertTableRowAtSelection(true)}
         data-test-id="table-insert-row-below"
       >
-        <span className="text">
+        <Typography.Text className="text">
           Insert{' '}
           {selectionCounts.rows === 1 ? 'row' : `${selectionCounts.rows} rows`}{' '}
           below
-        </span>
-      </button>
+        </Typography.Text>
+      </Button>
       <hr />
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() => insertTableColumnAtSelection(false)}
         data-test-id="table-insert-column-before"
       >
-        <span className="text">
+        <Typography.Text className="text">
           Insert{' '}
           {selectionCounts.columns === 1
             ? 'column'
             : `${selectionCounts.columns} columns`}{' '}
           left
-        </span>
-      </button>
-      <button
-        type="button"
+        </Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => insertTableColumnAtSelection(true)}
         data-test-id="table-insert-column-after"
       >
-        <span className="text">
+        <Typography.Text className="text">
           Insert{' '}
           {selectionCounts.columns === 1
             ? 'column'
             : `${selectionCounts.columns} columns`}{' '}
           right
-        </span>
-      </button>
+        </Typography.Text>
+      </Button>
       <hr />
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() => deleteTableColumnAtSelection()}
         data-test-id="table-delete-columns"
       >
-        <span className="text">Delete column</span>
-      </button>
-      <button
-        type="button"
+        <Typography.Text className="text">Delete column</Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => deleteTableRowAtSelection()}
         data-test-id="table-delete-rows"
       >
-        <span className="text">Delete row</span>
-      </button>
-      <button
-        type="button"
+        <Typography.Text className="text">Delete row</Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => deleteTableAtSelection()}
         data-test-id="table-delete"
       >
-        <span className="text">Delete table</span>
-      </button>
+        <Typography.Text className="text">Delete table</Typography.Text>
+      </Button>
       <hr />
-      <button
-        type="button"
+      <Button
         className="item"
         onClick={() => toggleTableRowIsHeader()}
         data-test-id="table-row-header"
       >
-        <span className="text">
+        <Typography.Text className="text">
           {(tableCellNode.__headerState & TableCellHeaderStates.ROW) ===
           TableCellHeaderStates.ROW
             ? 'Remove'
             : 'Add'}{' '}
           row header
-        </span>
-      </button>
-      <button
-        type="button"
+        </Typography.Text>
+      </Button>
+      <Button
         className="item"
         onClick={() => toggleTableColumnIsHeader()}
         data-test-id="table-column-header"
       >
-        <span className="text">
+        <Typography.Text className="text">
           {(tableCellNode.__headerState & TableCellHeaderStates.COLUMN) ===
           TableCellHeaderStates.COLUMN
             ? 'Remove'
             : 'Add'}{' '}
           column header
-        </span>
-      </button>
+        </Typography.Text>
+      </Button>
     </div>,
     document.body
   );
@@ -901,8 +891,7 @@ function TableCellActionMenuContainer({
     <div className="table-cell-action-button-container" ref={menuButtonRef}>
       {tableCellNode != null && (
         <>
-          <button
-            type="button"
+          <Button
             className="table-cell-action-button chevron-down"
             onClick={(e) => {
               e.stopPropagation();
@@ -911,7 +900,7 @@ function TableCellActionMenuContainer({
             ref={menuRootRef}
           >
             <i className="chevron-down" />
-          </button>
+          </Button>
           {colorPickerModal}
           {isMenuOpen && (
             <TableActionMenu

@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
+import { Button } from 'antd';
 import { COMMAND_PRIORITY_NORMAL, PASTE_COMMAND } from 'lexical';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -34,7 +35,7 @@ export default function PasteLogPlugin(): JSX.Element {
 
   return (
     <>
-      <button
+      <Button
         id="paste-log-button"
         className={`editor-dev-button ${isActive ? 'active' : ''}`}
         onClick={() => {

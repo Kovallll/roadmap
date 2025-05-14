@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Button } from 'antd';
 import {
   $getNearestNodeFromDOMNode,
   EditorThemeClasses,
@@ -252,14 +253,14 @@ function TableHoverActionsContainer({
   return (
     <>
       {isShownRow && (
-        <button
+        <Button
           className={`${getTheme()?.tableAddRows}`}
           style={{ ...position }}
           onClick={() => insertAction(true)}
         />
       )}
       {isShownColumn && (
-        <button
+        <Button
           className={`${getTheme()?.tableAddColumns}`}
           style={{ ...position }}
           onClick={() => insertAction(false)}

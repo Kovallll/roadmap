@@ -25,6 +25,7 @@
     "paths": {
       "@roadmap/*": ["libs/src/*"],
       "@front/*": ["apps/frontend/src/*"],
+      "@public/*": ["apps/frontend/public/*"],
       "@back/*": ["apps/backend/src/*"]
     }
   },

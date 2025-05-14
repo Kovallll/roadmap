@@ -6,7 +6,6 @@ import { CollapsibleTitleNode } from '../plugins/CollapsiblePlugin/CollapsibleTi
 import { AutocompleteNode } from './AutocompleteNode';
 import { FigmaNode } from './FigmaNode';
 import { ImageNode } from './ImageNode/ImageNode';
-import { InlineImageNode } from './InlineImageNode/InlineImageNode';
 import { KeywordNode } from './KeywordNode';
 import { MentionNode } from './MentionNode';
 import { SpecialTextNode } from './SpecialTextNode';
@@ -38,7 +37,6 @@ const EditorNodes: Array<Klass<LexicalNode>> = [
   LinkNode,
   OverflowNode,
   ImageNode,
-  InlineImageNode,
   MentionNode,
   AutocompleteNode,
   KeywordNode,

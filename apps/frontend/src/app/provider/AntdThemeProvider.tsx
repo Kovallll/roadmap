@@ -34,6 +34,10 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
           },
           Button: {
             colorText: colors.black,
+            defaultHoverColor: colors.white,
+            defaultHoverBg: colors.primaryHover,
+            defaultActiveColor: colors.secondary,
+            defaultActiveBg: colors.primary,
           },
           Tabs: {
             itemActiveColor: colors.secondary,

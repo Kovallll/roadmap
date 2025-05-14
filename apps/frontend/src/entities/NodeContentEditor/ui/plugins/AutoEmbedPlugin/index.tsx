@@ -1,10 +1,9 @@
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
+import { Button, Flex, Input, Typography } from 'antd';
 import type { LexicalEditor } from 'lexical';
 
-import Button from '../../components/Button';
-import { DialogActions } from '../../components/Dialog';
 import { INSERT_FIGMA_COMMAND } from '../FigmaPlugin';
 import { INSERT_TWEET_COMMAND } from '../TwitterPlugin';
 import { INSERT_YOUTUBE_COMMAND } from '../YouTubePlugin';
@@ -175,7 +174,7 @@ function AutoEmbedMenuItem({
       onMouseEnter={onMouseEnter}
       onClick={onClick}
     >
-      <span className="text">{option.title}</span>
+      <Typography.Text className="text">{option.title}</Typography.Text>
     </li>
   );
 }
@@ -257,7 +256,7 @@ export function AutoEmbedDialog({
   return (
     <div style={{ width: '600px' }}>
       <div className="Input__wrapper">
-        <input
+        <Input
           type="text"
           className="Input__input"
           placeholder={embedConfig.exampleUrl}
@@ -270,15 +269,11 @@ export function AutoEmbedDialog({
           }}
         />
       </div>
-      <DialogActions>
-        <Button
-          disabled={!embedResult}
-          onClick={onClick}
-          data-test-id={`${embedConfig.type}-embed-modal-submit-btn`}
-        >
+      <Flex>
+        <Button disabled={!embedResult} onClick={onClick}>
           Embed
         </Button>
-      </DialogActions>
+      </Flex>
     </div>
   );
 }

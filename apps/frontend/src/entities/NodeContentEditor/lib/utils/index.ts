@@ -6,3 +6,4 @@ export * from './setFloatingElemPositionForLinkEditor';
 export * from './swipe';
 export * from './url';
 export * from './fontSize';
+export * from './toolbar';

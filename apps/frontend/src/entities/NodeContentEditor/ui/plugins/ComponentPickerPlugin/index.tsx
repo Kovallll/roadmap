@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
+import { Typography } from 'antd';
 import {
   $createParagraphNode,
   $getSelection,
@@ -94,7 +95,7 @@ function ComponentPickerMenuItem({
       onClick={onClick}
     >
       {option.icon}
-      <span className="text">{option.title}</span>
+      <Typography.Text className="text">{option.title}</Typography.Text>
     </li>
   );
 }

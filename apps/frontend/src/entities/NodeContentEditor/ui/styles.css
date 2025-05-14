@@ -1313,15 +1313,6 @@ i.page-break,
   cursor: pointer;
 }
 
-i.chevron-down {
-  background-color: transparent;
-  background-size: contain;
-  display: inline-block;
-  height: 8px;
-  width: 8px;
-  background-image: url(images/icons/chevron-down.svg);
-}
-
 .action-button {
   background-color: #eee;
   border: 0;
@@ -1496,10 +1487,6 @@ button.toolbar-item:disabled .chevron-down {
 
 button.toolbar-item.active i {
   opacity: 1;
-}
-
-.toolbar-item:hover:not([disabled]) {
-  background-color: rgb(67, 62, 144);
 }
 
 .toolbar-item.font-family .text {

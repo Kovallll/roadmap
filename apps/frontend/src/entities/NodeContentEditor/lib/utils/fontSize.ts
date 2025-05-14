@@ -27,7 +27,7 @@ import {
   DEFAULT_FONT_SIZE,
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
-} from '../../model';
+} from '@/shared/ui/TextViewEditors/lib';
 
 export enum UpdateFontSizeType {
   increment = 1,

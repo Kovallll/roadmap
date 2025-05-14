@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Button } from 'antd';
 import {
   $getSelection,
   $isParagraphNode,
@@ -182,8 +183,7 @@ function TextFormatFloatingToolbar({
     <div ref={popupCharStylesEditorRef} className="floating-text-format-popup">
       {editor.isEditable() && (
         <>
-          <button
-            type="button"
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
             }}
@@ -192,9 +192,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text as bold"
           >
             <i className="format bold" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
             }}
@@ -203,9 +202,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text as italics"
           >
             <i className="format italic" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
             }}
@@ -214,9 +212,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to underlined"
           >
             <i className="format underline" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
             }}
@@ -225,9 +222,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text with a strikethrough"
           >
             <i className="format strikethrough" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
             }}
@@ -236,9 +232,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format Subscript"
           >
             <i className="format subscript" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
             }}
@@ -247,9 +242,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format Superscript"
           >
             <i className="format superscript" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
             }}
@@ -258,9 +252,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to uppercase"
           >
             <i className="format uppercase" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
             }}
@@ -269,9 +262,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to lowercase"
           >
             <i className="format lowercase" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
             }}
@@ -280,9 +272,8 @@ function TextFormatFloatingToolbar({
             aria-label="Format text to capitalize"
           >
             <i className="format capitalize" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
             }}
@@ -291,16 +282,15 @@ function TextFormatFloatingToolbar({
             aria-label="Insert code block"
           >
             <i className="format code" />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
             onClick={insertLink}
             className={'popup-item spaced ' + (isLink ? 'active' : '')}
             title="Insert link"
             aria-label="Insert link"
           >
             <i className="format link" />
-          </button>
+          </Button>
         </>
       )}
     </div>

@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Input, InputRef } from 'antd';
 import {
   $getSelection,
   $isLineBreakNode,
@@ -53,7 +54,7 @@ function FloatingLinkEditor({
   setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<InputRef>(null);
   const [linkUrl, setLinkUrl] = useState('');
   const [editedLinkUrl, setEditedLinkUrl] = useState('https://');
   const [lastSelection, setLastSelection] = useState<BaseSelection | null>(
@@ -251,7 +252,7 @@ function FloatingLinkEditor({
     <div ref={editorRef} className="link-editor">
       {!isLink ? null : isLinkEditMode ? (
         <>
-          <input
+          <Input
             ref={inputRef}
             className="link-input"
             value={editedLinkUrl}

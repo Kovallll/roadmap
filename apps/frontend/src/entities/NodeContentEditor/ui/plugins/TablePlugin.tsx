@@ -1,11 +1,11 @@
 import type { JSX } from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { Button, Flex } from 'antd';
 import { EditorThemeClasses, Klass, LexicalEditor, LexicalNode } from 'lexical';
 
-import Button from '../components/Button';
-import { DialogActions } from '../components/Dialog';
-import TextInput from '../components/TextInput';
+import { TextInput } from '../components/TextInput';
 
+import { gaps } from '@/shared/styles/theme';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
   INSERT_TABLE_COMMAND,
@@ -102,7 +102,7 @@ export function InsertTableDialog({
   };
 
   return (
-    <>
+    <Flex vertical gap={gaps.md}>
       <TextInput
         placeholder={'# of rows (1-500)'}
         label="Rows"
@@ -119,12 +119,12 @@ export function InsertTableDialog({
         data-test-id="table-modal-columns"
         type="number"
       />
-      <DialogActions data-test-id="table-model-confirm-insert">
+      <Flex justify="end" data-test-id="table-model-confirm-insert">
         <Button disabled={isDisabled} onClick={onClick}>
           Confirm
         </Button>
-      </DialogActions>
-    </>
+      </Flex>
+    </Flex>
   );
 }
 

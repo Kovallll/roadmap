@@ -49,7 +49,7 @@ function ContextMenuItem({
       onMouseEnter={onMouseEnter}
       onClick={onClick}
     >
-      <span className="text">{option.title}</span>
+      <Typography.Text className="text">{option.title}</Typography.Text>
     </li>
   );
 }

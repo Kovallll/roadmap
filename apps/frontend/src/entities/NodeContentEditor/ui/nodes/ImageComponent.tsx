@@ -20,16 +20,15 @@ import {
   KEY_ESCAPE_COMMAND,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
+import brokenImage from 'public/images/icons/image-broken.svg?url';
 
 import { useSharedHistoryContext } from '../../model';
-import ContentEditable from '../components/ContentEditable';
-import ImageResizer from '../components/ImageResizer';
-import brokenImage from '../images/icons/image-broken.svg';
+import { ContentEditable } from '../components/ContentEditable';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
 import { $isImageNode } from './ImageNode/ImageNode';
 
-import './ImageNode.css';
+import './ImageNode/ImageNode.css';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
@@ -469,19 +468,6 @@ export default function ImageComponent({
               />
             </LexicalNestedComposer>
           </div>
-        )}
-        {resizable && $isNodeSelection(selection) && isFocused && (
-          <ImageResizer
-            showCaption={showCaption}
-            setShowCaption={setShowCaption}
-            editor={editor}
-            buttonRef={buttonRef}
-            imageRef={imageRef}
-            maxWidth={maxWidth}
-            onResizeStart={onResizeStart}
-            onResizeEnd={onResizeEnd}
-            captionsEnabled={!isLoadError && captionsEnabled}
-          />
         )}
       </>
     </Suspense>

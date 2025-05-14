@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import { useRef, useState } from 'react';
+import { Button } from 'antd';
 import { $createParagraphNode, $getNearestNodeFromDOMNode } from 'lexical';
 
 import './index.css';
@@ -52,7 +53,7 @@ export default function DraggableBlockPlugin({
       targetLineRef={targetLineRef as any}
       menuComponent={
         <div ref={menuRef} className="icon draggable-block-menu">
-          <button
+          <Button
             title="Click to add below"
             className="icon icon-plus"
             onClick={insertBlock}

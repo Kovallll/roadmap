@@ -4,7 +4,8 @@ import { EditorState, SerializedEditorState } from 'lexical';
 
 import { useSettings } from '../../model';
 import { useSharedHistoryContext } from '../../model';
-import ContentEditable from '../components/ContentEditable';
+import { ContentEditable } from '../components/ContentEditable';
+import { EditorToolbar } from '../EditorToolbar/EditorToolbar';
 import AutocompletePlugin from '../plugins/AutocompletePlugin';
 import AutoEmbedPlugin from '../plugins/AutoEmbedPlugin';
 import AutoLinkPlugin from '../plugins/AutoLinkPlugin';
@@ -18,7 +19,6 @@ import FigmaPlugin from '../plugins/FigmaPlugin';
 import FloatingLinkEditorPlugin from '../plugins/FloatingLinkEditorPlugin';
 import FloatingTextFormatToolbarPlugin from '../plugins/FloatingTextFormatToolbarPlugin';
 import ImagesPlugin from '../plugins/ImagesPlugin';
-import InlineImagePlugin from '../plugins/InlineImagePlugin';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
 import ShortcutsPlugin from '../plugins/ShortcutsPlugin';
@@ -28,7 +28,6 @@ import TableCellActionMenuPlugin from '../plugins/TableActionMenuPlugin';
 import TableCellResizer from '../plugins/TableCellResizer';
 import TableHoverActionsPlugin from '../plugins/TableHoverActionsPlugin';
 import TableOfContentsPlugin from '../plugins/TableOfContentsPlugin';
-import { ToolbarPlugin } from '../plugins/ToolbarPlugin';
 import TwitterPlugin from '../plugins/TwitterPlugin';
 import YouTubePlugin from '../plugins/YouTubePlugin';
 
@@ -132,7 +131,7 @@ export const Editor = ({
   return (
     <>
       {isRichText && (
-        <ToolbarPlugin
+        <EditorToolbar
           editor={editor}
           activeEditor={activeEditor}
           setActiveEditor={setActiveEditor}
@@ -182,7 +181,6 @@ export const Editor = ({
             />
             <TableCellResizer />
             <ImagesPlugin />
-            <InlineImagePlugin />
             <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
             <TwitterPlugin />
             <YouTubePlugin />

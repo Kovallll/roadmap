@@ -26,6 +26,7 @@ export const StatusSelect = memo(() => {
     const nodeStatus =
       (selectedNode?.data?.status as string) || NodeStatus.PENDING;
     setStatus(nodeStatus);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!selectedNode || !canvas) return null;
