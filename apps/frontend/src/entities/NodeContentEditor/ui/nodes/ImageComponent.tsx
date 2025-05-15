@@ -7,7 +7,6 @@ import type {
   NodeKey,
 } from 'lexical';
 import {
-  $getNodeByKey,
   $getSelection,
   $isNodeSelection,
   $isRangeSelection,
@@ -26,7 +25,6 @@ import { useSharedHistoryContext } from '../../model';
 import { ContentEditable } from '../components/ContentEditable';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
-import { $isImageNode } from './ImageNode/ImageNode';
 
 import './ImageNode/ImageNode.css';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
@@ -202,10 +200,8 @@ export default function ImageComponent({
   width,
   height,
   maxWidth,
-  resizable,
   showCaption,
   caption,
-  captionsEnabled,
 }: {
   altText: string;
   caption: LexicalEditor;
@@ -222,7 +218,7 @@ export default function ImageComponent({
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [isSelected, setSelected, clearSelection] =
     useLexicalNodeSelection(nodeKey);
-  const [isResizing, setIsResizing] = useState<boolean>(false);
+  const [isResizing, _] = useState<boolean>(false);
   const [editor] = useLexicalComposerContext();
   const [selection, setSelection] = useState<BaseSelection | null>(null);
   const activeEditorRef = useRef<LexicalEditor | null>(null);
@@ -389,36 +385,6 @@ export default function ImageComponent({
     onRightClick,
     setSelected,
   ]);
-
-  const setShowCaption = () => {
-    editor.update(() => {
-      const node = $getNodeByKey(nodeKey);
-      if ($isImageNode(node)) {
-        node.setShowCaption(true);
-      }
-    });
-  };
-
-  const onResizeEnd = (
-    nextWidth: 'inherit' | number,
-    nextHeight: 'inherit' | number
-  ) => {
-    // Delay hiding the resize bars for click case
-    setTimeout(() => {
-      setIsResizing(false);
-    }, 200);
-
-    editor.update(() => {
-      const node = $getNodeByKey(nodeKey);
-      if ($isImageNode(node)) {
-        node.setWidthAndHeight(nextWidth, nextHeight);
-      }
-    });
-  };
-
-  const onResizeStart = () => {
-    setIsResizing(true);
-  };
 
   const { historyState } = useSharedHistoryContext();
 

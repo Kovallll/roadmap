@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
+import { Typography } from 'antd';
 import {
   $getNearestNodeFromDOMNode,
   $getSelection,
