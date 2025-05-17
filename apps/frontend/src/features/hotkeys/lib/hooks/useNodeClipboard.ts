@@ -5,16 +5,29 @@ import { useFlowStore } from '../../model';
 import { pasteOffset } from '../constants';
 
 import { Node } from '@xyflow/react';
+import { useCanvasStore } from '@/shared/model';
 
 export const useNodeClipboard = () => {
   const clipboard = useRef<Node[]>([]);
-  const setNodes = useFlowStore.use.setNodes();
-  const nodes = useFlowStore.use.nodes();
   const offsetStep = useRef(0);
 
+  const setNodes = useFlowStore.use.setNodes();
+  const nodes = useFlowStore.use.nodes();
+  const isEdit = useCanvasStore.use.isEdit();
+
   useEffect(() => {
+    if (!isEdit) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrl = e.ctrlKey || e.metaKey;
+
+      const active = document.activeElement;
+      const isInput =
+        active?.tagName === 'INPUT' ||
+        active?.tagName === 'TEXTAREA' ||
+        (active as HTMLElement)?.isContentEditable;
+
+      if (isInput) return;
 
       if (isCtrl && e.key === 'c') {
         const selected = nodes.filter((n) => n.selected);

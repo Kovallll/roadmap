@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 export const useSaveCanvas = (id: string, notify = true) => {
   const queryClient = useQueryClient();
   const setIsSave = useCanvasStore.use.setIsSave();
+  const isEdit = useCanvasStore.use.isEdit();
 
   return useMutation({
     mutationFn: (canvas: Canvas) => saveCanvas(canvas),
@@ -21,7 +22,7 @@ export const useSaveCanvas = (id: string, notify = true) => {
         queryKey: ['getCanvases'],
       });
       if (notify) toast.success('Карта успешно сохранена');
-      setIsSave(true);
+      if (isEdit) setIsSave(true);
     },
     onError: (error: AxiosError<ApiResponseError>) => {
       toast.error(

@@ -76,9 +76,9 @@ export const NodePropsEditor = ({
   const bgColor =
     (selectedNode.data?.backgroundColor as string) ?? colors.white;
   const justifyContent =
-    (selectedNode.data?.justifyContent as AlignType) ?? AlignTypes.START;
+    (selectedNode.data?.justifyContent as AlignType) ?? AlignTypes.CENTER;
   const alignItems =
-    (selectedNode.data?.alignItems as AlignType) ?? AlignTypes.START;
+    (selectedNode.data?.alignItems as AlignType) ?? AlignTypes.CENTER;
   const width = (selectedNode.data?.width as number) ?? defaultNodeWidth;
   const height =
     (selectedNode.data?.height as number | string) ?? defaultNodeHeight;

@@ -26,8 +26,8 @@ export const TextArea = ({
   const fontSize = Number(data?.fontSize ?? fontSizes.lg);
   const backgroundColor = String(data?.backgroundColor);
   const status = String(data?.status ?? NodeStatus.PENDING);
-  const justifyContent = String(data?.justifyContent ?? AlignTypes.START);
-  const alignItems = String(data?.alignItems ?? AlignTypes.START);
+  const justifyContent = String(data?.justifyContent ?? AlignTypes.CENTER);
+  const alignItems = String(data?.alignItems ?? AlignTypes.CENTER);
   const customColor = String(data?.color ?? colors.black);
 
   const color =

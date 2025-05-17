@@ -24,7 +24,7 @@ export const ContentArea = () => {
     editor.setEditable(false);
   }, [editor, content]);
 
-  if (!selectedNode) return null;
+  if (!content) return null;
 
   return (
     <>

@@ -7,7 +7,7 @@ import { Edge, Node } from '@xyflow/react';
 import { isEmpty, isEqualWith } from 'lodash';
 
 export const flowStore = create<FlowState>((set, get) => {
-  const { setIsSave } = canvasStore.getState();
+  const { setIsSave, isEdit } = canvasStore.getState();
 
   const isEqualWithoutSelected = (
     val1: Node[] | Edge[],
@@ -37,7 +37,7 @@ export const flowStore = create<FlowState>((set, get) => {
       set({ nodes: updatedNodes });
 
       const isEqualNodes = isEqualWithoutSelected(nodes, updatedNodes);
-      if (!isEmpty(nodes) && !isEqualNodes) setIsSave(false);
+      if (!isEmpty(nodes) && !isEqualNodes && isEdit) setIsSave(false);
 
       if (options?.undo) {
         set((state) => ({
@@ -57,7 +57,7 @@ export const flowStore = create<FlowState>((set, get) => {
       set({ edges: updatedEdges });
 
       const isEqualEdges = isEqualWithoutSelected(edges, updatedEdges);
-      if (!isEmpty(edges) && !isEqualEdges) setIsSave(false);
+      if (!isEmpty(edges) && !isEqualEdges && isEdit) setIsSave(false);
 
       if (options?.undo) {
         set((state) => ({
@@ -70,7 +70,7 @@ export const flowStore = create<FlowState>((set, get) => {
     undo: () => {
       const { undoStack, redoStack, nodes, edges } = get();
       if (undoStack.length === 0) {
-        setIsSave(true);
+        if (isEdit) setIsSave(true);
         return;
       }
 

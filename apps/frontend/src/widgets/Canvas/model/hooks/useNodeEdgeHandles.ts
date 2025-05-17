@@ -22,6 +22,13 @@ export const useNodeEdgeHandles = (
   const setNodes = useFlowStore.use.setNodes();
   const setEdges = useFlowStore.use.setEdges();
 
+  const isEdit = useCanvasStore.use.isEdit();
+  const setCanvasData = useCanvasStore.use.setCanvasData();
+  const setCanvas = useCanvasStore.use.setCanvas();
+
+  const setSelectedNode = useSelectedNodeStore.use.setSelectedNode();
+  const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
+
   useEffect(() => {
     setNodes(canvas.data?.nodes || []);
     setEdges(canvas.data?.edges || []);
@@ -29,25 +36,27 @@ export const useNodeEdgeHandles = (
 
   const onNodesChange: OnNodesChange = useCallback(
     (changes) => {
-      setNodes((nds) => applyNodeChanges(changes, nds));
+      const filteredChanges = isEdit
+        ? changes
+        : changes.filter((c) => c.type !== 'remove');
+      setNodes((nds) => applyNodeChanges(filteredChanges, nds));
     },
     [setNodes]
   );
 
   const onEdgesChange: OnEdgesChange = useCallback(
     (changes) => {
-      setEdges((eds) => applyEdgeChanges(changes, eds));
+      const filteredChanges = isEdit
+        ? changes
+        : changes.filter((c) => c.type !== 'remove');
+      setEdges((eds) => applyEdgeChanges(filteredChanges, eds));
     },
     [setEdges]
   );
-  const setCanvasData = useCanvasStore.use.setCanvasData();
-  const setCanvas = useCanvasStore.use.setCanvas();
-
-  const setSelectedNode = useSelectedNodeStore.use.setSelectedNode();
-  const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
 
   const handleSelectEdge = useCallback(
     (_: React.MouseEvent, edge: Edge) => {
+      handleChangeOpen(true);
       setSelectedNode(null);
       setSelectedEdge(edge);
     },

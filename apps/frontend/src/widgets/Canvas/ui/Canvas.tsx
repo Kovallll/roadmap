@@ -94,7 +94,9 @@ const Canvas = ({ canvas }: CanvasProps) => {
         <Background variant={BackgroundVariant.Lines} />
         <ComponentsSidebar nodeLabels={nodeLabels} />
         <NodeSidebar isOpen={isOpen} handleChangeOpen={handleChangeOpen} />
-        <EdgeSidebar isOpen={isOpen} handleChangeOpen={handleChangeOpen} />
+        {isEdit && (
+          <EdgeSidebar isOpen={isOpen} handleChangeOpen={handleChangeOpen} />
+        )}
         <Controls />
         <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
         <AlignLines />

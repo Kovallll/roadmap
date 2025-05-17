@@ -23,6 +23,10 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    .hidden {
+      opacity: 0;
+    }
   }
 }
 

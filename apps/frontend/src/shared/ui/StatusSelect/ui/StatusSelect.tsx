@@ -1,6 +1,7 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { Flex, Select, Typography } from 'antd';
 
+import { getStyledLabel } from '../lib';
 import styles from './styles.module.scss';
 
 import { useSaveCanvas } from '@/features/canvas/model';
@@ -15,25 +16,17 @@ import { useReactFlow } from '@xyflow/react';
 const { Text } = Typography;
 
 export const StatusSelect = memo(() => {
-  const [status, setStatus] = useState<string>(NodeStatus.PENDING);
+  const { updateNode } = useReactFlow();
   const selectedNode = useSelectedNodeStore.use.selectedNode();
   const canvas = useCanvasStore.use.canvas();
-
-  const { updateNode } = useReactFlow();
   const { mutate } = useSaveCanvas(canvas?.id ?? '', false);
 
-  useEffect(() => {
-    const nodeStatus =
-      (selectedNode?.data?.status as string) || NodeStatus.PENDING;
-    setStatus(nodeStatus);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const nodeStatus =
+    (selectedNode?.data?.status as string) || NodeStatus.PENDING;
 
   if (!selectedNode || !canvas) return null;
 
   const handleChangeStatus = (status: string) => {
-    setStatus(status);
-
     if (!canvas.data?.nodes) return;
 
     const updatedCanvas = {
@@ -65,20 +58,10 @@ export const StatusSelect = memo(() => {
     }));
   };
 
-  const getStyledLabel = (value: string, color?: string) => (
-    <Text
-      style={{
-        color: color || nodeStatuses.find((s) => s.value === value)?.color,
-      }}
-    >
-      {value}
-    </Text>
-  );
-
   return (
     <Select
       className={styles.select}
-      value={{ value: status, label: getStyledLabel(status) }}
+      value={{ value: nodeStatus, label: getStyledLabel(nodeStatus) }}
       labelInValue
       onChange={({ value }) => handleChangeStatus(value)}
       options={nodeStatuses.map((opt) => ({
