@@ -40,7 +40,7 @@ export function FileInput({
   };
 
   return (
-    <Flex justify="space-between" align="center">
+    <Flex justify="space-between" align="start">
       <Typography.Text className={styles.label}>{label}</Typography.Text>
       <Upload
         accept={accept}

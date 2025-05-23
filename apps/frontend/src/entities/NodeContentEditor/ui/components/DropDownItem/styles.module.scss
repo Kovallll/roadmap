@@ -1,0 +1,47 @@
+.item {
+  width: 256px;
+  margin: 0 $gap-xs $gap-xxs $gap-xs;
+  padding: $gap-xs;
+  color: #050505;
+  cursor: pointer;
+  line-height: 16px;
+  font-size: 15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  justify-content: space-between;
+  background-color: inherit;
+  color: white;
+  border-radius: 8px;
+  border: 0;
+  max-width: 264px;
+  min-width: 100px;
+}
+
+.active {
+  color: #f17900;
+  border: 1px solid #f17900;
+  opacity: 1;
+}
+
+.content {
+  width: 100%;
+}
+
+.shortcut {
+  color: #939393;
+}
+
+.dropIcon {
+  margin-right: $gap-xxs;
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.text {
+  display: flex;
+  flex-grow: 1;
+}

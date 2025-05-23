@@ -1,30 +1,24 @@
 import { ColorPicker } from '../ColorPicker';
-import { DropDown } from './DropDown';
+import { DropDown } from '../DropDown';
+import styles from './styles.module.scss';
 
-type Props = {
-  disabled?: boolean;
-  buttonAriaLabel?: string;
-  buttonClassName: string;
-  buttonIconClassName?: string;
-  buttonLabel?: string;
-  title?: string;
-  stopCloseOnClickSelf?: boolean;
-  color: string;
-  onChange?: (color: string, skipHistoryStack: boolean) => void;
-};
+import { DropdownColorPickerProps } from '@/entities/NodeContentEditor/model';
 
 export function DropdownColorPicker({
   disabled = false,
   stopCloseOnClickSelf = true,
   color,
+  iconComponent,
   onChange,
   ...rest
-}: Props) {
+}: DropdownColorPickerProps) {
   return (
     <DropDown
       {...rest}
+      buttonClassName={styles.container}
       disabled={disabled}
       stopCloseOnClickSelf={stopCloseOnClickSelf}
+      iconComponent={iconComponent}
     >
       <ColorPicker color={color} onChange={onChange} />
     </DropDown>

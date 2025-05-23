@@ -1,11 +1,11 @@
 import { JSX, useCallback } from 'react';
-import { Typography } from 'antd';
 import { $getSelection, LexicalEditor } from 'lexical';
 
-import { DropDown, DropDownItem } from '../../components/DropDown';
+import { DropDown } from '../DropDown';
+import { DropDownItem } from '../DropDownItem';
+import styles from './styles.module.scss';
 
 import {
-  dropDownActiveClass,
   FONT_FAMILY_OPTIONS,
   FONT_SIZE_OPTIONS,
 } from '@/entities/NodeContentEditor/lib';
@@ -43,8 +43,8 @@ export function FontDropDown({
 
   return (
     <DropDown
+      buttonClassName={styles.dropDown}
       disabled={disabled}
-      buttonClassName={'toolbar-item ' + style}
       buttonLabel={value}
       buttonIconClassName={
         style === 'font-family' ? 'icon block-type font-family' : ''
@@ -54,14 +54,10 @@ export function FontDropDown({
       {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
         ([option, text]) => (
           <DropDownItem
-            className={`item ${dropDownActiveClass(value === option)} ${
-              style === 'font-size' ? 'fontsize-item' : ''
-            }`}
             onClick={() => handleClick(option)}
             key={option}
-          >
-            <Typography.Text className="text">{text}</Typography.Text>
-          </DropDownItem>
+            item={{ title: text, isActive: value === option }}
+          />
         )
       )}
     </DropDown>

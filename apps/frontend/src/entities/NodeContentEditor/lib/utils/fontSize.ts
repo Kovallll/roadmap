@@ -6,6 +6,11 @@ import {
   LexicalEditor,
 } from 'lexical';
 
+import {
+  DEFAULT_FONT_SIZE,
+  MAX_ALLOWED_FONT_SIZE,
+  MIN_ALLOWED_FONT_SIZE,
+} from '@/shared/ui/TextViewEditors/lib';
 import { $createCodeNode } from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,
@@ -23,11 +28,6 @@ import {
 import { $patchStyleText, $setBlocksType } from '@lexical/selection';
 import { $isTableSelection } from '@lexical/table';
 import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
-import {
-  DEFAULT_FONT_SIZE,
-  MAX_ALLOWED_FONT_SIZE,
-  MIN_ALLOWED_FONT_SIZE,
-} from '@/shared/ui/TextViewEditors/lib';
 
 export enum UpdateFontSizeType {
   increment = 1,
@@ -156,18 +156,20 @@ export const formatParagraph = (editor: LexicalEditor) => {
 
 export const formatHeading = (
   editor: LexicalEditor,
-  blockType: string,
-  headingSize: HeadingTagType
+  blockType?: string,
+  headingSize?: string
 ) => {
   if (blockType !== headingSize) {
     editor.update(() => {
       const selection = $getSelection();
-      $setBlocksType(selection, () => $createHeadingNode(headingSize));
+      $setBlocksType(selection, () =>
+        $createHeadingNode(headingSize as HeadingTagType)
+      );
     });
   }
 };
 
-export const formatBulletList = (editor: LexicalEditor, blockType: string) => {
+export const formatBulletList = (editor: LexicalEditor, blockType?: string) => {
   if (blockType !== 'bullet') {
     editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
   } else {
@@ -175,7 +177,7 @@ export const formatBulletList = (editor: LexicalEditor, blockType: string) => {
   }
 };
 
-export const formatCheckList = (editor: LexicalEditor, blockType: string) => {
+export const formatCheckList = (editor: LexicalEditor, blockType?: string) => {
   if (blockType !== 'check') {
     editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
   } else {
@@ -185,7 +187,7 @@ export const formatCheckList = (editor: LexicalEditor, blockType: string) => {
 
 export const formatNumberedList = (
   editor: LexicalEditor,
-  blockType: string
+  blockType?: string
 ) => {
   if (blockType !== 'number') {
     editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
@@ -194,7 +196,7 @@ export const formatNumberedList = (
   }
 };
 
-export const formatQuote = (editor: LexicalEditor, blockType: string) => {
+export const formatQuote = (editor: LexicalEditor, blockType?: string) => {
   if (blockType !== 'quote') {
     editor.update(() => {
       const selection = $getSelection();
@@ -203,7 +205,7 @@ export const formatQuote = (editor: LexicalEditor, blockType: string) => {
   }
 };
 
-export const formatCode = (editor: LexicalEditor, blockType: string) => {
+export const formatCode = (editor: LexicalEditor, blockType?: string) => {
   if (blockType !== 'code') {
     editor.update(() => {
       let selection = $getSelection();

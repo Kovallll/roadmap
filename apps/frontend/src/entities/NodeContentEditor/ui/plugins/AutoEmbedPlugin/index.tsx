@@ -3,6 +3,9 @@ import { useMemo, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 import { Button, Flex, Input, Typography } from 'antd';
 import type { LexicalEditor } from 'lexical';
+import FigmaIcon from 'public/images/icons/figma.svg?react';
+import XIcon from 'public/images/icons/x.svg?react';
+import YoutubeIcon from 'public/images/icons/youtube.svg?react';
 
 import { INSERT_FIGMA_COMMAND } from '../FigmaPlugin';
 import { INSERT_TWEET_COMMAND } from '../TwitterPlugin';
@@ -41,7 +44,7 @@ export const YoutubeEmbedConfig: PlaygroundEmbedConfig = {
   exampleUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
 
   // Icon for display.
-  icon: <i className="icon youtube" />,
+  icon: <YoutubeIcon />,
 
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
     editor.dispatchCommand(INSERT_YOUTUBE_COMMAND, result.id);
@@ -76,7 +79,7 @@ export const TwitterEmbedConfig: PlaygroundEmbedConfig = {
   exampleUrl: 'https://x.com/jack/status/20',
 
   // Icon for display.
-  icon: <i className="icon x" />,
+  icon: <XIcon />,
 
   // Create the Lexical embed node from the url data.
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
@@ -111,7 +114,7 @@ export const FigmaEmbedConfig: PlaygroundEmbedConfig = {
 
   exampleUrl: 'https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File',
 
-  icon: <i className="icon figma" />,
+  icon: <FigmaIcon />,
 
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
     editor.dispatchCommand(INSERT_FIGMA_COMMAND, result.id);
@@ -254,11 +257,10 @@ export function AutoEmbedDialog({
   };
 
   return (
-    <div style={{ width: '600px' }}>
+    <>
       <div className="Input__wrapper">
         <Input
           type="text"
-          className="Input__input"
           placeholder={embedConfig.exampleUrl}
           value={text}
           data-test-id={`${embedConfig.type}-embed-modal-url`}
@@ -269,12 +271,13 @@ export function AutoEmbedDialog({
           }}
         />
       </div>
+      <br />
       <Flex>
         <Button disabled={!embedResult} onClick={onClick}>
           Embed
         </Button>
       </Flex>
-    </div>
+    </>
   );
 }
 

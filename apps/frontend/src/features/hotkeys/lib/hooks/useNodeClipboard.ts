@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFlowStore } from '../../model';
 import { pasteOffset } from '../constants';
 
-import { Node } from '@xyflow/react';
 import { useCanvasStore } from '@/shared/model';
+import { Node } from '@xyflow/react';
 
 export const useNodeClipboard = () => {
   const clipboard = useRef<Node[]>([]);

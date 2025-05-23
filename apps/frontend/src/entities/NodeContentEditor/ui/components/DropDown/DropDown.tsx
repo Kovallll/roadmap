@@ -1,14 +1,18 @@
 import type { JSX } from 'react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Button, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
+import cn from 'classnames';
 import { isDOMNode } from 'lexical';
 import ChevronDown from 'public/images/icons/chevron-down.svg?react';
 
-import { DropDownItems } from './DropDownItems';
+import { DropDownItems } from '../DropDownItems';
+import styles from './styles.module.scss';
 
 import { dropDownPadding } from '@/entities/NodeContentEditor/lib';
+import { DropDownProps } from '@/entities/NodeContentEditor/model';
 import { colors } from '@/shared/styles/theme';
+
 export function DropDown({
   disabled = false,
   buttonLabel,
@@ -17,15 +21,8 @@ export function DropDown({
   buttonIconClassName,
   children,
   stopCloseOnClickSelf,
-}: {
-  disabled?: boolean;
-  buttonAriaLabel?: string;
-  buttonClassName: string;
-  buttonIconClassName?: string;
-  buttonLabel?: string;
-  children: ReactNode;
-  stopCloseOnClickSelf?: boolean;
-}): JSX.Element {
+  iconComponent,
+}: DropDownProps): JSX.Element {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -106,19 +103,22 @@ export function DropDown({
       <Button
         disabled={disabled}
         aria-label={buttonAriaLabel || buttonLabel}
-        className={buttonClassName}
+        className={cn(styles.dropdown, buttonClassName)}
         onClick={() => setShowDropDown(!showDropDown)}
         ref={buttonRef}
       >
-        {buttonIconClassName && (
-          <Typography.Text className={buttonIconClassName} />
-        )}
+        <Flex className={cn(styles.icon, buttonIconClassName)}>
+          {iconComponent}
+        </Flex>
+
         {buttonLabel && (
-          <Typography.Text className="text dropdown-button-text">
+          <Typography.Text className={styles.text}>
             {buttonLabel}
           </Typography.Text>
         )}
-        <ChevronDown fill={showDropDown ? colors.secondary : colors.white} />
+        <div className={styles.arrowIcon}>
+          <ChevronDown fill={showDropDown ? colors.secondary : colors.white} />
+        </div>
       </Button>
 
       {showDropDown &&

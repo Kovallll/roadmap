@@ -1,3 +1,7 @@
+.editor {
+  caret-color: $caret-color;
+}
+
 .other h2 {
   font-size: 18px;
   color: #444;
@@ -51,12 +55,12 @@ h1 {
   min-height: 150px;
   resize: none;
   font-size: 15px;
-  caret-color: rgb(5, 5, 5);
+  caret-color: #fff;
   position: relative;
   tab-size: 1;
   outline: 0;
   padding: 15px 10px;
-  caret-color: #444;
+  caret-color: #fff;
 }
 
 .editor-placeholder {

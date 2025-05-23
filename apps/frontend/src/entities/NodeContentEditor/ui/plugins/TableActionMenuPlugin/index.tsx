@@ -14,9 +14,13 @@ import {
   isDOMNode,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
+import VerticalBottomIcon from 'public/images/icons/vertical-bottom.svg?react';
+import VerticalMiddleIcon from 'public/images/icons/vertical-middle.svg?react';
+import VerticalTopIcon from 'public/images/icons/vertical-top.svg?react';
 
 import { ColorPicker } from '../../components/ColorPicker';
-import { DropDown, DropDownItem } from '../../components/DropDown';
+import { DropDown } from '../../components/DropDown';
+import { DropDownItem } from '../../components/DropDownItem';
 
 import { useModal } from '@/entities/NodeContentEditor/model';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -526,35 +530,20 @@ const TableActionMenu = ({
           onClick={() => {
             formatVerticalAlign('top');
           }}
-          className="item wide"
-        >
-          <div className="icon-text-container">
-            <i className="icon vertical-top" />
-            <Typography.Text className="text">Top Align</Typography.Text>
-          </div>
-        </DropDownItem>
+          item={{ Icon: <VerticalTopIcon />, title: 'Top Align' }}
+        />
         <DropDownItem
           onClick={() => {
             formatVerticalAlign('middle');
           }}
-          className="item wide"
-        >
-          <div className="icon-text-container">
-            <i className="icon vertical-middle" />
-            <Typography.Text className="text">Middle Align</Typography.Text>
-          </div>
-        </DropDownItem>
+          item={{ Icon: <VerticalMiddleIcon />, title: 'Middle Align' }}
+        />
         <DropDownItem
           onClick={() => {
             formatVerticalAlign('bottom');
           }}
-          className="item wide"
-        >
-          <div className="icon-text-container">
-            <i className="icon vertical-bottom" />
-            <Typography.Text className="text">Bottom Align</Typography.Text>
-          </div>
-        </DropDownItem>
+          item={{ Icon: <VerticalBottomIcon />, title: 'Bottom Align' }}
+        />
       </DropDown>
       <Button
         className="item"

@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { Modal, Typography } from 'antd';
+import { fontSizes } from '@/shared/styles/theme';
 
 export const useModal = (): [
   JSX.Element | null,
@@ -41,7 +42,9 @@ export const useModal = (): [
         onClose={onClose}
         okButtonProps={{ style: { display: 'none' } }}
       >
-        <Typography.Title style={{ color: 'black' }}>{title}</Typography.Title>
+        <Typography.Title style={{ color: 'black', fontSize: fontSizes.xxl }}>
+          {title}
+        </Typography.Title>
         {content}
       </Modal>
     );

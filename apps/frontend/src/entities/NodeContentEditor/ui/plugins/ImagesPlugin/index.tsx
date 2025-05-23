@@ -59,6 +59,7 @@ export function InsertImageUriDialogBody({
         value={src}
         data-test-id="image-modal-url-input"
       />
+      <br />
       <TextInput
         label="Alt Text"
         placeholder="Random unsplash image"
@@ -66,6 +67,7 @@ export function InsertImageUriDialogBody({
         value={altText}
         data-test-id="image-modal-alt-text-input"
       />
+      <br />
       <Flex justify="end">
         <Button
           data-test-id="image-modal-confirm-btn"
@@ -86,7 +88,6 @@ export function InsertImageUploadedDialogBody({
 }) {
   const [src, setSrc] = useState('');
   const [altText, setAltText] = useState('');
-  console.log(src, 'src');
   const isDisabled = src === '';
 
   const loadImage = (files: FileList | null) => {

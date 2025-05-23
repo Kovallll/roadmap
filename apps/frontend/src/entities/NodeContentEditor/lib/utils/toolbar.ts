@@ -11,11 +11,3 @@ export function getCodeLanguageOptions(): [string, string][] {
 
   return options;
 }
-
-export function dropDownActiveClass(active: boolean) {
-  if (active) {
-    return 'active dropdown-item-active';
-  } else {
-    return '';
-  }
-}

@@ -2,6 +2,10 @@ import type { JSX } from 'react';
 import { useRef, useState } from 'react';
 import { Button } from 'antd';
 import { $createParagraphNode, $getNearestNodeFromDOMNode } from 'lexical';
+import DragIcon from 'public/images/icons/draggable-block-menu.svg?react';
+import PlusIcon from 'public/images/icons/plus.svg?react';
+
+import styles from './styles.module.scss';
 
 import './index.css';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -55,10 +59,14 @@ export default function DraggableBlockPlugin({
         <div ref={menuRef} className="icon draggable-block-menu">
           <Button
             title="Click to add below"
-            className="icon icon-plus"
+            className={styles.draggableBlock}
             onClick={insertBlock}
-          />
-          <div className="icon" />
+          >
+            <PlusIcon />
+          </Button>
+          <Button title="Click to add below" className={styles.draggableBlock}>
+            <DragIcon />
+          </Button>
         </div>
       }
       targetLineComponent={

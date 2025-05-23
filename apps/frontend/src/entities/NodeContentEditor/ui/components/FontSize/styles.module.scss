@@ -1,0 +1,50 @@
+.icon {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.button {
+  border: 0;
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  padding: $gap-xs;
+  margin: 0 $gap-xxs;
+  cursor: pointer;
+  vertical-align: middle;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+}
+
+.input {
+  background: $primary-color;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: $font-xs;
+  color: white;
+  height: 32px;
+  width: 32px;
+  margin: 0 $gap-xxs;
+  padding: $gap-xxs;
+  text-align: center;
+  align-self: center;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 0 2px $secondary-color;
+    background: $primary-color;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  -moz-appearance: textfield;
+}

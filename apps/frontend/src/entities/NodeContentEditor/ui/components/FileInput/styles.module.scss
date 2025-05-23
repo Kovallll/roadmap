@@ -3,3 +3,10 @@
   font-size: $font-sm;
   width: 100%;
 }
+
+:global(.ant-upload-wrapper) {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
+}

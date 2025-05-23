@@ -1,10 +1,10 @@
+import { isEmpty, isEqualWith } from 'lodash';
 import { create } from 'zustand';
 
 import { FlowState, SetState, UndoRedoOptions } from './types';
 
 import { canvasStore, createSelectors } from '@/shared/model';
 import { Edge, Node } from '@xyflow/react';
-import { isEmpty, isEqualWith } from 'lodash';
 
 export const flowStore = create<FlowState>((set, get) => {
   const { setIsSave, isEdit } = canvasStore.getState();

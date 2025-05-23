@@ -30,6 +30,7 @@ import TableHoverActionsPlugin from '../plugins/TableHoverActionsPlugin';
 import TableOfContentsPlugin from '../plugins/TableOfContentsPlugin';
 import TwitterPlugin from '../plugins/TwitterPlugin';
 import YouTubePlugin from '../plugins/YouTubePlugin';
+import styles from './styles.module.scss';
 
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { CharacterLimitPlugin } from '@lexical/react/LexicalCharacterLimitPlugin';
@@ -129,7 +130,7 @@ export const Editor = ({
   }, [isSmallWidthViewport]);
 
   return (
-    <>
+    <div className={styles.editor}>
       {isRichText && (
         <EditorToolbar
           editor={editor}
@@ -235,6 +236,6 @@ export const Editor = ({
         {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
         {shouldAllowHighlightingWithBrackets && <SpecialTextPlugin />}
       </div>
-    </>
+    </div>
   );
 };

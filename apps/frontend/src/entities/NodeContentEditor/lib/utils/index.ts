@@ -7,3 +7,4 @@ export * from './swipe';
 export * from './url';
 export * from './fontSize';
 export * from './toolbar';
+export * from './colors';

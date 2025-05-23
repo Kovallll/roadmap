@@ -1,4 +1,5 @@
 import { ElementFormatType } from 'lexical';
+
 import { getCodeLanguageOptions } from '../utils';
 
 export const rootTypeToRootName = {

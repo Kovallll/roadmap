@@ -48,6 +48,9 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
           Divider: {
             colorSplit: colors.secondary,
           },
+          Upload: {
+            colorText: colors.black,
+          },
         },
       }}
     >

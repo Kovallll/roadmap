@@ -1,17 +1,10 @@
 import type { JSX } from 'react';
-import { HTMLInputTypeAttribute } from 'react';
 import { Flex, Input, Typography } from 'antd';
+import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-type Props = Readonly<{
-  'data-test-id'?: string;
-  label: string;
-  onChange: (val: string) => void;
-  placeholder?: string;
-  value: string;
-  type?: HTMLInputTypeAttribute;
-}>;
+import { TextInputProps } from '@/entities/NodeContentEditor/model';
 
 export function TextInput({
   label,
@@ -20,10 +13,15 @@ export function TextInput({
   placeholder = '',
   'data-test-id': dataTestId,
   type = 'text',
-}: Props): JSX.Element {
+  labelClassName,
+  containerClassName,
+  ...rest
+}: TextInputProps): JSX.Element {
   return (
-    <Flex justify="space-between" align="center">
-      <Typography.Text className={styles.label}>{label}</Typography.Text>
+    <Flex justify="space-between" align="center" className={containerClassName}>
+      <Typography.Text className={classNames(styles.label, labelClassName)}>
+        {label}
+      </Typography.Text>
       <Input
         type={type}
         placeholder={placeholder}
@@ -33,6 +31,7 @@ export function TextInput({
         }}
         data-test-id={dataTestId}
         className={styles.input}
+        {...rest}
       />
     </Flex>
   );
