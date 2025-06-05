@@ -2,7 +2,7 @@ import { ElementFormatType } from 'lexical';
 
 import { rootTypeToRootName } from './toolbar';
 
-import { DEFAULT_FONT_SIZE } from '@/shared/ui/TextViewEditors/lib';
+import { DEFAULT_FONT_SIZE } from '@/shared/ui/Align/lib';
 
 export {
   CODE_LANGUAGE_OPTIONS,
@@ -13,8 +13,7 @@ export {
 } from './toolbar';
 
 export * from './enums';
-
-export const placeholder = 'Enter some rich text...';
+export * from './settings';
 
 export const INITIAL_TOOLBAR_STATE = {
   bgColor: '#fff',
@@ -66,3 +65,5 @@ export const basicColors = [
   '#9b9b9b',
   '#ffffff',
 ];
+
+export const placeholder = 'Enter some text...';

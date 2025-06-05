@@ -17,8 +17,8 @@ import { NodeContentEditor } from '@/entities/NodeContentEditor/ui/NodeContentEd
 import { defaultNodeHeight, defaultNodeWidth } from '@/shared/lib';
 import { AlignType, AlignTypes, useSelectedNodeStore } from '@/shared/model';
 import { colors, fontSizes, gaps } from '@/shared/styles/theme';
+import { Align } from '@/shared/ui/Align/ui';
 import { StatusSelect } from '@/shared/ui/StatusSelect/ui/StatusSelect';
-import { Align } from '@/shared/ui/TextViewEditors/ui';
 
 export const NodePropsEditor = ({
   handleUpdate,

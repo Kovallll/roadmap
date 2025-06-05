@@ -1,7 +1,7 @@
 import { Flex } from 'antd';
 import cn from 'classnames';
 
-import { AlignHorizontalProps } from '../../../model';
+import { AlignHorizontalProps } from '../../../../Align/model';
 import styles from '../styles.module.scss';
 
 import { AlignTypes } from '@/shared/model';

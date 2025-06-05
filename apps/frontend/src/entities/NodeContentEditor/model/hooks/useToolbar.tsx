@@ -61,7 +61,7 @@ import {
   TransformButtonType,
 } from '../types';
 
-import { SHORTCUTS } from '@/shared/ui/TextViewEditors/lib';
+import { SHORTCUTS } from '@/shared/ui/Align/lib';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { INSERT_HORIZONTAL_RULE_COMMAND } from '@lexical/react/LexicalHorizontalRuleNode';
 import { IS_APPLE } from '@lexical/utils';

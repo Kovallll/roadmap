@@ -10,7 +10,7 @@ import {
   DEFAULT_FONT_SIZE,
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
-} from '@/shared/ui/TextViewEditors/lib';
+} from '@/shared/ui/Align/lib';
 import { $createCodeNode } from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,

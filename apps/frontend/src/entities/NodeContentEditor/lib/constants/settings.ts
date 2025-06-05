@@ -1,3 +1,5 @@
+import { SettingName } from '../../model';
+
 export const DEFAULT_SETTINGS = {
   disableBeforeInput: false,
   hasLinkAttributes: false,
@@ -25,7 +27,3 @@ export const DEFAULT_SETTINGS = {
 export const INITIAL_SETTINGS: Record<SettingName, boolean> = {
   ...DEFAULT_SETTINGS,
 };
-
-export type SettingName = keyof typeof DEFAULT_SETTINGS;
-
-export type Settings = typeof INITIAL_SETTINGS;

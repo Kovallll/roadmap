@@ -1,14 +1,12 @@
 import type { JSX } from 'react';
 import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Button } from 'antd';
 import {
   $getSelection,
   $isParagraphNode,
   $isRangeSelection,
   $isTextNode,
   COMMAND_PRIORITY_LOW,
-  FORMAT_TEXT_COMMAND,
   getDOMSelection,
   LexicalEditor,
   SELECTION_CHANGE_COMMAND,
@@ -17,10 +15,12 @@ import {
 import { getDOMRangeRect } from '../../../lib/utils/getDOMRangeRect';
 import { getSelectedNode } from '../../../lib/utils/getSelectedNode';
 import { setFloatingElemPosition } from '../../../lib/utils/setFloatingElemPosition';
+import { TextFormatButtons } from '../../components/TextFormatButtons';
+import { TransformButtons } from '../../components/TransformButtons';
 
 import './index.css';
 import { $isCodeHighlightNode } from '@lexical/code';
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $isLinkNode } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
 
@@ -28,16 +28,6 @@ function TextFormatFloatingToolbar({
   editor,
   anchorElem,
   isLink,
-  isBold,
-  isItalic,
-  isUnderline,
-  isUppercase,
-  isLowercase,
-  isCapitalize,
-  isCode,
-  isStrikethrough,
-  isSubscript,
-  isSuperscript,
   setIsLinkEditMode,
 }: {
   editor: LexicalEditor;
@@ -56,16 +46,6 @@ function TextFormatFloatingToolbar({
   setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
-
-  const insertLink = useCallback(() => {
-    if (!isLink) {
-      setIsLinkEditMode(true);
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, 'https://');
-    } else {
-      setIsLinkEditMode(false);
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
-  }, [editor, isLink, setIsLinkEditMode]);
 
   function mouseMoveListener(e: MouseEvent) {
     if (
@@ -183,114 +163,11 @@ function TextFormatFloatingToolbar({
     <div ref={popupCharStylesEditorRef} className="floating-text-format-popup">
       {editor.isEditable() && (
         <>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
-            }}
-            className={'popup-item spaced ' + (isBold ? 'active' : '')}
-            title="Bold"
-            aria-label="Format text as bold"
-          >
-            <i className="format bold" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
-            }}
-            className={'popup-item spaced ' + (isItalic ? 'active' : '')}
-            title="Italic"
-            aria-label="Format text as italics"
-          >
-            <i className="format italic" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
-            }}
-            className={'popup-item spaced ' + (isUnderline ? 'active' : '')}
-            title="Underline"
-            aria-label="Format text to underlined"
-          >
-            <i className="format underline" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
-            }}
-            className={'popup-item spaced ' + (isStrikethrough ? 'active' : '')}
-            title="Strikethrough"
-            aria-label="Format text with a strikethrough"
-          >
-            <i className="format strikethrough" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
-            }}
-            className={'popup-item spaced ' + (isSubscript ? 'active' : '')}
-            title="Subscript"
-            aria-label="Format Subscript"
-          >
-            <i className="format subscript" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
-            }}
-            className={'popup-item spaced ' + (isSuperscript ? 'active' : '')}
-            title="Superscript"
-            aria-label="Format Superscript"
-          >
-            <i className="format superscript" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'uppercase');
-            }}
-            className={'popup-item spaced ' + (isUppercase ? 'active' : '')}
-            title="Uppercase"
-            aria-label="Format text to uppercase"
-          >
-            <i className="format uppercase" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'lowercase');
-            }}
-            className={'popup-item spaced ' + (isLowercase ? 'active' : '')}
-            title="Lowercase"
-            aria-label="Format text to lowercase"
-          >
-            <i className="format lowercase" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'capitalize');
-            }}
-            className={'popup-item spaced ' + (isCapitalize ? 'active' : '')}
-            title="Capitalize"
-            aria-label="Format text to capitalize"
-          >
-            <i className="format capitalize" />
-          </Button>
-          <Button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
-            }}
-            className={'popup-item spaced ' + (isCode ? 'active' : '')}
-            title="Insert code block"
-            aria-label="Insert code block"
-          >
-            <i className="format code" />
-          </Button>
-          <Button
-            onClick={insertLink}
-            className={'popup-item spaced ' + (isLink ? 'active' : '')}
-            title="Insert link"
-            aria-label="Insert link"
-          >
-            <i className="format link" />
-          </Button>
+          <TransformButtons
+            activeEditor={editor}
+            setIsLinkEditMode={setIsLinkEditMode}
+          />
+          <TextFormatButtons activeEditor={editor} />
         </>
       )}
     </div>

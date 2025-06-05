@@ -1,0 +1,27 @@
+.button {
+  border: 0;
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  padding: $gap-xs;
+  margin: 0 $gap-xxs;
+  cursor: pointer;
+  vertical-align: middle;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+}
+
+.active {
+  box-shadow: 0 0 0 2px $secondary-color;
+
+  svg {
+    fill: $secondary-color;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}

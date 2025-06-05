@@ -1,1 +1,0 @@
-export { Align } from './Align';

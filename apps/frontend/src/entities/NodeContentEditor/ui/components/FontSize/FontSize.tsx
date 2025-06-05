@@ -15,7 +15,7 @@ import {
 import {
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
-} from '@/shared/ui/TextViewEditors/lib';
+} from '@/shared/ui/Align/lib';
 
 export function parseAllowedFontSize(input: string): string {
   const match = input.match(/^(\d+(?:\.\d+)?)px$/);

@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 
-import { AlignComponentProps } from '../../model';
+import { AlignComponentProps } from '../model';
 import { Horizontal } from './Horizontal/Horizontal';
 import { Vertical } from './Vertical/Vertical';
 

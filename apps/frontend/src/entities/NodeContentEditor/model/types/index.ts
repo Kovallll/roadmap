@@ -1,6 +1,7 @@
 export * from './colors';
 export * from './dropdown';
 export * from './toolbar';
+export * from './settings';
 
 import { HTMLAttributes, HTMLInputTypeAttribute, JSX, ReactNode } from 'react';
 import { LexicalEditor, SerializedEditorState } from 'lexical';

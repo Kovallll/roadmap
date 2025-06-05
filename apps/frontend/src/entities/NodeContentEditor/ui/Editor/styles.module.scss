@@ -1,5 +1,9 @@
 .editor {
+  display: flex;
+  flex-direction: column;
   caret-color: $caret-color;
+  height: 100%;
+  width: 90%;
 }
 
 .other h2 {
@@ -34,11 +38,12 @@ h1 {
 }
 
 .editor-container {
+  display: flex !important;
+  height: 100%;
   margin: 20px auto 20px auto;
   border-radius: 2px;
   max-width: 600px;
   color: #000;
-  position: relative;
   line-height: 20px;
   font-weight: 400;
   text-align: left;

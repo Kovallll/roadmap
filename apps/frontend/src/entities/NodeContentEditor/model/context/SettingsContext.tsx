@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 
-import type { SettingName } from '../../ui/appSettings';
-import { DEFAULT_SETTINGS, INITIAL_SETTINGS } from '../../ui/appSettings';
+import { DEFAULT_SETTINGS, INITIAL_SETTINGS } from '../../lib';
+import { SettingName } from '../types';
 
 type SettingsContextShape = {
   setOption: (name: SettingName, value: boolean) => void;
