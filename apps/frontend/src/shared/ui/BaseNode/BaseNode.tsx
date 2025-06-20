@@ -1,7 +1,7 @@
 import { Flex } from 'antd';
 import cn from 'classnames';
 
-import { BaseNodeProps, NodeStatus, Styles } from '../../model';
+import { BaseNodeProps, NodeStatus, Styles, useTheme } from '../../model';
 import styles from './styles.module.scss';
 
 import {
@@ -17,6 +17,7 @@ import { Handle } from '@xyflow/react';
 export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
   const { data } = nodeProps;
   const isEdit = useCanvasStore.use.isEdit();
+  const { colors } = useTheme();
 
   const fontSize = Number(data?.fontSize ?? fontSizes.lg);
   const status = String(data?.status);
@@ -30,7 +31,7 @@ export const BaseNode = ({ nodeProps, className, children }: BaseNodeProps) => {
     status === NodeStatus.PENDING || status === NodeStatus.CLOSE
       ? customColor
       : getStatusColor(status);
-  const borderColor = getStatusColor(status);
+  const borderColor = getStatusColor(status, colors.contrPrimary);
 
   const nodeStyles: Styles = {
     fontSize,

@@ -16,9 +16,5 @@ export const ViewButton = ({ canvasId }: ViewButtonProps) => {
     setIsEdit(false);
   };
 
-  return (
-    <Button type="primary" onClick={handleEditCanvas}>
-      Просмотреть
-    </Button>
-  );
+  return <Button onClick={handleEditCanvas}>Просмотреть</Button>;
 };

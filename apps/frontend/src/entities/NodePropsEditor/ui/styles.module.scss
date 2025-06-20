@@ -25,12 +25,11 @@
 }
 
 .active {
-  color: $secondary-color;
+  color: var(--secondary-color);
 }
 
 .drawer {
   height: 80vh !important;
-  background: $primary-color !important;
   padding: 0 $gap-lg;
 
   @layer antd {

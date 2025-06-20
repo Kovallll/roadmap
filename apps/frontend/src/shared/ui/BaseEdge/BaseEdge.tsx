@@ -3,7 +3,8 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 import { getEdgePath } from '@/shared/lib';
-import { colors } from '@/shared/styles/theme';
+import { useTheme } from '@/shared/model';
+import { useThemeStore } from '@/shared/model/store/themeStore';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 import {
   BaseEdge as FlowBaseEdge,
@@ -22,6 +23,7 @@ export const BaseEdge = ({
   data,
   ...props
 }: EdgeProps) => {
+  const { colors, defaults } = useTheme();
   const selectedEdge = useSelectedEdgeStore.use.selectedEdge();
   const type = String(data?.type);
   const { path, labelX, labelY } = getEdgePath(type, {
@@ -33,7 +35,7 @@ export const BaseEdge = ({
     targetPosition,
   });
 
-  const textColor = String(data?.color) || colors.black;
+  const textColor = String(data?.color) || defaults.black;
   const strokeWidth = Number(data?.strokeWidth);
   const strokeColor = String(data?.strokeColor ?? colors.primary);
   const label = String(data?.label ?? '');

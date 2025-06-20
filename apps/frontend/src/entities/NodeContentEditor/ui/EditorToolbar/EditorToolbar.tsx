@@ -18,7 +18,7 @@ import { TextFormatDropDown } from '../components/TextFormatDropDown';
 import { TransformButtons } from '../components/TransformButtons';
 import styles from './styles.module.scss';
 
-import { Styles } from '@/shared/model';
+import { Styles, useTheme } from '@/shared/model';
 
 export function EditorToolbar({
   editor,
@@ -34,9 +34,18 @@ export function EditorToolbar({
   const { onBgColorSelect, onCodeLanguageSelect, onFontColorSelect } =
     useUpdateToolbar(editor, activeEditor, setActiveEditor);
   const { toolbarState } = useToolbarState();
+  const { colors } = useTheme();
 
-  const fontIconStyles: Styles = { '--font-color': toolbarState.fontColor };
-  const bgIconStyles: Styles = { '--bg-color': toolbarState.bgColor };
+  const fontIconStyles: Styles = {
+    '--font-color': !toolbarState.fontColor
+      ? colors.contrPrimary
+      : toolbarState.fontColor,
+  };
+  const bgIconStyles: Styles = {
+    '--bg-color': !toolbarState.bgColor
+      ? colors.contrPrimary
+      : toolbarState.bgColor,
+  };
 
   return (
     <div className={styles.toolbar}>
@@ -64,7 +73,7 @@ export function EditorToolbar({
           />
           <DropdownColorPicker
             buttonAriaLabel="Formatting text color"
-            color={toolbarState.fontColor}
+            color={toolbarState.fontColor ?? colors.contrPrimary}
             onChange={onFontColorSelect}
             iconComponent={
               <FontColor className={styles.fontIcon} style={fontIconStyles} />
@@ -72,7 +81,7 @@ export function EditorToolbar({
           />
           <DropdownColorPicker
             buttonAriaLabel="Formatting background color"
-            color={toolbarState.bgColor}
+            color={toolbarState.bgColor ?? colors.contrPrimary}
             onChange={onBgColorSelect}
             iconComponent={
               <BgColor className={styles.bgIcon} style={bgIconStyles} />

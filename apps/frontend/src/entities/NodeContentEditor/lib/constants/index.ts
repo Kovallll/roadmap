@@ -16,13 +16,13 @@ export * from './enums';
 export * from './settings';
 
 export const INITIAL_TOOLBAR_STATE = {
-  bgColor: '#fff',
+  bgColor: null as string | null,
   blockType: 'paragraph',
   canRedo: false,
   canUndo: false,
   codeLanguage: '',
   elementFormat: 'left' as ElementFormatType,
-  fontColor: '#fff',
+  fontColor: null as string | null,
   fontFamily: 'Arial',
   fontSize: `${DEFAULT_FONT_SIZE}px`,
   fontSizeInputValue: `${DEFAULT_FONT_SIZE}`,

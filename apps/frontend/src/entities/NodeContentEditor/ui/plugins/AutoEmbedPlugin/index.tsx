@@ -10,6 +10,7 @@ import YoutubeIcon from 'public/images/icons/youtube.svg?react';
 import { INSERT_FIGMA_COMMAND } from '../FigmaPlugin';
 import { INSERT_TWEET_COMMAND } from '../TwitterPlugin';
 import { INSERT_YOUTUBE_COMMAND } from '../YouTubePlugin';
+import styles from './styles.module.scss';
 
 import { useModal } from '@/entities/NodeContentEditor/model';
 import {
@@ -44,7 +45,7 @@ export const YoutubeEmbedConfig: PlaygroundEmbedConfig = {
   exampleUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
 
   // Icon for display.
-  icon: <YoutubeIcon />,
+  icon: <YoutubeIcon className={styles.icon} />,
 
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
     editor.dispatchCommand(INSERT_YOUTUBE_COMMAND, result.id);
@@ -79,7 +80,7 @@ export const TwitterEmbedConfig: PlaygroundEmbedConfig = {
   exampleUrl: 'https://x.com/jack/status/20',
 
   // Icon for display.
-  icon: <XIcon />,
+  icon: <XIcon className={styles.icon} />,
 
   // Create the Lexical embed node from the url data.
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
@@ -114,7 +115,7 @@ export const FigmaEmbedConfig: PlaygroundEmbedConfig = {
 
   exampleUrl: 'https://www.figma.com/file/LKQ4FJ4bTnCSjedbRpk931/Sample-File',
 
-  icon: <FigmaIcon />,
+  icon: <FigmaIcon className={styles.icon} />,
 
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
     editor.dispatchCommand(INSERT_FIGMA_COMMAND, result.id);

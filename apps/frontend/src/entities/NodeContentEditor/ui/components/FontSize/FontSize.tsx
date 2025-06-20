@@ -16,6 +16,7 @@ import {
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
 } from '@/shared/ui/Align/lib';
+import { useTheme } from '@/shared/model';
 
 export function parseAllowedFontSize(input: string): string {
   const match = input.match(/^(\d+(?:\.\d+)?)px$/);
@@ -37,6 +38,8 @@ export function FontSize({
 }) {
   const [inputValue, setInputValue] = useState<string>(selectionFontSize);
   const [inputChangeFlag, setInputChangeFlag] = useState<boolean>(false);
+
+  const { colors } = useTheme();
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValueNumber = Number(inputValue);

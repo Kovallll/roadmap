@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Flex, Form, Input, Typography } from 'antd';
 
 import { useLogin } from '../model';
 import styles from './styles.module.scss';
@@ -25,47 +25,44 @@ export const LoginForm = () => {
   };
 
   return (
-    <Form
-      form={form}
-      name="login"
-      layout="vertical"
-      onFinish={onFinish}
-      className={styles.form}
-    >
-      <Typography.Title level={3}>Вход</Typography.Title>
-
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Введите имя пользователя' }]}
+    <Flex className={styles.container}>
+      <Form
+        form={form}
+        name="login"
+        layout="vertical"
+        onFinish={onFinish}
+        className={styles.form}
       >
-        <Input placeholder="username" />
-      </Form.Item>
+        <Typography.Title level={3}>Вход</Typography.Title>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Введите пароль' }]}
-      >
-        <Input.Password placeholder="••••••••" />
-      </Form.Item>
-
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          block
-          loading={login.isPending}
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: 'Введите имя пользователя' }]}
         >
-          Войти
-        </Button>
-      </Form.Item>
+          <Input placeholder="username" />
+        </Form.Item>
 
-      <Form.Item>
-        <Button type="link" block onClick={handleClickRegisterButton}>
-          Нет аккаунта? Зарегистрироваться
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: 'Введите пароль' }]}
+        >
+          <Input.Password placeholder="••••••••" />
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType="submit" block loading={login.isPending}>
+            Войти
+          </Button>
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="link" block onClick={handleClickRegisterButton}>
+            Нет аккаунта? Зарегистрироваться
+          </Button>
+        </Form.Item>
+      </Form>
+    </Flex>
   );
 };

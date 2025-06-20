@@ -10,8 +10,9 @@ import {
   Styles,
   TextAreaProps,
   useCanvasStore,
+  useTheme,
 } from '@/shared/model';
-import { colors, fontSizes } from '@/shared/styles/theme';
+import { fontSizes, theme } from '@/shared/styles/theme';
 
 export const TextArea = ({
   value,
@@ -22,13 +23,14 @@ export const TextArea = ({
 }: TextAreaProps) => {
   const isEdit = useCanvasStore.use.isEdit();
   const ref = useRef<HTMLDivElement>(null);
+  const { colors } = useTheme();
 
   const fontSize = Number(data?.fontSize ?? fontSizes.lg);
   const backgroundColor = String(data?.backgroundColor);
   const status = String(data?.status ?? NodeStatus.PENDING);
   const justifyContent = String(data?.justifyContent ?? AlignTypes.CENTER);
   const alignItems = String(data?.alignItems ?? AlignTypes.CENTER);
-  const customColor = String(data?.color ?? colors.black);
+  const customColor = String(data?.color ?? colors.contrPrimary);
 
   const color =
     status === NodeStatus.PENDING || status === NodeStatus.CLOSE

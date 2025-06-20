@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import styles from '../../styles.module.scss';
+
 import { DropDownContext } from '@/entities/NodeContentEditor/model';
 
 export function DropDownItems({
@@ -73,7 +75,11 @@ export function DropDownItems({
 
   return (
     <DropDownContext.Provider value={contextValue}>
-      <div className="dropdown" ref={dropDownRef} onKeyDown={handleKeyDown}>
+      <div
+        className={styles.dropdown}
+        ref={dropDownRef}
+        onKeyDown={handleKeyDown}
+      >
         {children}
       </div>
     </DropDownContext.Provider>

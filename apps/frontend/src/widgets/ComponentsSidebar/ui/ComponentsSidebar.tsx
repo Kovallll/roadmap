@@ -1,3 +1,5 @@
+import { Typography } from 'antd';
+
 import { useTypeStore } from '../model';
 import { ComponentsSidebarProps } from '../model';
 import styles from './styles.module.scss';
@@ -32,7 +34,9 @@ export const ComponentsSidebar = ({ nodeLabels }: ComponentsSidebarProps) => {
             draggable
             onDragStart={onDragStart(label)}
           >
-            <div className={styles.nodePreview}>{label}</div>
+            <Typography.Text className={styles.nodePreview}>
+              {label}
+            </Typography.Text>
           </div>
         ))}
       </div>

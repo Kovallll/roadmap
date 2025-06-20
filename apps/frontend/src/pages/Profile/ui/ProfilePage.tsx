@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 import { LogoutButton } from '@/entities/Logout/ui/LogoutButton';
 import { useUserStore } from '@/features/user/model';
 import { gaps } from '@/shared/styles/theme';
+import { ThemeButton } from '@/shared/ui/ThemeButton/ThemeButton';
 import { UserOutlined } from '@ant-design/icons';
 
 const { Content, Sider, Header } = Layout;
@@ -32,7 +33,6 @@ const ProfilePage = () => {
           <div className={styles.logo}>Roadmap</div>
           <Flex vertical gap={gaps.md}>
             <Menu
-              theme="dark"
               mode="inline"
               selectedKeys={[selectedMenu]}
               onClick={handleClickMenu}
@@ -45,7 +45,7 @@ const ProfilePage = () => {
 
       <Layout>
         <Header className={styles.header}>
-          <div />
+          <ThemeButton />
           <div className={styles.profileInfo}>
             <Avatar icon={<UserOutlined />} />
             <Text className={styles.username}>{user?.username}</Text>

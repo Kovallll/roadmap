@@ -8,7 +8,7 @@ import {
   LexicalNode,
   SerializedElementNode,
 } from 'lexical';
-
+import styles from './styles.module.scss';
 import { $isCollapsibleContainerNode } from './CollapsibleContainerNode';
 import { domOnBeforeMatch, setDomHiddenUntilFound } from './CollapsibleUtils';
 
@@ -36,7 +36,7 @@ export class CollapsibleContentNode extends ElementNode {
 
   createDOM(config: EditorConfig, editor: LexicalEditor): HTMLElement {
     const dom = document.createElement('div');
-    dom.classList.add('Collapsible__content');
+    dom.classList.add(styles.content);
     if (IS_CHROME) {
       editor.getEditorState().read(() => {
         const containerNode = this.getParentOrThrow();
@@ -86,7 +86,7 @@ export class CollapsibleContentNode extends ElementNode {
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('div');
-    element.classList.add('Collapsible__content');
+    element.classList.add(styles.content);
     element.setAttribute('data-lexical-collapsible-content', 'true');
     return { element };
   }

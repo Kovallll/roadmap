@@ -1,5 +1,5 @@
 import { AlignTypes, NodeStatus } from '../model';
-import { colors } from '../styles/theme';
+import { theme } from '../styles/theme';
 import { BaseEdge } from '../ui/BaseEdge/BaseEdge';
 import styles from '../ui/BaseNode/styles.module.scss';
 
@@ -16,10 +16,10 @@ export const defaultNodeWidth = 100;
 export const defaultNodeHeight = 'auto';
 
 export const nodeStatuses = [
-  { color: colors.success, value: NodeStatus.DONE },
-  { color: colors.secondary, value: NodeStatus.IN_PROGRESS },
-  { color: colors.disabled, value: NodeStatus.PENDING },
-  { color: colors.black, value: NodeStatus.CLOSE },
+  { color: theme.default.success, value: NodeStatus.DONE },
+  { color: theme.dark.secondary, value: NodeStatus.IN_PROGRESS },
+  { color: theme.default.disabled, value: NodeStatus.PENDING },
+  { color: theme.default.black, value: NodeStatus.CLOSE },
 ];
 
 export const edgeTypes = {

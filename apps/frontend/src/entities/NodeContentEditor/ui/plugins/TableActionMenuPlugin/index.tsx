@@ -2,6 +2,7 @@ import type { JSX } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, Typography } from 'antd';
+import classNames from 'classnames';
 import type { ElementNode, LexicalEditor } from 'lexical';
 import {
   $getSelection,
@@ -14,6 +15,7 @@ import {
   isDOMNode,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
+import ChevronDown from 'public/images/icons/chevron-down.svg?react';
 import VerticalBottomIcon from 'public/images/icons/vertical-bottom.svg?react';
 import VerticalMiddleIcon from 'public/images/icons/vertical-middle.svg?react';
 import VerticalTopIcon from 'public/images/icons/vertical-top.svg?react';
@@ -21,8 +23,10 @@ import VerticalTopIcon from 'public/images/icons/vertical-top.svg?react';
 import { ColorPicker } from '../../components/ColorPicker';
 import { DropDown } from '../../components/DropDown';
 import { DropDownItem } from '../../components/DropDownItem';
+import styles from '../../styles.module.scss';
 
 import { useModal } from '@/entities/NodeContentEditor/model';
+import { useTheme } from '@/shared/model';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useLexicalEditable } from '@lexical/react/useLexicalEditable';
 import {
@@ -129,6 +133,7 @@ const TableActionMenu = ({
   const [backgroundColor, setBackgroundColor] = useState(
     () => currentCellBackgroundColor(editor) || ''
   );
+  const { colors } = useTheme();
 
   useEffect(() => {
     return editor.registerMutationListener(
@@ -471,7 +476,7 @@ const TableActionMenu = ({
     if (canMergeCells) {
       mergeCellButton = (
         <Button
-          className="item"
+          className={styles.dropdownItem}
           onClick={() => mergeTableCellsAtSelection()}
           data-test-id="table-merge-cells"
         >
@@ -481,7 +486,7 @@ const TableActionMenu = ({
     } else if (canUnmergeCell) {
       mergeCellButton = (
         <Button
-          className="item"
+          className={styles.dropdownItem}
           onClick={() => unmergeTableCellsAtSelection()}
           data-test-id="table-unmerge-cells"
         >
@@ -493,7 +498,7 @@ const TableActionMenu = ({
 
   return createPortal(
     <div
-      className="dropdown"
+      className={styles.dropdown}
       ref={dropDownRef}
       onClick={(e) => {
         e.stopPropagation();
@@ -501,7 +506,7 @@ const TableActionMenu = ({
     >
       {mergeCellButton}
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() =>
           showColorPickerModal('Cell background color', () => (
             <ColorPicker
@@ -515,7 +520,7 @@ const TableActionMenu = ({
         <Typography.Text className="text">Background color</Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => toggleRowStriping()}
         data-test-id="table-row-striping"
       >
@@ -523,30 +528,39 @@ const TableActionMenu = ({
       </Button>
       <DropDown
         buttonLabel="Vertical Align"
-        buttonClassName="item"
+        buttonClassName={styles.dropdownItem}
         buttonAriaLabel="Formatting options for vertical alignment"
       >
         <DropDownItem
           onClick={() => {
             formatVerticalAlign('top');
           }}
-          item={{ Icon: <VerticalTopIcon />, title: 'Top Align' }}
+          item={{
+            Icon: <VerticalTopIcon fill={colors.contrPrimary} />,
+            title: 'Top Align',
+          }}
         />
         <DropDownItem
           onClick={() => {
             formatVerticalAlign('middle');
           }}
-          item={{ Icon: <VerticalMiddleIcon />, title: 'Middle Align' }}
+          item={{
+            Icon: <VerticalMiddleIcon fill={colors.contrPrimary} />,
+            title: 'Middle Align',
+          }}
         />
         <DropDownItem
           onClick={() => {
             formatVerticalAlign('bottom');
           }}
-          item={{ Icon: <VerticalBottomIcon />, title: 'Bottom Align' }}
+          item={{
+            Icon: <VerticalBottomIcon fill={colors.contrPrimary} />,
+            title: 'Bottom Align',
+          }}
         />
       </DropDown>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => toggleFirstRowFreeze()}
         data-test-id="table-freeze-first-row"
       >
@@ -555,7 +569,7 @@ const TableActionMenu = ({
         </Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => toggleFirstColumnFreeze()}
         data-test-id="table-freeze-first-column"
       >
@@ -565,7 +579,7 @@ const TableActionMenu = ({
       </Button>
       <hr />
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => insertTableRowAtSelection(false)}
         data-test-id="table-insert-row-above"
       >
@@ -576,7 +590,7 @@ const TableActionMenu = ({
         </Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => insertTableRowAtSelection(true)}
         data-test-id="table-insert-row-below"
       >
@@ -588,7 +602,7 @@ const TableActionMenu = ({
       </Button>
       <hr />
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => insertTableColumnAtSelection(false)}
         data-test-id="table-insert-column-before"
       >
@@ -601,7 +615,7 @@ const TableActionMenu = ({
         </Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => insertTableColumnAtSelection(true)}
         data-test-id="table-insert-column-after"
       >
@@ -615,21 +629,21 @@ const TableActionMenu = ({
       </Button>
       <hr />
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => deleteTableColumnAtSelection()}
         data-test-id="table-delete-columns"
       >
         <Typography.Text className="text">Delete column</Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => deleteTableRowAtSelection()}
         data-test-id="table-delete-rows"
       >
         <Typography.Text className="text">Delete row</Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => deleteTableAtSelection()}
         data-test-id="table-delete"
       >
@@ -637,7 +651,7 @@ const TableActionMenu = ({
       </Button>
       <hr />
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => toggleTableRowIsHeader()}
         data-test-id="table-row-header"
       >
@@ -650,7 +664,7 @@ const TableActionMenu = ({
         </Typography.Text>
       </Button>
       <Button
-        className="item"
+        className={styles.dropdownItem}
         onClick={() => toggleTableColumnIsHeader()}
         data-test-id="table-column-header"
       >
@@ -675,7 +689,7 @@ function TableCellActionMenuContainer({
   cellMerge: boolean;
 }) {
   const [editor] = useLexicalComposerContext();
-
+  const { colors } = useTheme();
   const menuButtonRef = useRef<HTMLDivElement | null>(null);
   const menuRootRef = useRef<HTMLButtonElement | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -881,14 +895,14 @@ function TableCellActionMenuContainer({
       {tableCellNode != null && (
         <>
           <Button
-            className="table-cell-action-button chevron-down"
+            className={classNames(styles.tableCellActionButton, 'chevron-down')}
             onClick={(e) => {
               e.stopPropagation();
               setIsMenuOpen(!isMenuOpen);
             }}
             ref={menuRootRef}
           >
-            <i className="chevron-down" />
+            <ChevronDown stroke={colors.primary} />
           </Button>
           {colorPickerModal}
           {isMenuOpen && (

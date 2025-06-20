@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { nodeStatuses } from '../constants';
 import { EdgePathData } from '../types';
 
-import { colors } from '@/shared/styles/theme';
+import { theme } from '@/shared/styles/theme';
 import {
   getBezierPath,
   getSimpleBezierPath,
@@ -33,9 +33,11 @@ export const createNode = (
   };
 };
 
-export const getStatusColor = (status: string) => {
+export const getStatusColor = (status: string, defaultColor?: string) => {
   return (
-    nodeStatuses.find((node) => status === node.value)?.color ?? colors.black
+    nodeStatuses.find((node) => status === node.value)?.color ??
+    defaultColor ??
+    theme.default.black
   );
 };
 

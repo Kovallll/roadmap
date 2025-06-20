@@ -1,6 +1,7 @@
 export enum LOCAL_STORAGE {
   REFRESH_TOKEN = 'refresh_token',
   ACCESS_TOKEN = 'access_token',
+  THEME = 'theme',
 }
 
 export enum RoutePath {
@@ -23,4 +24,9 @@ export enum AlignTypes {
   START = 'start',
   CENTER = 'center',
   END = 'end',
+}
+
+export enum ETheme {
+  LIGHT = 'light',
+  DARK = 'dark',
 }
