@@ -1,41 +1,62 @@
 import { ReactNode } from 'react';
 import { ConfigProvider, theme as antdTheme } from 'antd';
 
-import { colors, fontSizes } from '@/shared/styles/theme';
+import { useTheme } from '@/shared/model';
+import { fontSizes } from '@/shared/styles/theme';
 
 export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
+  const { colors, defaults } = useTheme();
+
   return (
     <ConfigProvider
       theme={{
         algorithm: antdTheme.defaultAlgorithm,
         token: {
-          colorPrimary: colors.primary,
-          colorText: colors.primary,
+          colorPrimary: colors.altPrimary,
           colorLink: colors.secondary,
           borderRadius: 8,
           fontFamily: 'Inter, sans-serif',
           fontSize: fontSizes.sm,
+          colorText: colors.contrPrimary,
         },
         components: {
           Layout: {
             siderBg: colors.primary,
             headerBg: colors.primary,
             algorithm: true,
+            bodyBg: colors.altPrimary,
+          },
+          Typography: {
+            colorText: `${colors.contrPrimary} !important`,
+          },
+          Form: {
+            labelColor: colors.contrPrimary,
+          },
+          Menu: {
+            itemSelectedBg: colors.altPrimary,
+            colorBgContainer: colors.menu,
+            colorBorder: colors.secondary,
+            itemSelectedColor: colors.secondary,
+          },
+          Card: {
+            colorBgContainer: colors.primary,
           },
           Drawer: {
-            colorText: colors.black,
+            colorBgElevated: colors.primary,
           },
           Input: {
-            colorText: colors.primary,
+            colorBgContainer: defaults.white,
+            colorText: defaults.black,
           },
-
           InputNumber: {
-            colorText: colors.primary,
+            colorText: defaults.black,
           },
           Button: {
-            colorText: colors.black,
-            defaultHoverColor: colors.white,
-            defaultHoverBg: colors.primaryHover,
+            colorText: colors.contrPrimary,
+            defaultHoverColor: colors.contrPrimary,
+            defaultHoverBorderColor: colors.secondary,
+            defaultHoverBg: colors.primary,
+            defaultBg: colors.button,
             defaultActiveColor: colors.secondary,
             defaultActiveBg: colors.primary,
           },
@@ -49,7 +70,17 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
             colorSplit: colors.secondary,
           },
           Upload: {
-            colorText: colors.black,
+            colorText: defaults.black,
+          },
+          Switch: {
+            handleBg: colors.secondary,
+            colorPrimary: colors.contrPrimary,
+            colorPrimaryHover: colors.contrPrimary,
+          },
+          Modal: {
+            contentBg: colors.primary,
+            headerBg: colors.primary,
+            titleColor: colors.contrPrimary,
           },
         },
       }}

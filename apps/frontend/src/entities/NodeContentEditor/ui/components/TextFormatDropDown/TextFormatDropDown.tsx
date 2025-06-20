@@ -14,7 +14,7 @@ export const TextFormatDropDown = ({ activeEditor }: FormatDropDownProps) => {
     <DropDown
       buttonAriaLabel="Formatting options for additional text styles"
       buttonIconClassName={styles.icon}
-      iconComponent={<>Aa</>}
+      iconComponent={<span className={styles.icon}>Aa</span>}
     >
       {textFormatOptions.map((item) => (
         <DropDownItem

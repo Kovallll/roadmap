@@ -1,5 +1,4 @@
 .baseNode {
-  background: $white;
   border: 1px solid #d1d5db;
   border-radius: $radius-sm;
   padding: $gap-xs;
@@ -13,7 +12,7 @@
   min-height: 26px;
   min-width: 100px;
 
-  color: $primary-color;
+  color: var(--primary-color);
   height: auto;
 
   &:hover {

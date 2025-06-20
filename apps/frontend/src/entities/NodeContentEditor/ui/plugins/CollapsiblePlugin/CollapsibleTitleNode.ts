@@ -10,7 +10,7 @@ import {
   RangeSelection,
   SerializedElementNode,
 } from 'lexical';
-
+import styles from './styles.module.scss';
 import { $isCollapsibleContainerNode } from './CollapsibleContainerNode';
 import { $isCollapsibleContentNode } from './CollapsibleContentNode';
 
@@ -38,7 +38,7 @@ export class CollapsibleTitleNode extends ElementNode {
 
   createDOM(config: EditorConfig, editor: LexicalEditor): HTMLElement {
     const dom = document.createElement('summary');
-    dom.classList.add('Collapsible__title');
+    dom.classList.add(styles.title);
     if (IS_CHROME) {
       dom.addEventListener('click', () => {
         editor.update(() => {

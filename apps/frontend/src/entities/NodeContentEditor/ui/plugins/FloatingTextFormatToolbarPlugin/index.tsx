@@ -17,8 +17,8 @@ import { getSelectedNode } from '../../../lib/utils/getSelectedNode';
 import { setFloatingElemPosition } from '../../../lib/utils/setFloatingElemPosition';
 import { TextFormatButtons } from '../../components/TextFormatButtons';
 import { TransformButtons } from '../../components/TransformButtons';
+import styles from './styles.module.scss';
 
-import './index.css';
 import { $isCodeHighlightNode } from '@lexical/code';
 import { $isLinkNode } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -160,7 +160,10 @@ function TextFormatFloatingToolbar({
   }, [editor, $updateTextFormatFloatingToolbar]);
 
   return (
-    <div ref={popupCharStylesEditorRef} className="floating-text-format-popup">
+    <div
+      ref={popupCharStylesEditorRef}
+      className={styles.floatingTextFormatPopup}
+    >
       {editor.isEditable() && (
         <>
           <TransformButtons

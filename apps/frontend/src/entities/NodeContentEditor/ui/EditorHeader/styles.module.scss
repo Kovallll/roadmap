@@ -1,14 +1,12 @@
 .editorHeader {
-  background: $white !important;
   width: 100%;
   padding: 0;
 }
 
 .headerContent {
   width: 100%;
-  background: $primary-color;
+  background: var(--primary-color);
 }
 
 .title {
-  color: $white !important;
 }

@@ -4,6 +4,8 @@ import { Button, Modal } from 'antd';
 import { DeleteButtonProps, useDeleteCanvas } from '../model';
 import styles from './styles.module.scss';
 
+import { DeleteOutlined } from '@ant-design/icons';
+
 export const DeleteButton = ({ canvasId }: DeleteButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate, isPending } = useDeleteCanvas();
@@ -20,11 +22,12 @@ export const DeleteButton = ({ canvasId }: DeleteButtonProps) => {
   return (
     <>
       <Button
+        type="primary"
         danger
         onClick={() => setIsModalOpen(true)}
         className={styles.deleteButton}
       >
-        Удалить карту
+        <DeleteOutlined />
       </Button>
 
       <Modal

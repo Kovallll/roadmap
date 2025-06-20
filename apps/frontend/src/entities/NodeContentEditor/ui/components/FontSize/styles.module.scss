@@ -18,15 +18,24 @@
   align-items: center;
   justify-content: space-between;
   height: 36px;
+
+  path {
+    fill: var(--contr-primary-color);
+    stroke: var(--contr-primary-color);
+  }
+
+  &:hover {
+    path {
+      fill: var(--secondary-color);
+      stroke: var(--secondary-color);
+    }
+  }
 }
 
 .input {
-  background: $primary-color;
-  color: white;
   border: none;
   font-weight: bold;
   font-size: $font-xs;
-  color: white;
   height: 32px;
   width: 32px;
   margin: 0 $gap-xxs;
@@ -36,8 +45,7 @@
 
   &:focus,
   &:hover {
-    box-shadow: 0 0 0 2px $secondary-color;
-    background: $primary-color;
+    box-shadow: 0 0 0 2px var(--secondary-color);
   }
 
   &::-webkit-outer-spin-button,

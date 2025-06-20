@@ -1,6 +1,6 @@
 .draggableBlock {
   padding: 0;
-  background: $primary-color;
+  background: var(--primary-color);
   border: none;
   width: 24px;
   height: 24px;
@@ -10,7 +10,7 @@
   }
 
   path {
-    fill: $secondary-color;
-    stroke: $secondary-color;
+    fill: var(--secondary-color);
+    stroke: var(--secondary-color);
   }
 }

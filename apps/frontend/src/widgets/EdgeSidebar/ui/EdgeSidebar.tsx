@@ -15,7 +15,7 @@ import { EdgeTypes, edgeTypes } from './constants';
 import styles from './styles.module.scss';
 
 import { capitalizeText } from '@/shared/lib';
-import { colors } from '@/shared/styles/theme';
+import { theme } from '@/shared/styles/theme';
 import { useReactFlow } from '@xyflow/react';
 
 const { Option } = Select;
@@ -59,9 +59,10 @@ export const EdgeSidebar = ({ isOpen, handleChangeOpen }: EdgeSidebarProps) => {
     handleChangeOpen(false);
   };
 
-  const lineColor = (selectedEdge.data?.strokeColor as string) || colors.black;
+  const lineColor =
+    (selectedEdge.data?.strokeColor as string) || theme.default.black;
   const lineWidth = (selectedEdge.data?.strokeWidth as string) || '1';
-  const textColor = (selectedEdge.data?.color as string) || colors.black;
+  const textColor = (selectedEdge.data?.color as string) || theme.default.black;
   const type = (selectedEdge.data?.type as string) || EdgeTypes.Default;
   const label = (selectedEdge.data?.label as string) ?? '';
 

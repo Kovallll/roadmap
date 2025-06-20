@@ -1,7 +1,7 @@
 .icon {
   width: 20px;
   height: 20px;
-  color: $white;
+
   margin-right: $gap-xxs;
 }
 
@@ -24,7 +24,7 @@
   border: 0;
   display: flex;
   border-radius: $radius-xs;
-  background: $primary-color;
+  background: var(--primary-color);
   padding: $gap-xs;
   cursor: pointer;
   vertical-align: middle;

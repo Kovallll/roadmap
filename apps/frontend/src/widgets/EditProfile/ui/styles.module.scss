@@ -2,8 +2,8 @@
   max-width: 500px;
   margin: 0 auto;
   padding: $gap-lg;
-  background-color: $white;
   border-radius: $radius-md;
+  background: var(--primary-color);
   box-shadow: 0 $gap-xxxs $gap-xs rgba(0, 0, 0, 0.05);
 }
 
@@ -19,4 +19,16 @@
 .uploadButton {
   margin-left: $gap-md;
   color: black;
+}
+
+.switch {
+  width: 60px;
+}
+
+.switchLightIcon {
+  color: var(--contr-primary-color);
+}
+
+.switchDarkIcon {
+  color: var(--primary-color);
 }

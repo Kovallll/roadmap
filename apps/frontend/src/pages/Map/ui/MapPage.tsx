@@ -10,8 +10,8 @@ import {
   useAuthStore,
   useCanvasStore,
   useSelectedNodeStore,
+  useTheme,
 } from '@/shared/model';
-import { colors } from '@/shared/styles/theme';
 import Canvas from '@/widgets/Canvas/ui/Canvas';
 import { useSelectedEdgeStore } from '@/widgets/EdgeSidebar/model';
 
@@ -20,6 +20,8 @@ const MapPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const canvasId = id || '';
+
+  const { defaults } = useTheme();
 
   const setSelectedNode = useSelectedNodeStore.use.setSelectedNode();
   const setSelectedEdge = useSelectedEdgeStore.use.setSelectedEdge();
@@ -57,7 +59,7 @@ const MapPage = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorText: colors.white,
+          colorText: defaults.white,
         },
       }}
     >

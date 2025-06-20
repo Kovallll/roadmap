@@ -17,7 +17,7 @@ import {
 } from 'lexical';
 
 import { setDomHiddenUntilFound } from './CollapsibleUtils';
-
+import styles from './styles.module.scss';
 import { IS_CHROME } from '@lexical/utils';
 
 type SerializedCollapsibleContainerNode = Spread<
@@ -94,7 +94,7 @@ export class CollapsibleContainerNode extends ElementNode {
       });
       dom = detailsDom;
     }
-    dom.classList.add('Collapsible__container');
+    dom.classList.add(styles.container);
 
     return dom;
   }
@@ -144,7 +144,7 @@ export class CollapsibleContainerNode extends ElementNode {
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('details');
-    element.classList.add('Collapsible__container');
+    element.classList.add(styles.container);
     element.setAttribute('open', this.__open.toString());
     return { element };
   }

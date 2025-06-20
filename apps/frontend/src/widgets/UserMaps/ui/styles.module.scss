@@ -4,25 +4,29 @@
 
 .title {
   font-size: $font-lg;
-  color: $primary-color;
+  color: var(--contr-primary-color);
 }
 
 .description {
   font-size: $font-xs;
-  color: $primary-color;
+  color: var(--contr-primary-color);
 }
 
 .crateButton {
   margin-right: $gap-lg;
 }
 
-.maps {
+.mapCards {
   overflow-y: auto;
 }
 
-.map {
+.mapCard {
   margin-bottom: $gap-md;
   margin-right: $gap-xs;
+
+  &:hover {
+    border-color: var(--secondary-color) !important;
+  }
 }
 
 .search {

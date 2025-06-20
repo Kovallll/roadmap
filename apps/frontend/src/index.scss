@@ -2,24 +2,34 @@ body {
   box-sizing: border-box;
 }
 
+.react-flow__renderer {
+  background: var(--canvas-color);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    $disabled 1px,
+    transparent 1px
+  );
+  background-size: 50px 50px; /* Размер сетки */
+  z-index: 1;
+}
 .temp .react-flow__edge-path {
-  stroke: #bbb;
+  stroke: #bbbbbb;
   stroke-dasharray: 5 5;
 }
 
 .react-flow__node {
-  color: #2c3144;
+  color: var(--primary-color);
   font-family: 'Inter', sans-serif;
 }
 
 .react-flow__handle {
-  background: #f17900;
+  background: var(--secondary-color);
   width: 10px;
   height: 10px;
 }
 
 .react-flow__edge-path {
-  stroke: #2c3144;
+  stroke: var(--primary-color);
 }
 
 .react-flow__background {
@@ -36,21 +46,21 @@ body {
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #2c3144;
+    background-color: var(--primary-color);
     border-radius: 4px;
   }
 }
 
 .ant-select-selection-item {
-  color: #2c3144;
+  color: var(--primary-color);
 }
 .ant-select-item-option-content {
-  color: #2c3144;
+  color: var(--primary-color);
 }
 
 .ant-select-item-option-selected {
   background: transparent !important;
   .ant-select-item-option-content {
-    color: #f17900 !important;
+    color: var(--secondary-color) !important;
   }
 }

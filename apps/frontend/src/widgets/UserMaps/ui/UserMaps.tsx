@@ -40,10 +40,10 @@ export const UserMaps = () => {
         </Flex>
       </Flex>
 
-      <Flex vertical className={styles.maps}>
+      <Flex vertical className={styles.mapCards}>
         {searchedCanvases.length ? (
           searchedCanvases.map((canvas) => (
-            <Card key={canvas.id} hoverable className={styles.map}>
+            <Card key={canvas.id} hoverable className={styles.mapCard}>
               <Flex justify="space-between">
                 <Flex vertical>
                   <Typography.Text className={styles.title}>

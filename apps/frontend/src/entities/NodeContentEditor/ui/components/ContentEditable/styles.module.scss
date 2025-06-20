@@ -1,0 +1,22 @@
+.contentEditable {
+  height: 100%;
+  border: 0;
+  font-size: 15px;
+  display: block;
+  position: relative;
+  outline: 0;
+  padding: 8px 8px 8px 46px;
+  min-height: 150px;
+  width: 100%;
+
+  span {
+    background-color: var(--primary-color);
+    color: var(--contr-primary-color);
+  }
+}
+@media (max-width: 1025px) {
+  .contentEditable {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

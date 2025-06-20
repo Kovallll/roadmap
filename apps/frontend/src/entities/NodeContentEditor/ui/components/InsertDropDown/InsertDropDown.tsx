@@ -12,11 +12,13 @@ import {
   useModal,
   useToolbar,
 } from '@/entities/NodeContentEditor/model';
+import { useTheme } from '@/shared/model';
 import { INSERT_EMBED_COMMAND } from '@lexical/react/LexicalAutoEmbedPlugin';
 
 export const InsertDropDown = ({ activeEditor }: InsertDropDownProps) => {
   const [modal, showModal] = useModal();
   const { insertOptions } = useToolbar();
+  const { colors } = useTheme();
 
   const handleClickInsertOption =
     (
@@ -55,7 +57,7 @@ export const InsertDropDown = ({ activeEditor }: InsertDropDownProps) => {
         buttonLabel="Insert"
         buttonAriaLabel="Insert specialized editor node"
         buttonIconClassName="icon"
-        iconComponent={<PlusIcon />}
+        iconComponent={<PlusIcon fill={colors.contrPrimary} />}
       >
         {insertOptions.map((item) => (
           <DropDownItem

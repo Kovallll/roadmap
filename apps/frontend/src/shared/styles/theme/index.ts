@@ -1,13 +1,36 @@
-export const colors = {
-  primary: '#2c3144',
-  primaryHover: '#3a4059',
-  secondary: '#f17900',
-  lightSecondary: 'rgba(241, 121, 0, 0.5)',
-  black: '#000',
-  white: '#fff',
-  success: '#28a745',
-  disabled: '#6c757d',
-  error: '#dc3545',
+export const theme = {
+  dark: {
+    primary: '#2c3144',
+    contrPrimary: '#ffffff',
+    secondary: '#f17900',
+    altPrimary: '#3a4059',
+    altContrPrimary: '#f0f0f5',
+    altSecondary: 'rgba(241, 121, 0, 0.5)',
+    caret: '#fff',
+    canvas: '#13111c',
+    button: '#3a4059',
+    menu: '#001529',
+  },
+  light: {
+    primary: '#ffffff',
+    contrPrimary: '#2c3144',
+    secondary: '#f17900',
+    altPrimary: '#f0f0f5',
+    altContrPrimary: '#3a4059',
+    altSecondary: 'rgba(241, 121, 0, 0.5)',
+    caret: '#000',
+    canvas: '#f8f9fa',
+    button: '#f0f0f5',
+    menu: '#f8f9fa',
+  },
+  default: {
+    black: '#000',
+    white: '#fff',
+    error: '#dc3545',
+    success: '#28a745',
+    disabled: '#6c757d',
+    gray: '#999',
+  },
 };
 
 export const gaps = {

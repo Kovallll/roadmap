@@ -17,7 +17,6 @@ import {
 import { getSelectedNode } from '../../lib';
 import { useToolbarState } from '../../model';
 
-import { colors } from '@/shared/styles/theme';
 import { $isCodeNode, CODE_LANGUAGE_MAP } from '@lexical/code';
 import { $isLinkNode } from '@lexical/link';
 import { $isListNode, ListNode } from '@lexical/list';
@@ -122,15 +121,11 @@ export const useUpdateToolbar = (
       // Handle buttons
       updateToolbarState(
         'fontColor',
-        $getSelectionStyleValueForProperty(selection, 'color', colors.white)
+        $getSelectionStyleValueForProperty(selection, 'color')
       );
       updateToolbarState(
         'bgColor',
-        $getSelectionStyleValueForProperty(
-          selection,
-          'background-color',
-          colors.white
-        )
+        $getSelectionStyleValueForProperty(selection, 'background-color')
       );
       updateToolbarState(
         'fontFamily',

@@ -1,14 +1,27 @@
-$primary-color: #2c3144;
-$secondary-color: #f17900;
-$light-primary-color: rgba(44, 49, 68, 0.5);
-$light-secondary-color: rgba(241, 121, 0, 0.5);
+$dark-primary-color: #2c3144;
+$light-primary-color: #ffffff;
+$dark-secondary-color: #f17900;
+$light-secondary-color: #f17900;
+$dark-alt-primary-color: #3a4059;
+$light-alt-primary-color: #f0f0f5;
+$dark-alt-secondary-color: rgba(241, 121, 0, 0.5);
+$light-alt-secondary-color: rgba(241, 121, 0, 0.5);
+
+$dark-caret-color: #fff;
+$light-caret-color: #000;
+$dark-canvas-color: #13111c;
+$light-canvas-color: #f8f9fa;
+$dark-button-color: #3a4059;
+$light-button-color: #f0f0f5;
+$dark-menu-color: #001529;
+$light-menu-color: #f8f9fa;
+
 $error: #dc3545;
 $black: #000;
 $white: #fff;
 $success: #28a745;
 $disabled: #6c757d;
 $gray: #999;
-$caret-color: #fff;
 
 $gap-xxxs: 2px;
 $gap-xxs: 4px;
@@ -49,3 +62,41 @@ $lineHeight-lg: 28px;
 $lineHeight-xl: 32px;
 $lineHeight-xxl: 40px;
 $lineHeight-xxxl: 48px;
+
+.theme-dark {
+  --primary-color: #{$dark-primary-color};
+  --contr-primary-color: #{$light-primary-color};
+  --secondary-color: #{$dark-secondary-color};
+  --alt-primary-color: #{$dark-alt-primary-color};
+  --alt-contr-primary-color: #{$light-alt-primary-color};
+  --alt-secondary-color: #{$dark-alt-secondary-color};
+  --caret-color: #{$dark-caret-color};
+  --canvas-color: #{$dark-canvas-color};
+  --button-color: #{$dark-button-color};
+  --menu-color: #{$dark-menu-color};
+  --black: #{$black};
+  --white: #{$white};
+  --error: #{$error};
+  --success: #{$success};
+  --disabled: #{$disabled};
+  --gray: #{$gray};
+}
+
+.theme-light {
+  --primary-color: #{$light-primary-color};
+  --contr-primary-color: #{$dark-primary-color};
+  --secondary-color: #{$light-secondary-color};
+  --alt-primary-color: #{$light-alt-primary-color};
+  --alt-contr-primary-color: #{$dark-alt-primary-color};
+  --alt-secondary-color: #{$light-alt-secondary-color};
+  --caret-color: #{$light-caret-color};
+  --canvas-color: #{$light-canvas-color};
+  --button-color: #{$light-button-color};
+  --menu-color: #{$light-menu-color};
+  --black: #{$black};
+  --white: #{$white};
+  --error: #{$error};
+  --success: #{$success};
+  --disabled: #{$disabled};
+  --gray: #{$gray};
+}

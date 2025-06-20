@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import type { FC, JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, Flex, Typography } from 'antd';
@@ -11,7 +11,7 @@ import styles from './styles.module.scss';
 
 import { dropDownPadding } from '@/entities/NodeContentEditor/lib';
 import { DropDownProps } from '@/entities/NodeContentEditor/model';
-import { colors } from '@/shared/styles/theme';
+import { useTheme } from '@/shared/model';
 
 export function DropDown({
   disabled = false,
@@ -26,7 +26,7 @@ export function DropDown({
   const dropDownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showDropDown, setShowDropDown] = useState(false);
-
+  const { colors } = useTheme();
   const handleClose = () => {
     setShowDropDown(false);
     if (buttonRef && buttonRef.current) {
@@ -117,7 +117,9 @@ export function DropDown({
           </Typography.Text>
         )}
         <div className={styles.arrowIcon}>
-          <ChevronDown fill={showDropDown ? colors.secondary : colors.white} />
+          <ChevronDown
+            fill={showDropDown ? colors.secondary : colors.contrPrimary}
+          />
         </div>
       </Button>
 

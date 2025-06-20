@@ -38,11 +38,7 @@ export const CreateButton = ({ userId }: CreateButtonProps) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={handleCreate}
-        className={styles.createButton}
-      >
+      <Button onClick={handleCreate} className={styles.createButton}>
         Создать карту
       </Button>
       <Modal
@@ -53,6 +49,7 @@ export const CreateButton = ({ userId }: CreateButtonProps) => {
         confirmLoading={isPending}
         okText="Создать"
         cancelText="Отмена"
+        okButtonProps={{ type: 'default' }}
       >
         <Flex vertical gap={gaps.md}>
           <Input

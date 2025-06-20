@@ -15,8 +15,13 @@ import styles from './styles.module.scss';
 
 import { NodeContentEditor } from '@/entities/NodeContentEditor/ui/NodeContentEditor';
 import { defaultNodeHeight, defaultNodeWidth } from '@/shared/lib';
-import { AlignType, AlignTypes, useSelectedNodeStore } from '@/shared/model';
-import { colors, fontSizes, gaps } from '@/shared/styles/theme';
+import {
+  AlignType,
+  AlignTypes,
+  useSelectedNodeStore,
+  useTheme,
+} from '@/shared/model';
+import { fontSizes, gaps } from '@/shared/styles/theme';
 import { Align } from '@/shared/ui/Align/ui';
 import { StatusSelect } from '@/shared/ui/StatusSelect/ui/StatusSelect';
 
@@ -24,6 +29,7 @@ export const NodePropsEditor = ({
   handleUpdate,
   onCloseDrawer,
 }: NodePropsEditorProps) => {
+  const { defaults, colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const selectedNode = useSelectedNodeStore.use.selectedNode();
   if (!selectedNode) return null;
@@ -72,9 +78,9 @@ export const NodePropsEditor = ({
     setIsOpen(false);
   };
   const fontSize = (selectedNode.data?.fontSize as number) ?? fontSizes.lg;
-  const textColor = (selectedNode.data?.color as string) ?? colors.black;
+  const textColor = (selectedNode.data?.color as string) ?? defaults.black;
   const bgColor =
-    (selectedNode.data?.backgroundColor as string) ?? colors.white;
+    (selectedNode.data?.backgroundColor as string) ?? defaults.white;
   const justifyContent =
     (selectedNode.data?.justifyContent as AlignType) ?? AlignTypes.CENTER;
   const alignItems =
@@ -83,7 +89,7 @@ export const NodePropsEditor = ({
   const height =
     (selectedNode.data?.height as number | string) ?? defaultNodeHeight;
 
-  const ButtonColor = height === 'auto' ? colors.secondary : colors.black;
+  const ButtonColor = height === 'auto' ? colors.secondary : defaults.black;
   const buttonAutoHeightStyles = {
     border: `2px solid ${ButtonColor}`,
     color: ButtonColor,

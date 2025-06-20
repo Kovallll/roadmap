@@ -1,6 +1,7 @@
 import type { EditorThemeClasses } from 'lexical';
 
 import './EditorTheme.css';
+import styles from './styles.module.scss';
 
 export const editorTheme: EditorThemeClasses = {
   autocomplete: 'EditorTheme__autocomplete',
@@ -85,8 +86,8 @@ export const editorTheme: EditorThemeClasses = {
   specialText: 'EditorTheme__specialText',
   tab: 'EditorTheme__tabNode',
   table: 'EditorTheme__table',
-  tableAddColumns: 'EditorTheme__tableAddColumns',
-  tableAddRows: 'EditorTheme__tableAddRows',
+  tableAddColumns: styles.EditorTheme__tableAddColumns,
+  tableAddRows: styles.EditorTheme__tableAddRows,
   tableAlignment: {
     center: 'EditorTheme__tableAlignmentCenter',
     right: 'EditorTheme__tableAlignmentRight',
@@ -94,11 +95,11 @@ export const editorTheme: EditorThemeClasses = {
   tableCell: 'EditorTheme__tableCell',
   tableCellActionButton: 'EditorTheme__tableCellActionButton',
   tableCellActionButtonContainer: 'EditorTheme__tableCellActionButtonContainer',
-  tableCellHeader: 'EditorTheme__tableCellHeader',
+  tableCellHeader: styles.EditorTheme__tableCellHeader,
   tableCellResizer: 'EditorTheme__tableCellResizer',
   tableCellSelected: 'EditorTheme__tableCellSelected',
-  tableFrozenColumn: 'EditorTheme__tableFrozenColumn',
-  tableFrozenRow: 'EditorTheme__tableFrozenRow',
+  tableFrozenColumn: styles.EditorTheme__tableFrozenColumn,
+  tableFrozenRow: styles.EditorTheme__tableFrozenRow,
   tableRowStriping: 'EditorTheme__tableRowStriping',
   tableScrollableWrapper: 'EditorTheme__tableScrollableWrapper',
   tableSelected: 'EditorTheme__tableSelected',
