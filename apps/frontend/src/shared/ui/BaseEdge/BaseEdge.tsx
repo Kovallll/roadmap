@@ -23,7 +23,7 @@ export const BaseEdge = ({
   data,
   ...props
 }: EdgeProps) => {
-  const { colors, defaults } = useTheme();
+  const { colors } = useTheme();
   const selectedEdge = useSelectedEdgeStore.use.selectedEdge();
   const type = String(data?.type);
   const { path, labelX, labelY } = getEdgePath(type, {
@@ -35,9 +35,9 @@ export const BaseEdge = ({
     targetPosition,
   });
 
-  const textColor = String(data?.color) || defaults.black;
+  const textColor = String(data?.color) || colors.contrPrimary;
   const strokeWidth = Number(data?.strokeWidth);
-  const strokeColor = String(data?.strokeColor ?? colors.primary);
+  const strokeColor = String(data?.strokeColor ?? colors.contrPrimary);
   const label = String(data?.label ?? '');
 
   const getEdgeColor = () => {

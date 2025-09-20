@@ -27,7 +27,11 @@ export const Sidebar = ({
       style={sidebarStyles}
       {...props}
     >
-      {title && <Typography.Title level={4}>{title}</Typography.Title>}
+      {title && (
+        <Typography.Title level={4} className={styles.title}>
+          {title}
+        </Typography.Title>
+      )}
       {children}
     </Sider>
   );

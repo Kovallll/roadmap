@@ -99,7 +99,9 @@ export const NodePropsEditor = ({
 
   return (
     <>
-      <Typography.Title level={2}>Редактирование узла</Typography.Title>
+      <Typography.Title level={2} className={styles.title}>
+        Редактирование узла
+      </Typography.Title>
       <Divider />
       <Button onClick={showDrawer} className={styles.contentButton}>
         Добавить описание

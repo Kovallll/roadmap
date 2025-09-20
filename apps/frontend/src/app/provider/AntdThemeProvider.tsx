@@ -26,8 +26,12 @@ export const AntdThemeProvider = ({ children }: { children: ReactNode }) => {
             algorithm: true,
             bodyBg: colors.altPrimary,
           },
+          Select: {
+            selectorBg: defaults.white,
+            optionSelectedColor: defaults.black,
+          },
           Typography: {
-            colorText: `${colors.contrPrimary} !important`,
+            colorText: colors.contrPrimary,
           },
           Form: {
             labelColor: colors.contrPrimary,

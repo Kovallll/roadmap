@@ -10,8 +10,8 @@ import {
 import { AggregationColor } from 'antd/es/color-picker/color';
 import { set } from 'lodash';
 
+import { EdgeTypes, edgeTypes } from '../lib';
 import { EdgeSidebarProps, store } from '../model';
-import { EdgeTypes, edgeTypes } from './constants';
 import styles from './styles.module.scss';
 
 import { capitalizeText } from '@/shared/lib';
@@ -76,7 +76,9 @@ export const EdgeSidebar = ({ isOpen, handleChangeOpen }: EdgeSidebarProps) => {
       mask={false}
       keyboard
     >
-      <Typography.Title level={2}>Редактирование cвязи</Typography.Title>
+      <Typography.Title level={2} className={styles.title}>
+        Редактирование cвязи
+      </Typography.Title>
       <Divider />
       <Typography.Text className={styles.label}>Тип связи</Typography.Text>
       <Select
@@ -85,8 +87,8 @@ export const EdgeSidebar = ({ isOpen, handleChangeOpen }: EdgeSidebarProps) => {
         className={styles.select}
       >
         {edgeTypes.map((type) => (
-          <Option value={type} className={styles.option}>
-            {type}
+          <Option value={type}>
+            <Typography.Text>{type}</Typography.Text>
           </Option>
         ))}
       </Select>
